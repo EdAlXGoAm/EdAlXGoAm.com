@@ -5,6 +5,10 @@
   "repository": "https://github.com/EdAlXGoAm/EdAlXGoAm.com.git",
   "author": "<edalxgoam@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js"
+  },
   "dependencies": {
     "express": "^4.18.2"
   },

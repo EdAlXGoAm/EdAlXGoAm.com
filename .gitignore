@@ -1,3 +1,6 @@
+# My .gitignore file
+build
+
 # Logs
 logs
 *.log
