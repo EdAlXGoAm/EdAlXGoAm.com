@@ -1,8 +1,5 @@
 // Component Usuario
-const Usuario = () => {
-    const color = 'red';
-    const nombre = 'Juan';
-    const amigos = ['Pedro', 'Pablo', 'Maria'];
+const Usuario = ({color, nombre, amigos}) => {
     return (
       <div>
         <h1 className="title" style={{ color: color }}>Hola {nombre}!</h1>
