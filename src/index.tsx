@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 // React
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import ReactDOM from 'react-dom';
 // Routers
 import indexRouter from '@routes/index.route';
 
