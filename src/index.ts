@@ -1,5 +1,9 @@
 import express from 'express';
 import path from 'path';
+// React
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+// Routers
 import indexRouter from '@routes/index.route';
 
 const app = express();
