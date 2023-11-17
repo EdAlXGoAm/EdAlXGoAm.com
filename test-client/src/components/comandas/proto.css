@@ -1,0 +1,24 @@
+/* Estilos personalizados */
+
+.ingredient-list {
+    list-style: none;
+    padding-left: 0;
+    color: blue;
+  }
+  
+  .ingredient-list li {
+    text-decoration: underline;
+    opacity: 0.5; /* Opacidad para los ingredientes no seleccionados */
+  }
+  
+  .ingredient-list li:first-child {
+    opacity: 1; /* Opacidad total para el primer elemento */
+  }
+  
+  hr {
+    border-top: 2px dashed #bbb; /* Estilo de línea punteada */
+  }
+  
+  /* Estilos adicionales para el formulario */
+  /* ... */
+  

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulario de Pedido</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+
+        <div className="container">
+            <!-- Fila 1 -->
+            <div className="row">
+                <!-- Columna 1 para Hamburguesas -->
+                <div className="col-md-6">
+                    <h2>Hamburguesa</h2>
+                    <select id="burgerStyle"className="custom-select mb-3">
+                        <option value="sencilla">Sencilla</option>
+                        <option value="suiza">Suiza</option>
+                        <option value="gringa">Gringa</option>
+                        <option value="hawaiana">Hawaiana</option>
+                        <option value="rusa">Rusa</option>
+                        <option value="chilena">Chilena</option>
+                        <option value="inglesa">Inglesa</option>
+                        <option value="italiana">Italiana</option>
+                        <option value="francesa">Francesa</option>
+                        <option value="española">Española</option>
+                        <option value="doble_carne">Doble Carne</option>
+                        <option value="cubana">Cubana</option>
+                        <option value="pardo_especial">Pardo Especial</option>
+                    </select>
+
+                    <div id="ingredientListDisplay"className="ingredient-list">
+                        <!-- La lista de ingredientes se actualizará con JS -->
+                    </div>
+
+                    <div className="custom-control custom-switch mb-3">
+                        <input type="checkbox"className="custom-control-input"
+                            id="toggleBurgerAll">
+                        <labelclassName="custom-control-label"
+                            for="toggleBurgerAll">Con todo</label>
+                    </div>
+
+                    <!-- Checkboxes de ingredientes -->
+                    <div className="form-group mt-2" id="burgerIngredients">
+                        <div className="form-check">
+                            <inputclassName="form-check-input burger-ingredient-checkbox" type="checkbox" id="checkLettuce">
+                            <labelclassName="form-check-label" for="checkLettuce">Lechuga</label>
+                        </div>
+                        <div className="form-check">
+                            <inputclassName="form-check-input burger-ingredient-checkbox" type="checkbox" id="checkTomato">
+                            <labelclassName="form-check-label" for="checkTomato">Tomate</label>
+                        </div>
+                        <div className="form-check">
+                            <inputclassName="form-check-input burger-ingredient-checkbox" type="checkbox" id="checkCebollaCaramelizada">
+                            <labelclassName="form-check-label" for="checkCebollaCaramelizada">Cebolla Caramelizada</label>
+                        </div>
+                        <div className="form-check">
+                            <inputclassName="form-check-input burger-ingredient-checkbox" type="checkbox" id="checkCatsup">
+                            <labelclassName="form-check-label" for="checkCatsup">Catsup</label>
+                        </div>
+                        <div className="form-check">
+                            <inputclassName="form-check-input burger-ingredient-checkbox" type="checkbox" id="checkMostaza">
+                            <labelclassName="form-check-label" for="checkMostaza">Mostaza</label>
+                        </div>
+                        <div className="form-check">
+                            <inputclassName="form-check-input burger-ingredient-checkbox" type="checkbox" id="checkChilesPicados">
+                            <labelclassName="form-check-label" for="checkChilesPicados">Chiles picados (en vinagre)</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Columna 2 para Papas -->
+                <div className="col-md-6">
+                    <h2>Con papas</h2>
+                    <div className="custom-control custom-switch mb-3">
+                        <input type="checkbox"className="custom-control-input"
+                            id="toggleFries">
+                        <labelclassName="custom-control-label" for="toggleFries"></label>
+                    </div>
+
+                    <!-- ... Contenido de papas que se mostrará/ocultará con el toggle ... -->
+                    <div id="friesOptions" style="display: none;">
+                        <div className="row">
+                            <div className="col-6">
+                                <img src="papas.png" alt="Papas Fritas"className="img-fluid">
+                            </div>
+                            <div className="col-6">
+                                <div className="custom-control custom-switch">
+                                    <input type="checkbox"className="custom-control-input" id="toggleFriesAll">
+                                    <labelclassName="custom-control-label" for="toggleFriesAll">Con todo</label>
+                                </div>
+                                <div className="form-group mt-2" id="papasIngredients">
+                                    <div className="form-check">
+                                        <inputclassName="form-check-input papas-ingredient-checkbox" type="checkbox" id="quesoFries" value="quesoFries">
+                                        <labelclassName="form-check-label" for="quesoFries">Queso</label>
+                                    </div>
+                                    <div className="form-check">
+                                        <inputclassName="form-check-input papas-ingredient-checkbox" type="checkbox" id="catsupFries" value="catsupFries">
+                                        <labelclassName="form-check-label" for="catsupFries">Catsup</label>
+                                    </div>
+                                    <div className="form-check">
+                                        <inputclassName="form-check-input papas-ingredient-checkbox" type="checkbox" id="valentinaFries" value="valentinaFries">
+                                        <labelclassName="form-check-label" for="valentinaFries">Valentina</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Línea separadora -->
+            <hr>
+
+            <!-- Segunda Fila -->
+            <div className="row">
+                <div className="col-12">
+                    <div className="d-flex justify-content-start">
+                        <span>Para:</span>
+                        <div className="form-check ml-2">
+                            <inputclassName="form-check-input" type="checkbox"
+                                value id="here">
+                            <labelclassName="form-check-label" for="here">Aquí</label>
+                        </div>
+                        <div className="form-check ml-2">
+                            <inputclassName="form-check-input" type="checkbox" value id="toGo">
+                            <labelclassName="form-check-label" for="toGo">Llevar</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

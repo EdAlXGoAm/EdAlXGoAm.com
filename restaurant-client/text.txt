@@ -1,0 +1,24 @@
+Solicitan un Postre para la orden número _.
+Solicitan un Pay de Limón para la orden número _.
+Solicitan un Pastel Imposible para la orden número _.
+Solicitan un Vaso de Esquites para la orden número _.
+Solicitan un Doriesquite para la orden número _.
+Solicitan una Maruchan Loca para la orden número _.
+Solicitan una Maruchan con Suadero para la orden número _.
+Solicitan unas Papas a la Francesa para la orden número _.
+Solicitan una Rebanada de Pizza para la orden número _.
+Solicitan un Hotdog para la orden número _.
+Solicitan unas Sincronizadas para la orden número _.
+Solicitan una Ensalada para la orden número _.
+Solicitan unas Alitas BBQ para la orden número _.
+Solicitan una Hamburguesa para la orden número _.
+Solicitan un Bubble Waffle para la orden número _.
+Solicitan una Dona para la orden número _.
+Solicitan un Frappé para la orden número _.
+Solicitan una Malteada para la orden número _.
+Solicitan un Esquimo para la orden número _.
+Solicitan un Café para la orden número _.
+Solicitan un Bubble Soda para la orden número _.
+Solicitan una Bomba de Chocolate para la orden número _.
+Solicitan una Agua Fresca para la orden número _.
+Solicitan un Refresco para la orden número _.
