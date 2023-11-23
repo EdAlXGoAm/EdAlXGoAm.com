@@ -1,0 +1,55 @@
+import React, { useState } from 'react';
+
+import DropDown from './DropDown';
+import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
+
+const Ensaladas = ({ index, comanda, platillo, platillo_espacios }) => {
+    const proteinasOptions = [
+        'Pollo',
+        'Atun',
+        'Queso Panela'
+    ];
+    const crocantesOptions = [
+        'Crotones',
+        'Arandanos',
+        'Ajonjoli',
+        'Cacahuate'
+    ];
+    const aderezos = [
+        'Miel con Mostaza',
+        'Tamarindo'
+    ];
+    
+    // Estado para almacenar el valor seleccionado del dropdown
+    const [selectedMaruchan, setSelectedMaruchan] = useState('Camarón');
+
+    const handleDropdownChangeMaruchan = (value) => {
+        setSelectedMaruchan(value);
+    };
+
+    // Estado para almacenar el valor seleccionado del dropdown
+    const [selectedTamano, setSelectedTamano] = useState('$30 Mediano');
+
+    const handleDropdownChange = (value) => {
+        setSelectedTamano(value);
+    };
+
+    return (
+        <div>
+        <div>
+            <DropDown opciones_in={proteinasOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[45, 45, 45]}/>
+        </div>
+            <div>
+                <DropDown opciones_in={crocantesOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange}/>
+            </div>
+            
+            <div className="row">
+                <div className="col">
+                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Ensaladas;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const DropDown = ({ opciones_in, selectedValue, onDropdownChange }) => {
+const DropDown = ({ opciones_in, selectedValue, onDropdownChange, precios }) => {
   // Asignar opciones_in directamente a opciones
   const opcionesPredeterminadas = ['Opciones'];
   const opciones = opciones_in && opciones_in.length > 0 ? opciones_in : opcionesPredeterminadas;
@@ -18,7 +18,7 @@ const DropDown = ({ opciones_in, selectedValue, onDropdownChange }) => {
       <select id="burgerStyle" className="custom-select mb-3" value={selectedValue} onChange={handleSelectChange} style={{ fontWeight: 'bold', fontSize: '22px' }}>
         {opciones.map((opcion, index) => (
           <option key={index} value={opcion.toLowerCase().replace(/\s/g, '_')}>
-            {opcion}
+             {precios && precios.length > 0 ? `$${precios[index]} ` : ''}{opcion}
           </option>
         ))}
       </select>

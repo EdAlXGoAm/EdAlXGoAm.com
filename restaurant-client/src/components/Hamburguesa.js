@@ -4,7 +4,7 @@ import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 import IngredientesAndQuesos from './IngredientesAndQuesos';
 // Component Hamburguesa
-const Hamburguesa = ({ index }) => {
+const Hamburguesa = ({ index, comanda, platillo, platillo_espacios }) => {
     const opcionesDosDimensiones = [
         ['Sencilla',
             [
@@ -84,6 +84,90 @@ const Hamburguesa = ({ index }) => {
                 'Piña, Amarillo, Oaxava, Manchego'
             ]
         ],
+        ['.',
+            [
+                'Carne',
+                'Amarillo'
+            ]
+        ],
+        ['Sencilla c/Papas',
+            [
+                'Carne',
+                'Amarillo'
+            ]
+        ],
+        ['Suiza c/Papas',
+            [
+                'Jamón, ',
+                'Amarillo, Oaxaca'
+            ]
+        ],
+        ['Gringa c/Papas',
+            [
+                'Jamón, Chorizo',
+                'Amarillo, Oaxaca'
+            ]
+        ],
+        ['Hawaiana c/Papas',
+            [
+                'Jamón, Píña',
+                'Amarillo, Oaxaca'
+            ]
+        ],
+        ['Rusa c/Papas',
+            [
+                'Tocino, Piña',
+                'Manchego, '
+            ]
+        ],
+        ['Chilena c/Papas',
+            [
+                'Jamón, Tocino',
+                'Oaxaca, '
+            ]
+        ],
+        ['Inglesa c/Papas',
+            [
+                'Chorizo, Piña',
+                'Oaxaca, '
+            ]
+        ],
+        ['Italiana c/Papas',
+            [
+                'Chorizo, Tocino',
+                'Manchego, '
+            ]
+        ],
+        ['Francesa c/Papas',
+            [
+                'Tocino, Piña',
+                'Oaxaca, '
+            ]
+        ],
+        ['Española c/Papas',
+            [
+                'Salchicha, Tocino',
+                'Oaxaca, '
+            ]
+        ],
+        ['Doble Carne',
+            [
+                'Dos Carnes',
+                'Q a Elegir'
+            ]
+        ],
+        ['Cubana c/Papas',
+            [
+                'Dos Carnes, Jamón, Piña, Tocino',
+                'Amarillo, Oaxaca, Manchego'
+            ]
+        ],
+        ['Pardo Especial c/Papas (Dos carnes)',
+            [
+                'Jamón, Tocino, Chorizo, Salchicha',
+                'Piña, Amarillo, Oaxava, Manchego'
+            ]
+        ],
     ];
     const drop_down_opciones = opcionesDosDimensiones.map(par => par[0]);
     const ingredientesPorSabor = {};
@@ -144,7 +228,8 @@ const Hamburguesa = ({ index }) => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-6">
-                    <DropDown opciones_in={drop_down_opciones} selectedSabor={selectedSabor} onDropdownChange={handleDropdownChange} />
+                    <DropDown opciones_in={drop_down_opciones} selectedSabor={selectedSabor} onDropdownChange={handleDropdownChange} precios={[ 47, 57, 60, 60, 60, 60, 60, 60, 60, 70, 75, 100, 120, 0,
+                                                                                                                                                67, 77, 80, 80, 80, 80, 80, 80, 80, 90, 95, 120, 140]} />
                     <IngredientesAndQuesos selectedSabor={selectedSabor} ingredientesPorSabor={ingredientesPorSabor} />
                 </div>
                 <div className="col-6">

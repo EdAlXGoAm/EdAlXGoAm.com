@@ -67,7 +67,7 @@ const Orden = ({ Interfaz, Order }) => {
         ["Esquimos", true, [0, 25, 25, 25, 25, 30, 30]],
         ["Cafés", true, [0, 15, 20, 15, 25]],
         ["Bubble Sodas", true, [0, 55]],
-        ["Bombas de Chocolate", true, [0, 45]],
+        ["Platanos Fritos", true, [0, 45]],
         ["Aguas Frescas", true, [25, 50]],
         ["Refrescos", true, [0, 20, 20]]
     ];
@@ -141,11 +141,127 @@ const Orden = ({ Interfaz, Order }) => {
     }
 
     const handleAddComanda = (buttonName) => {
+        console.log("buttonName: ", buttonName);
         const buttonValue = capitalizeFirstLetter(buttonName[0]);
         const comandaId = `${Order.OrderID}_${comandaCount}`;
+        if (buttonValue == 'Postre'){
+            // Reproducir audio de postres
+            const audio = new Audio("/ComandaAudios/Solicitan un-0001.wav");
+            audio.play();
+        }
+        if (buttonValue == 'PayDeLimón'){
+            // Reproducir audio de pay de limón
+            const audio = new Audio("/ComandaAudios/Solicitan un-0002.wav");
+            audio.play();
+        }
+        if (buttonValue == 'PastelImposible'){
+            // Reproducir audio de pastel imposible
+            const audio = new Audio("/ComandaAudios/Solicitan un-0003.wav");
+            audio.play();
+        }
+        if (buttonValue == 'VasosDeEsquites'){
+            // Reproducir audio de vasos de esquites
+            const audio = new Audio("/ComandaAudios/Solicitan un-0004.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Doriesquites'){
+            // Reproducir audio de doriesquites
+            const audio = new Audio("/ComandaAudios/Solicitan un-0005.wav");
+            audio.play();
+        }
+        if (buttonValue == 'MaruchanLoca'){
+            // Reproducir audio de maruchan loca
+            const audio = new Audio("/ComandaAudios/Solicitan un-0006.wav");
+            audio.play();
+        }
+        if (buttonValue == 'MaruchanConSuadero'){
+            // Reproducir audio de maruchan con suadero
+            const audio = new Audio("/ComandaAudios/Solicitan un-0007.wav");
+            audio.play();
+        }
+        if (buttonValue == 'PapasALaFrancesa'){
+            // Reproducir audio de papas a la francesa
+            const audio = new Audio("/ComandaAudios/Solicitan un-0008.wav");
+            audio.play();
+        }
+        if (buttonValue == 'RebanadaDePizza'){
+            // Reproducir audio de rebanada de pizza
+            const audio = new Audio("/ComandaAudios/Solicitan un-0009.wav");
+            audio.play();
+        }
+        if (buttonValue == 'HotDog'){
+            // Reproducir audio de hotdog
+            const audio = new Audio("/ComandaAudios/Solicitan un-0010.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Sincronizadas'){
+            // Reproducir audio de sincronizadas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0011.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Ensaladas'){
+            // Reproducir audio de ensaladas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0012.wav");
+            audio.play();
+        }
+        if (buttonValue == 'AlitasBbq'){
+            // Reproducir audio de alitas BBQ
+            const audio = new Audio("/ComandaAudios/Solicitan un-0013.wav");
+            audio.play();
+        }
         if (buttonValue == 'Hamburguesas'){
             // Reproducir audio de hamburguesas
-            const audio = new Audio("/ComandaAudios/Audios para comandas-0002.wav");
+            const audio = new Audio("/ComandaAudios/Solicitan un-0014.wav");
+            audio.play();
+        }
+        if (buttonValue == 'BubbleWaffles'){
+            // Reproducir audio de bubble waffles
+            const audio = new Audio("/ComandaAudios/Solicitan un-0015.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Donas'){
+            // Reproducir audio de donas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0016.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Frappés'){
+            // Reproducir audio de frappes
+            const audio = new Audio("/ComandaAudios/Solicitan un-0017.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Malteadas'){
+            // Reproducir audio de malteadas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0018.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Esquimos'){
+            // Reproducir audio de esquimos
+            const audio = new Audio("/ComandaAudios/Solicitan un-0019.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Cafés'){
+            // Reproducir audio de cafes
+            const audio = new Audio("/ComandaAudios/Solicitan un-0020.wav");
+            audio.play();
+        }
+        if (buttonValue == 'BubbleSodas'){
+            // Reproducir audio de bubble sodas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0021.wav");
+            audio.play();
+        }
+        if (buttonValue == 'PlatanosFritos'){
+            // Reproducir audio de bombas de chocolate
+            const audio = new Audio("/ComandaAudios/Solicitan un-0022.wav");
+            audio.play();
+        }
+        if (buttonValue == 'AguasFrescas'){
+            // Reproducir audio de aguas frescas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0023.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Refrescos'){
+            // Reproducir audio de refrescos
+            const audio = new Audio("/ComandaAudios/Solicitan un-0024.wav");
             audio.play();
         }
         let precio = buttonName[2][0];
@@ -159,6 +275,7 @@ const Orden = ({ Interfaz, Order }) => {
             ComandaID: comandaCount,
             UniqueID: comandaId,
             Platillo: buttonValue,
+            Platillo_espacios: buttonName[0],
             Propiedades: [],
             Precio: precio,
             Status: "Preparando"
@@ -168,9 +285,11 @@ const Orden = ({ Interfaz, Order }) => {
             const newComandas = [...prevComandas, newComanda];
             return newComandas;
         });
-        // save comanda in order.ComamdasList
+        // save comanda in order.ComamdasList with callback function
         Order.ComandasList.push(newComanda);
-        setComandaCount(comandaCount + 1);
+        // set comandaCount to the next value
+        setComandaCount(prevComandaCount => prevComandaCount + 1);
+        // calculate the pending payment
         let cobro = 0;
         Order.ComandasList.forEach(comanda => {
             cobro += comanda.Precio;
@@ -179,6 +298,7 @@ const Orden = ({ Interfaz, Order }) => {
             const newCobroPendiente = prevCobroPendiente + precio;
             return newCobroPendiente;
         });
+        console.log("Order.ComandasList: ", Order.ComandasList);
     };
 
     const handleSlideChange = (newSlide) => {
@@ -190,7 +310,7 @@ const Orden = ({ Interfaz, Order }) => {
 
     const renderComandas = () => {
         return comandas.map((comanda, i) => (
-            <Comanda key={(Order.OrderID*1000)+comanda.ComandaID} comanda={comanda} buttonName={BUTTON_NAMES_DEFAULT[i]}/>
+            <Comanda key={(Order.OrderID*1000)+comanda.ComandaID} index={(Order.OrderID*1000)+comanda.ComandaID} comanda={comanda} platillo={comanda.Platillo} platillo_espacios={comanda.Platillo_espacios}/>
         ));
     };
 
@@ -328,11 +448,13 @@ const Orden = ({ Interfaz, Order }) => {
         justifyContent: 'center',
         alignItems: 'center',
         /* Ocultar cuando Interfaz == true */
-        display: Interfaz ? 'flex' : 'none'
+        display: !Interfaz ? 'flex' : 'none'
     };
 
     return (
-        <div className='col-xl-2 d-flex justify-content-center'>
+        <div className='col-xl-2 d-flex justify-content-center'
+        /* Reducir altura si no tiene contenido */
+        style={{ height: comandas.length == 0 ? '300px' : 'auto' }}>
             <div className="card" style={OrderContainerStyle}>
                 <div className='row mb-3'> {/* row for the order header */}
                     <div className='col' style={{ display: 'flex', justifyContent: 'space-between' }}> {/* row for the fold button and the lock button */}
@@ -360,7 +482,7 @@ const Orden = ({ Interfaz, Order }) => {
                         >
                             {/* if (orderFoldStatus == false) icon = fa-solid fa-lock, else icon = fa-solid fa-unlock */}
                             {/* Llevar opacidad de  a 0 cuando Interfaz == true */}
-                            <FontAwesomeIcon icon={orderLockStatus ? faLock : faUnlock} size="2x" style={{opacity: Interfaz ? '1' : '0'}}/>
+                            <FontAwesomeIcon icon={orderLockStatus ? faLock : faUnlock} size="2x" style={{opacity: !Interfaz ? '1' : '0'}}/>
                         </button>
                     </div>
                 </div>
