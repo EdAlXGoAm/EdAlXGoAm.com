@@ -41,6 +41,10 @@
   .container input:checked ~ .checkmark {
     background-color: #38E54D;
   }
+
+  .container input:checked ~ .checkmark.true {
+    background-color: #2D2D2D;
+  }
   
   /* Create the checkmark/indicator (hidden when not checked) */
   .checkmark:after {

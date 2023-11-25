@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const PastelImposible = ({ index, comanda, platillo, platillo_espacios, status }) => {
+const PastelImposible = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const Label = ["$40 Rebanada"];
     
     return (

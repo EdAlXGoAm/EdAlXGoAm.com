@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import checkbox_css from '../css/checkbox.css'; //La ruta de este archivo es: src/css/checkbox.css
 
-const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegue }) => {
+const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegue, toggleChecked_Status, setToggleChecked_Status }) => {
     // Asignar opciones_in directamente a opciones
     const opcionesPredeterminadas = ['Opciones'];
     const opciones = opciones_in && opciones_in.length > 0 ? opciones_in : opcionesPredeterminadas;
@@ -27,6 +27,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
 
     return (
         <div className="row">
+            {console.log('status: ', toggleChecked_Status)}
             <div className="col">
                 {/* Align text to left, padding left */}
                 {despliegue==='vertical' &&
@@ -38,7 +39,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
                                 style={{
                                     paddingLeft: "15px",
                                     borderRadius: "10px",
-                                    background: checkboxStates[local_index] ? '#38E54D' : '' ,
+                                    background: checkboxStates[local_index] ? (toggleChecked_Status ? '#2D2D2D' : '#38E54D') : '' ,
                                     color: checkboxStates[local_index] ? 'white' : 'grey'
                                     }}>
                                     {opcion}
@@ -49,7 +50,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
                                     checked={checkboxStates[local_index]}
                                     onChange={() => handleCheckboxChange(local_index)}
                                     disabled={toggleChecked}/>
-                                <span className="checkmark"></span>
+                                <span className={`checkmark ${toggleChecked_Status ? 'true' : ''}`}></span>
                             </label>
                         </div>
                     ))}
@@ -68,7 +69,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
                                         style={{
                                             paddingLeft: "15px",
                                             borderRadius: "10px",
-                                            background: checkboxStates[local_index] ? '#38E54D' : '' ,
+                                            background: checkboxStates[local_index] ? (toggleChecked_Status ? '#2D2D2D' : '#38E54D') : '' ,
                                             color: checkboxStates[local_index] ? 'white' : 'grey'
                                             }}>
                                             {opcion}
@@ -79,7 +80,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
                                             checked={checkboxStates[local_index]}
                                             onChange={() => handleCheckboxChange(local_index)}
                                             disabled={toggleChecked}/>
-                                        <span className="checkmark"></span>
+                                        <span className={`checkmark ${toggleChecked_Status ? 'true' : ''}`}></span>
                                     </label>
                                 </div>
                             ))}
@@ -93,7 +94,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
                                         style={{
                                             paddingLeft: "15px",
                                             borderRadius: "10px",
-                                            background: checkboxStates[local_index+opciones.length/2] ? '#38E54D' : '' ,
+                                            background: checkboxStates[local_index+opciones.length/2] ? (toggleChecked_Status ? '#2D2D2D' : '#38E54D') : '' ,
                                             color: checkboxStates[local_index+opciones.length/2] ? 'white' : 'grey'
                                             }}>
                                             {opcion}
@@ -104,7 +105,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
                                             checked={checkboxStates[local_index+opciones.length/2]}
                                             onChange={() => handleCheckboxChange(local_index+opciones.length/2)}
                                             disabled={toggleChecked}/>
-                                        <span className="checkmark"></span>
+                                        <span className={`checkmark ${toggleChecked_Status ? 'true' : ''}`}></span>
                                     </label>
                                 </div>
                             ))}

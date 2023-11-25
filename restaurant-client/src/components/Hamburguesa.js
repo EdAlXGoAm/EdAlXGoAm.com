@@ -4,7 +4,7 @@ import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 import IngredientesAndQuesos from './IngredientesAndQuesos';
 // Component Hamburguesa
-const Hamburguesa = ({ index, comanda, platillo, platillo_espacios, status }) => {
+const Hamburguesa = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const opcionesDosDimensiones = [
         ['Sencilla',
             [
@@ -233,13 +233,13 @@ const Hamburguesa = ({ index, comanda, platillo, platillo_espacios, status }) =>
                     <IngredientesAndQuesos selectedSabor={selectedSabor} ingredientesPorSabor={ingredientesPorSabor} />
                 </div>
                 <div className="col-6">
-                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='vegetales' ingredientes_checkbutton={vegetales} despliegue='vertical' />
+                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='vegetales' ingredientes_checkbutton={vegetales} despliegue='vertical' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
                 </div>
             </div>
             <hr />
             <div className="row">
                 <div className="col">
-                <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' />
+                <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
                 </div>
             </div>
             <hr />
@@ -263,7 +263,7 @@ const Hamburguesa = ({ index, comanda, platillo, platillo_espacios, status }) =>
                         <img src="papas.png" alt="Papas Fritas"className="img-fluid" style={{ width: '150px' }}></img>
                     </div>
                     <div className="col-6">
-                        <ToogleButton_CheckButtons index={index} platillo='Papas' tipo_ingrediente='aderezos' ingredientes_checkbutton={ingredientes_papas_opcional} despliegue='vertical' />
+                        <ToogleButton_CheckButtons index={index} platillo='Papas' tipo_ingrediente='aderezos' ingredientes_checkbutton={ingredientes_papas_opcional} despliegue='vertical' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
                     </div>
                 </div>
             </div>

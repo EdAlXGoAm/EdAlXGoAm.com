@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import CheckButton_Ingredientes from './CheckButton_Ingredientes';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 
-const ToogleButton_CheckButtons = ({ index, platillo, tipo_ingrediente, ingredientes_checkbutton, despliegue }) => {
+const ToogleButton_CheckButtons = ({ index, platillo, tipo_ingrediente, ingredientes_checkbutton, despliegue, toggleChecked_Status, setToggleChecked_Status }) => {
   const [toggleChecked, setToggleChecked] = useState(false);
 
   const handleToggleChange = () => {
@@ -38,6 +38,8 @@ const ToogleButton_CheckButtons = ({ index, platillo, tipo_ingrediente, ingredie
         opciones_in={ingredientes_checkbutton}
         toggleChecked={toggleChecked}
         despliegue={despliegue}
+        toggleChecked_Status={toggleChecked_Status}
+        setToggleChecked_Status={setToggleChecked_Status}
         />
     </div>
   );

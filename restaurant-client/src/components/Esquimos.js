@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import DropDown from './DropDown';
 
-const Esquimos = ({ index, comanda, platillo, platillo_espacios, status }) => {
+const Esquimos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     
     //Esquimo
     const dessertOptions = [

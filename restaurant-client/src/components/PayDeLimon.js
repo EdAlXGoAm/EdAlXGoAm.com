@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const PayDeLimón = ({ index, comanda, platillo, platillo_espacios, status }) => {
+const PayDeLimón = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const Label = ["$40 Rebanada"];
     
     return (

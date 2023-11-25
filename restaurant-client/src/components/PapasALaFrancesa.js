@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const PapasALaFrancesa = ({ index, comanda, platillo, platillo_espacios, status }) => {
+const PapasALaFrancesa = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const Label = ["$40 Orden"];
     const aderezos = [
         'Q Amarillo',
@@ -20,7 +20,7 @@ const PapasALaFrancesa = ({ index, comanda, platillo, platillo_espacios, status 
             </div>
             <div className="row">
                 <div className="col">
-                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' />
+                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
                 </div>
             </div>
         </div>

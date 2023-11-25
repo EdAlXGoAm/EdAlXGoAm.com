@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const Doriesquites = ({ index, comanda, platillo, platillo_espacios, status }) => {
+const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const doritosOptions = [
         'Nachos (Rojos)',
         'Diablo (Naranjas)',
@@ -35,7 +35,7 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, status }) =
             
             <div className="row">
                 <div className="col">
-                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' />
+                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
                 </div>
             </div>
         </div>

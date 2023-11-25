@@ -270,6 +270,8 @@ const Orden = ({ Interfaz, Order }) => {
             case 2:
                 precio = buttonName[2][1];
                 break;
+            default:
+                break;
         }
         const newComanda = {
             ComandaID: comandaCount,

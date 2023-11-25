@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, status }) => {
+const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const cpapasOptions = [
         'Sin Papas',
         'Con Papas'
@@ -63,7 +63,7 @@ const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, status }
             
             <div className="row">
                 <div className="col">
-                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' />
+                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
                 </div>
             </div>
             <hr />
@@ -87,7 +87,7 @@ const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, status }
                         <img src="papas.png" alt="Papas Fritas"className="img-fluid" style={{ width: '150px' }}></img>
                     </div>
                     <div className="col-6">
-                        <ToogleButton_CheckButtons index={index} platillo='Papas' tipo_ingrediente='aderezos' ingredientes_checkbutton={ingredientes_papas_opcional} despliegue='vertical' />
+                        <ToogleButton_CheckButtons index={index} platillo='Papas' tipo_ingrediente='aderezos' ingredientes_checkbutton={ingredientes_papas_opcional} despliegue='vertical' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
                     </div>
                 </div>
             </div>

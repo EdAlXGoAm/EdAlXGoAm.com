@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const VasosDeEsquites = ({ index, comanda, platillo, platillo_espacios, status }) => {
+const VasosDeEsquites = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const tamanoOptions = [
         'Mediano',
         'Grande',
@@ -24,6 +24,7 @@ const VasosDeEsquites = ({ index, comanda, platillo, platillo_espacios, status }
     };
 
     return (
+
         <div>
             <div>
                 <DropDown opciones_in={tamanoOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange} precios={[20, 25, 80]}/>
@@ -31,7 +32,7 @@ const VasosDeEsquites = ({ index, comanda, platillo, platillo_espacios, status }
             
             <div className="row">
                 <div className="col">
-                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' />
+                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
                 </div>
             </div>
         </div>
