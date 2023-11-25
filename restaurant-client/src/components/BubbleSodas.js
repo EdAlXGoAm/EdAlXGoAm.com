@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import DropDown from './DropDown';
-import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
+import DropDown from './x10DropDown';
+import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
 const BubbleSodas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const proteinasOptions = [

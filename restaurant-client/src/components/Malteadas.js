@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import DropDown from './DropDown';
+import DropDown from './x10DropDown';
 
 const Malteadas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
    
