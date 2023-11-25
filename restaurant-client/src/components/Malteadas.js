@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import DropDown from './DropDown';
 
-const Malteadas = ({ index, comanda, platillo, platillo_espacios }) => {
+const Malteadas = ({ index, comanda, platillo, platillo_espacios, status }) => {
    
     //Malteada
     const dessertOptions = [

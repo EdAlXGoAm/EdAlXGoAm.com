@@ -4,7 +4,7 @@ import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 import IngredientesAndQuesos from './IngredientesAndQuesos';
 // Component Hamburguesa
-const Hamburguesa = ({ index, comanda, platillo, platillo_espacios }) => {
+const Hamburguesa = ({ index, comanda, platillo, platillo_espacios, status }) => {
     const opcionesDosDimensiones = [
         ['Sencilla',
             [

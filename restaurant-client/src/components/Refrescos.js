@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import DropDown from './DropDown';
 
-const Refrescos = ({ index, comanda, platillo, platillo_espacios }) => {
+const Refrescos = ({ index, comanda, platillo, platillo_espacios, status }) => {
     const dessertOptions = [
         '600 ml',
         'Lata',

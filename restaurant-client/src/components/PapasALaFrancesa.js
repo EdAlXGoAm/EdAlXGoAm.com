@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const PapasALaFrancesa = ({ index, comanda, platillo, platillo_espacios }) => {
+const PapasALaFrancesa = ({ index, comanda, platillo, platillo_espacios, status }) => {
     const Label = ["$40 Orden"];
     const aderezos = [
         'Q Amarillo',

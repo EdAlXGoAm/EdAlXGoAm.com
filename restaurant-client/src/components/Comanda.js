@@ -26,28 +26,7 @@ import BombasDeChocolate from './BombasDeChocolate';
 import AguasFrescas from './AguasFrescas';
 import Refrescos from './Refrescos';
 // Component Comanda
-const Comanda = ({ index, comanda, platillo, platillo_espacios }) => {
-  const ComandaStyleFondo = {
-    margin: '0px 10px 10px 10px',
-  };
-  const ComandaStyleText = {
-    fontSize: "20px",
-    color: '#000',
-    backgroundColor: '#abe1e3', // Color de fondo pastel
-    borderRadius: '40px',       // Bordes redondeados
-    padding: '0px 10px',       // Padding para no pegar el texto a los bordes
-    margin: '0px 10px 0px 10px',
-  };
-  const divStyle = {
-    fontWeight: 'bold',
-    border: '10px solid #FF2559',
-    borderRadius: '15px',
-    padding: '15px',
-  }
-  const id = 0;
-  const día = '09 Nov 2023';
-  const status = 'Preparando';
-
+const Comanda = ({ index, comanda, platillo, platillo_espacios, lock }) => {
   const [toggleChecked_LlevarAqui, setToggleChecked_LlevarAqui] = useState(false);
   const handleToggleChange_LlevarAqui = () => {
     setToggleChecked_LlevarAqui(!toggleChecked_LlevarAqui);
@@ -60,6 +39,28 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios }) => {
   const handleToggleChange_Comment = () => {
     setToggleChecked_Comment(!toggleChecked_Comment);
   };
+  const ComandaStyleFondo = {
+    margin: '0px 10px 10px 10px',
+  };
+  const ComandaStyleText = {
+    fontSize: "20px",
+    color: toggleChecked_Status ? '#fff' : '#000',
+    backgroundColor: toggleChecked_Status ? '#2d2d2d' : '#00ff04', // Color de fondo pastel
+    borderRadius: '40px',       // Bordes redondeados
+    padding: '0px 10px',       // Padding para no pegar el texto a los bordes
+    margin: '0px 10px 0px 10px',
+    
+  };
+  const divStyle = {
+    fontWeight: 'bold',
+    border: toggleChecked_Status ? '10px solid #2d2d2d' : '10px solid #FF2559',
+    borderRadius: '15px',
+    padding: '15px',
+  }
+  const id = 0;
+  const día = '09 Nov 2023';
+  const status = 'Preparando';
+
   return (
         <div className="card-body mb-3" style={divStyle}>
           <div className="row mb-3">
@@ -104,7 +105,7 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios }) => {
               </div>
             </div>
           </div>
-          <div className="row" style={{display: toggleChecked_Status ? 'none' : 'flex'}}>
+          <div className="row" style={{display: toggleChecked_Status && lock ? 'none' : 'flex'}}>
             <div className='col'>
               {/* const BUTTON_NAMES_DEFAULT = [
                   ["Postre", true, [0, 30, 35, 40]],
@@ -133,53 +134,53 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios }) => {
                   ["Refrescos", true, [0, 20, 20]],
                   ]; */}
               {/* Si buttonValue == 'Postre, desplegar Componente Postre */}
-              {platillo == 'Postre' && <Postre key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Postre' && <Postre key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Pay de Limón, desplegar Componente Pay de Limón */}
-              {platillo == 'PayDeLimón' && <PayDeLimón key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'PayDeLimón' && <PayDeLimón key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Pastel Imposible, desplegar Componente Pastel Imposible */}
-              {platillo == 'PastelImposible' && <PastelImposible key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'PastelImposible' && <PastelImposible key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Vasos de Esquites, desplegar Componente Vasos de Esquites */}
-              {platillo == 'VasosDeEsquites' && <VasosDeEsquites key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'VasosDeEsquites' && <VasosDeEsquites key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Doriesquites, desplegar Componente Doriesquites */}
-              {platillo == 'Doriesquites' && <Doriesquites key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Doriesquites' && <Doriesquites key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Maruchan Loca, desplegar Componente Maruchan Loca */}
-              {platillo == 'MaruchanLoca' && <MaruchanLoca key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'MaruchanLoca' && <MaruchanLoca key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Maruchan con Suadero, desplegar Componente Maruchan con Suadero */}
-              {platillo == 'MaruchanConSuadero' && <MaruchanConSuadero key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'MaruchanConSuadero' && <MaruchanConSuadero key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Papas a la Francesa, desplegar Componente Papas a la Francesa */}
-              {platillo == 'PapasALaFrancesa' && <PapasALaFrancesa key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'PapasALaFrancesa' && <PapasALaFrancesa key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Rebanada de Pizza, desplegar Componente Rebanada de Pizza */}
-              {platillo == 'RebanadaDePizza' && <RebanadaDePizza key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'RebanadaDePizza' && <RebanadaDePizza key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Hot Dog, desplegar Componente Hot Dog */}
-              {platillo == 'HotDog' && <HotDog key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'HotDog' && <HotDog key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Sincronizadas, desplegar Componente Sincronizadas */}
-              {platillo == 'Sincronizadas' && <Sincronizadas key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Sincronizadas' && <Sincronizadas key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Ensaladas, desplegar Componente Ensaladas */}
-              {platillo == 'Ensaladas' && <Ensaladas key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Ensaladas' && <Ensaladas key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Alitas BBQ, desplegar Componente Alitas BBQ */}
-              {platillo == 'AlitasBbq' && <AlitasBBQ key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'AlitasBbq' && <AlitasBBQ key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Hamburguesa, desplegar Componente Hamburguesa */}
-              {platillo == 'Hamburguesas' && <Hamburguesa key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Hamburguesas' && <Hamburguesa key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Bubble Waffles, desplegar Componente Bubble Waffles */}
-              {platillo == 'BubbleWaffles' && <BubbleWaffles key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'BubbleWaffles' && <BubbleWaffles key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Donas, desplegar Componente Donas */}
-              {platillo == 'Donas' && <Donas key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Donas' && <Donas key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Frappés, desplegar Componente Frappés */}
-              {platillo == 'Frappés' && <Frappés key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Frappés' && <Frappés key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Malteadas, desplegar Componente Malteadas */}
-              {platillo == 'Malteadas' && <Malteadas key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Malteadas' && <Malteadas key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Esquimos, desplegar Componente Esquimos */}
-              {platillo == 'Esquimos' && <Esquimos key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Esquimos' && <Esquimos key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Cafés, desplegar Componente Cafés */}
-              {platillo == 'Cafés' && <Cafés key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Cafés' && <Cafés key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Bubble Sodas, desplegar Componente Bubble Sodas */}
-              {platillo == 'BubbleSodas' && <BubbleSodas key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'BubbleSodas' && <BubbleSodas key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Bombas de Chocolate, desplegar Componente Bombas de Chocolate */}
-              {platillo == 'PlatanosFritos' && <BombasDeChocolate key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'PlatanosFritos' && <BombasDeChocolate key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Aguas Frescas, desplegar Componente Aguas Frescas */}
-              {platillo == 'AguasFrescas' && <AguasFrescas key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'AguasFrescas' && <AguasFrescas key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
               {/* Si buttonValue == 'Refrescos, desplegar Componente Refrescos */}
-              {platillo == 'Refrescos' && <Refrescos key={index} index={index} comanda={comanda} platillo={platillo}/>}
+              {platillo == 'Refrescos' && <Refrescos key={index} index={index} comanda={comanda} platillo={platillo} status={toggleChecked_Status}/>}
 
             </div>
           </div>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const VasosDeEsquites = ({ index, comanda, platillo, platillo_espacios }) => {
+const VasosDeEsquites = ({ index, comanda, platillo, platillo_espacios, status }) => {
     const tamanoOptions = [
         'Mediano',
         'Grande',

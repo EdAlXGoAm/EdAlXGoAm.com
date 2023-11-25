@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios }) => {
+const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, status }) => {
     const cpapasOptions = [
         'Sin Papas',
         'Con Papas'

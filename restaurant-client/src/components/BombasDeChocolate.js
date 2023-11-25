@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const BombasDeChocolate = ({ index, comanda, platillo, platillo_espacios }) => {
+const BombasDeChocolate = ({ index, comanda, platillo, platillo_espacios, status }) => {
     
     const aderezos = [
         'Crema',

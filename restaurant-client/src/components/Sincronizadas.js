@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const Sincronizadas = ({ index, comanda, platillo, platillo_espacios }) => {
+const Sincronizadas = ({ index, comanda, platillo, platillo_espacios, status }) => {
     const Label = ["$45 Orden"];
     
     const vegetales = [

@@ -310,7 +310,7 @@ const Orden = ({ Interfaz, Order }) => {
 
     const renderComandas = () => {
         return comandas.map((comanda, i) => (
-            <Comanda key={(Order.OrderID*1000)+comanda.ComandaID} index={(Order.OrderID*1000)+comanda.ComandaID} comanda={comanda} platillo={comanda.Platillo} platillo_espacios={comanda.Platillo_espacios}/>
+            <Comanda key={(Order.OrderID*1000)+comanda.ComandaID} index={(Order.OrderID*1000)+comanda.ComandaID} comanda={comanda} platillo={comanda.Platillo} platillo_espacios={comanda.Platillo_espacios} lock={orderLockStatus}/>
         ));
     };
 
@@ -376,6 +376,7 @@ const Orden = ({ Interfaz, Order }) => {
         border: '5px solid #abe1e3',
         borderRadius: '10px',
         backgroundColor: '#ffffff',
+        height: comandas.length == 0 ? '300px' : 'auto'
     };
 
 
@@ -452,9 +453,6 @@ const Orden = ({ Interfaz, Order }) => {
     };
 
     return (
-        <div className='col-xl-2 d-flex justify-content-center'
-        /* Reducir altura si no tiene contenido */
-        style={{ height: comandas.length == 0 ? '300px' : 'auto' }}>
             <div className="card" style={OrderContainerStyle}>
                 <div className='row mb-3'> {/* row for the order header */}
                     <div className='col' style={{ display: 'flex', justifyContent: 'space-between' }}> {/* row for the fold button and the lock button */}
@@ -525,7 +523,6 @@ const Orden = ({ Interfaz, Order }) => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
 

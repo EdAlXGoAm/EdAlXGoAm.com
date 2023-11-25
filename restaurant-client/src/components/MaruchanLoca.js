@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './DropDown';
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const Doriesquites = ({ index, comanda, platillo, platillo_espacios }) => {
+const Doriesquites = ({ index, comanda, platillo, platillo_espacios, status }) => {
     const maruchanOptions = [
         'Camarón',
         'Camarón Habanero',
