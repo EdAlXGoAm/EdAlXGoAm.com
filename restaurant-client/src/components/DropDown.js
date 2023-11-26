@@ -15,7 +15,7 @@ const DropDown = ({ opciones_in, selectedValue, onDropdownChange, precios }) => 
   return (
     <div>
       {/* bold to drop down, and font size 15 */}
-      <select id="burgerStyle" className="custom-select mb-3" value={selectedValue} onChange={handleSelectChange} style={{ fontWeight: 'bold', fontSize: '22px' }}>
+      <select id="burgerStyle" className="custom-select mb-3" value={selectedValue} onChange={handleSelectChange} style={{ fontWeight: 'bold', fontSize: '30px' }}>
         {opciones.map((opcion, index) => (
           <option key={index} value={opcion.toLowerCase().replace(/\s/g, '_')}>
              {precios && precios.length > 0 ? `$${precios[index]} ` : ''}{opcion}

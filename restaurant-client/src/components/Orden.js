@@ -6,7 +6,7 @@ import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { faUnlock } from '@fortawesome/free-solid-svg-icons';
-const TOTAL_BUTTONS = 24;
+const TOTAL_BUTTONS = 27;
 const BUTTONS_PER_SLIDE = 4;
 
 
@@ -53,6 +53,7 @@ const Orden = ({ Interfaz, Order }) => {
         ["Doriesquites", true, [0, 35]],
         ["Maruchan Loca", true, [0, 55]],
         ["Maruchan con Suadero", true, [0, 45]],
+        ["Maruchan Sola", true, [0, 25]],
         ["Papas a la Francesa", true, [0, 40]],
         ["Rebanada de Pizza", true, [0, 25]],
         ["Hot Dog", true, [0, 30, 38, 45]],
@@ -60,14 +61,16 @@ const Orden = ({ Interfaz, Order }) => {
         ["Ensaladas", true, [0, 45]],
         ["Alitas BBQ", true, [0, 80]],
         ["Hamburguesas", true, [0, 47, 57, 60, 60, 60, 60, 60, 60, 60, 70, 75, 100, 120]],
+        ["Pizza Completa", true, [0, 180]],
         ["Bubble Waffles", true, [0, 60, 70, 70, 70]],
         ["Donas", true, [0, 40]],
+        ["Platanos Fritos", true, [0, 45]],
+        ["Ponche", true, [0, 30]],
         ["Frappés", true, [0, 48, 48, 48, 48, 48, 68, 68, 68, 68, 68]],
         ["Malteadas", true, [0, 58, 58, 58]],
         ["Esquimos", true, [0, 25, 25, 25, 25, 30, 30]],
         ["Cafés", true, [0, 15, 20, 15, 25]],
         ["Bubble Sodas", true, [0, 55]],
-        ["Platanos Fritos", true, [0, 45]],
         ["Aguas Frescas", true, [25, 50]],
         ["Refrescos", true, [0, 20, 20]]
     ];
@@ -80,6 +83,7 @@ const Orden = ({ Interfaz, Order }) => {
         'icons/btn_doriesquites.png',
         'icons/btn_maruchan_loca.png',
         'icons/btn_maruchan_con_suadero.png',
+        'icons/btn_maruchan_loca.png',
         'icons/btn_papas_a_la_francesa.png',
         'icons/btn_rebanada_de_pizza.png',
         'icons/btn_hotdog.png',
@@ -87,14 +91,16 @@ const Orden = ({ Interfaz, Order }) => {
         'icons/btn_ensaladas.png',
         'icons/btn_alitas_bbq.png',
         'icons/btn_hamburguesas.png',
+        'icons/btn_pizza_completa.png',
         'icons/btn_bubble_waffles.png',
         'icons/btn_donas.png',
+        'icons/btn_platanos_fritos.png',
+        'icons/btn_ponche.png',
         'icons/btn_frappes.png',
         'icons/btn_malteadas.png',
         'icons/btn_esquimos.png',
         'icons/btn_cafes.png',
         'icons/btn_bubble_sodas.png',
-        'icons/btn_bombas_de_chocolate.png',
         'icons/btn_aguas_frescas.png',
         'icons/btn_refrescos.png'
     ];
@@ -179,6 +185,11 @@ const Orden = ({ Interfaz, Order }) => {
             const audio = new Audio("/ComandaAudios/Solicitan un-0007.wav");
             audio.play();
         }
+        if (buttonValue == 'MaruchanSola'){
+            // Reproducir audio de maruchan sola
+            const audio = new Audio("/ComandaAudios/Solicitan un-MaruchanSola.wav");
+            audio.play();
+        }
         if (buttonValue == 'PapasALaFrancesa'){
             // Reproducir audio de papas a la francesa
             const audio = new Audio("/ComandaAudios/Solicitan un-0008.wav");
@@ -214,6 +225,11 @@ const Orden = ({ Interfaz, Order }) => {
             const audio = new Audio("/ComandaAudios/Solicitan un-0014.wav");
             audio.play();
         }
+        if (buttonValue == 'PizzaCompleta'){
+            // Reproducir audio de pizza completa
+            const audio = new Audio("/ComandaAudios/Solicitan un-PizzaCompleta.wav");
+            audio.play();
+        }
         if (buttonValue == 'BubbleWaffles'){
             // Reproducir audio de bubble waffles
             const audio = new Audio("/ComandaAudios/Solicitan un-0015.wav");
@@ -222,6 +238,16 @@ const Orden = ({ Interfaz, Order }) => {
         if (buttonValue == 'Donas'){
             // Reproducir audio de donas
             const audio = new Audio("/ComandaAudios/Solicitan un-0016.wav");
+            audio.play();
+        }
+        if (buttonValue == 'PlatanosFritos'){
+            // Reproducir audio de platanos fritos
+            const audio = new Audio("/ComandaAudios/Solicitan un-PlatanosFritos.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Ponche'){
+            // Reproducir audio de ponche
+            const audio = new Audio("/ComandaAudios/Solicitan un-Ponche.wav");
             audio.play();
         }
         if (buttonValue == 'Frappés'){
@@ -247,11 +273,6 @@ const Orden = ({ Interfaz, Order }) => {
         if (buttonValue == 'BubbleSodas'){
             // Reproducir audio de bubble sodas
             const audio = new Audio("/ComandaAudios/Solicitan un-0021.wav");
-            audio.play();
-        }
-        if (buttonValue == 'PlatanosFritos'){
-            // Reproducir audio de bombas de chocolate
-            const audio = new Audio("/ComandaAudios/Solicitan un-0022.wav");
             audio.play();
         }
         if (buttonValue == 'AguasFrescas'){
@@ -455,6 +476,7 @@ const Orden = ({ Interfaz, Order }) => {
     };
 
     return (
+        <div className='col-xl-2 d-flex justify-content-center'>
             <div className="card" style={OrderContainerStyle}>
                 <div className='row mb-3'> {/* row for the order header */}
                     <div className='col' style={{ display: 'flex', justifyContent: 'space-between' }}> {/* row for the fold button and the lock button */}
@@ -525,6 +547,7 @@ const Orden = ({ Interfaz, Order }) => {
                     </div>
                 </div>
             </div>
+        </div>
     );
 };
 

@@ -54,7 +54,7 @@ const Sincronizadas = ({ index, comanda, platillo, platillo_espacios, toggleChec
         <div>
             <div className="row">
                 <div className="col">
-                    <label htmlFor="PayDeLimón"  style={{ fontWeight: 'bold', fontSize: '22px', border: '1px solid #2d2d2d', borderRadius: '15px', padding: '15px', width: '100%'
+                    <label htmlFor="PayDeLimón"  style={{ fontWeight: 'bold', fontSize: '30px', border: '1px solid #2d2d2d', borderRadius: '15px', padding: '15px', width: '100%'
                 }}>{Label}</label>
                 </div>
             </div>

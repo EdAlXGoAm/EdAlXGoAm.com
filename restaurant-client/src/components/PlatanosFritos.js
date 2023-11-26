@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
 
-const BombasDeChocolate = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const PlatanosFritos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     
     const aderezos = [
         'Crema',
@@ -16,7 +16,7 @@ const BombasDeChocolate = ({ index, comanda, platillo, platillo_espacios, toggle
         <div>
             <div className="row">
                 <div className="col">
-                    <label htmlFor="BombasDeChocolate"  style={{ fontWeight: 'bold', fontSize: '22px', border: '1px solid #2d2d2d', borderRadius: '15px', padding: '15px', width: '100%'
+                    <label htmlFor="PlatanosFritos"  style={{ fontWeight: 'bold', fontSize: '22px', border: '1px solid #2d2d2d', borderRadius: '15px', padding: '15px', width: '100%'
                 }}>{Label}</label>
                 </div>
             </div>
@@ -30,4 +30,4 @@ const BombasDeChocolate = ({ index, comanda, platillo, platillo_espacios, toggle
     );
 };
 
-export default BombasDeChocolate;
+export default PlatanosFritos;
