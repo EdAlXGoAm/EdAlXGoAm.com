@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import CheckButton_Ingredientes from './CheckButton_Ingredientes';
+import CheckButton_Ingredientes from './x12CheckButton_Ingredientes';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 
 const ToogleButton_CheckButtons = ({ index, platillo, tipo_ingrediente, ingredientes_checkbutton, despliegue, toggleChecked_Status, setToggleChecked_Status }) => {

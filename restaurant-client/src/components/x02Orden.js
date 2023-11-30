@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Comanda from './Comanda';
+import Comanda from './x03Comanda';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';

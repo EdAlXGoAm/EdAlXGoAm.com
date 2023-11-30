@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
-import DropDown from './DropDown';
-import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
+import DropDown from './x10DropDown';
+import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
 const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const pizzaOptions = [
         'Sencillo',
         'Q Oaxaca',
         'Q Manchego',
-        'Especial'
+        'Tocino',
+        'Especial (Q Oaxaca, Tocino)',
+        'Especial (Q Manchego, Tocino)',
     ];
     
     const vegetales = [
@@ -60,7 +62,7 @@ const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
     return (
         <div>
             <div>
-                <DropDown opciones_in={pizzaOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[30, 38, 38, 45]}/>
+                <DropDown opciones_in={pizzaOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[30, 38, 38, 38, 45, 45]}/>
             </div>
             
             

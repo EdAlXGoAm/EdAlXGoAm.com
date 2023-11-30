@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Orden from './Orden';
+import Orden from './x02Orden';
 import Button from 'react-bootstrap/Button';
 
 const ShowComandasInterface = ({ cocina_mesero_switch, orders_collection }) => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import DropDown from './DropDown';
-import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
+import DropDown from './x10DropDown';
+import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
 const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     const maruchanOptions = [
@@ -12,11 +12,12 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
         'Res'
     ];
     const doritosOptions = [
-        'Nachos (Rojos)',
-        'Diablo (Naranjas)',
-        'Pizzerolas (Verdes)',
-        'Incognita (Negros)',
-        'Flaming Hot (Morados)',
+        'Dor. Nachos (Rojos)',
+        'Dor. Diablo (Naranjas)',
+        'Dor. Pizzerolas (Verdes)',
+        'Dor. Incognita (Negros)',
+        'Dor. Flaming Hot (Morados)',
+        'Dor. Mix',
         'Cheetos Naranjas',
         'Cheetos Flaming Hot'
     ];

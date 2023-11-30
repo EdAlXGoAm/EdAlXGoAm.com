@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import io from 'socket.io-client';
 
-import ShowComandasInterface from './components/ShowComandasInterface';
+import ShowComandasInterface from './components/x01ShowComandasInterface';
 
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 

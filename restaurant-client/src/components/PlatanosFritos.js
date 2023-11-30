@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import ToogleButton_CheckButtons from './ToogleButton_CheckButtons';
+import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
 const PlatanosFritos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
     
