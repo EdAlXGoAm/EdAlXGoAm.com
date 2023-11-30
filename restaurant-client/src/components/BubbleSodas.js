@@ -4,39 +4,40 @@ import DropDown from './x10DropDown';
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
 const BubbleSodas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
-    const proteinasOptions = [
+    const jarabeOptions = [
         'Mora Azul',
         'Fresa',
         'Manzana Verde',
         'Kiwi',
+        'Mango',
     ];
-    const crocantesOptions = [
+    const perlasOptions = [
         'Mora Azul',
         'Manzana Verde',
         'Chamoy'
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedMaruchan, setSelectedMaruchan] = useState('Camarón');
+    const [selectedJarabe, setselectedJarabe] = useState('mora_azul');
 
-    const handleDropdownChangeMaruchan = (value) => {
-        setSelectedMaruchan(value);
+    const handleDropdownChangeMaruchan = (e) => {
+        setselectedJarabe(e.value);
     };
 
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('$30 Mediano');
+    const [selectedPerlas, setselectedPerlas] = useState('mora_azul');
 
-    const handleDropdownChange = (value) => {
-        setSelectedTamano(value);
+    const handleDropdownChange = (e) => {
+        setselectedPerlas(e.value);
     };
 
     return (
         <div>
         <div>
-            <DropDown opciones_in={proteinasOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[55, 55, 55, 55]}/>
+            <DropDown opciones_in={jarabeOptions} selectedValue={selectedJarabe} onDropdownChange={handleDropdownChangeMaruchan} precios={[55, 55, 55, 55, 55]}/>
         </div>
             <div>
-                <DropDown opciones_in={crocantesOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange}/>
+                <DropDown opciones_in={perlasOptions} selectedValue={selectedPerlas} onDropdownChange={handleDropdownChange}/>
             </div>
             
         </div>

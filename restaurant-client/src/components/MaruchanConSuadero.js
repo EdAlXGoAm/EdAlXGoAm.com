@@ -20,16 +20,16 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
     
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedMaruchan, setSelectedMaruchan] = useState('Camarón');
+    const [selectedMaruchan, setSelectedMaruchan] = useState('camarón');
 
-    const handleDropdownChangeMaruchan = (value) => {
-        setSelectedMaruchan(value);
+    const handleDropdownChangeMaruchan = (e) => {
+        setSelectedMaruchan(e.value);
     };
 
     return (
         <div>
             <div>
-                <DropDown opciones_in={maruchanOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[45, 45, 45, 45, 45]}/>
+                <DropDown opciones_in={maruchanOptions} selectedValue={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[45, 45, 45, 45, 45]}/>
             </div>
             
             <div className="row">

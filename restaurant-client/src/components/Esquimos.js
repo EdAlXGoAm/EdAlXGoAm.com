@@ -15,15 +15,15 @@ const Esquimos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_S
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('$30 Mediano');
+    const [selectedSaborEsquimo, setselectedSaborEsquimo] = useState('fresa');
 
-    const handleDropdownChange = (value) => {
-        setSelectedTamano(value);
+    const handleDropdownChange = (e) => {
+        setselectedSaborEsquimo(e.value);
     };
 
     return (
         <div>
-            <DropDown opciones_in={dessertOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange} precios={[25, 25, 25, 25, 30, 30]}/>
+            <DropDown opciones_in={dessertOptions} selectedValue={selectedSaborEsquimo} onDropdownChange={handleDropdownChange} precios={[25, 25, 25, 25, 30, 30]}/>
         </div>
     );
 };

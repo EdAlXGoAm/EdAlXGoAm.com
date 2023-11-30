@@ -12,15 +12,15 @@ const Malteadas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('$30 Mediano');
+    const [selectedSaborMalteada, setselectedSaborMalteada] = useState('fresa');
 
-    const handleDropdownChange = (value) => {
-        setSelectedTamano(value);
+    const handleDropdownChange = (e) => {
+        setselectedSaborMalteada(e.value);
     };
 
     return (
         <div>
-            <DropDown opciones_in={dessertOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange} precios={[58, 58, 58]}/>
+            <DropDown opciones_in={dessertOptions} selectedValue={selectedSaborMalteada} onDropdownChange={handleDropdownChange} precios={[58, 58, 58]}/>
         </div>
     );
 };

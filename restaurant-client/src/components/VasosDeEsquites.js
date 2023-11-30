@@ -17,17 +17,17 @@ const VasosDeEsquites = ({ index, comanda, platillo, platillo_espacios, toggleCh
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('$30 Mediano');
+    const [selectedTamano, setSelectedTamano] = useState('mediano');
 
-    const handleDropdownChange = (value) => {
-        setSelectedTamano(value);
+    const handleDropdownChange = (e) => {
+        setSelectedTamano(e.value);
     };
 
     return (
 
         <div>
             <div>
-                <DropDown opciones_in={tamanoOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange} precios={[20, 25, 80]}/>
+                <DropDown opciones_in={tamanoOptions} selectedValue={selectedTamano} onDropdownChange={handleDropdownChange} precios={[20, 25, 80]}/>
             </div>
             
             <div className="row">

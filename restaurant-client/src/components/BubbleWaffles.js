@@ -12,16 +12,16 @@ const BubbleWaffles = ({ index, comanda, platillo, platillo_espacios, toggleChec
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('$30 Mediano');
+    const [selectedSaborWaffle, setselectedSaborWaffle] = useState('brillitos');
 
-    const handleDropdownChange = (value) => {
-        setSelectedTamano(value);
+    const handleDropdownChange = (e) => {
+        setselectedSaborWaffle(e.value);
     };
 
     return (
         <div>
             <div>
-                <DropDown opciones_in={tamanoOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange} precios={[60, 70, 70, 70]}/>
+                <DropDown opciones_in={tamanoOptions} selectedValue={selectedSaborWaffle} onDropdownChange={handleDropdownChange} precios={[60, 70, 70, 70]}/>
             </div>
         </div>
     );

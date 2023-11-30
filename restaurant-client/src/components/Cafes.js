@@ -13,15 +13,15 @@ const Cafés = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('$30 Mediano');
+    const [selectedSaborCafe, setselectedSaborCafe] = useState('americano');
 
-    const handleDropdownChange = (value) => {
-        setSelectedTamano(value);
+    const handleDropdownChange = (e) => {
+        setselectedSaborCafe(e.value);
     };
 
     return (
         <div>
-            <DropDown opciones_in={dessertOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange} precios={[15, 20, 15, 25]}/>
+            <DropDown opciones_in={dessertOptions} selectedValue={selectedSaborCafe} onDropdownChange={handleDropdownChange} precios={[15, 20, 15, 25]}/>
         </div>
     );
 };

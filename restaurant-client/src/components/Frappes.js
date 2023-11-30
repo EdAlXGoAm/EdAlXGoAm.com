@@ -17,15 +17,15 @@ const Frappes = ({ index, comanda, platillo, platillo_espacios, toggleChecked_St
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('$30 Mediano');
+    const [selectedSaborFrappe, setselectedSaborFrappe] = useState('oreo');
 
-    const handleDropdownChange = (value) => {
-        setSelectedTamano(value);
+    const handleDropdownChange = (e) => {
+        setselectedSaborFrappe(e.value);
     };
 
     return (
         <div>
-            <DropDown opciones_in={dessertOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange} precios={[48, 48, 48, 48, 48, 68, 68, 68, 68, 68]}/>
+            <DropDown opciones_in={dessertOptions} selectedValue={selectedSaborFrappe} onDropdownChange={handleDropdownChange} precios={[48, 48, 48, 48, 48, 68, 68, 68, 68, 68]}/>
         </div>
     );
 };

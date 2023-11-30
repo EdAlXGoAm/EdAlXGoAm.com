@@ -9,10 +9,15 @@ const Donas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Stat
         'Mermelada',
         'Cajeta',
         'Nutella',
+        'Hersheys',
+        'Ninguna',
+        'Otra'
     ];
     const crocantesOptions = [
         'Fresas',
         'Durazno',
+        'Ninguna',
+        'Otra'
     ];
     const aderezos = [
         'Tutin',
@@ -24,26 +29,26 @@ const Donas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Stat
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedMaruchan, setSelectedMaruchan] = useState('Camarón');
+    const [selectedBase, setselectedBase] = useState('lechera');
 
-    const handleDropdownChangeMaruchan = (value) => {
-        setSelectedMaruchan(value);
+    const handleDropdownChangeMaruchan = (e) => {
+        setselectedBase(e.value);
     };
 
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('$40 Orden');
+    const [selectedFruta, setselectedFruta] = useState('fresas');
 
-    const handleDropdownChange = (value) => {
-        setSelectedTamano(value);
+    const handleDropdownChange = (e) => {
+        setselectedFruta(e.value);
     };
 
     return (
         <div>
         <div>
-            <DropDown opciones_in={proteinasOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[40, 40, 40, 40]}/>
+            <DropDown opciones_in={proteinasOptions} selectedValue={selectedBase} onDropdownChange={handleDropdownChangeMaruchan} precios={[40, 40, 40, 40, 40, 40, 40]}/>
         </div>
             <div>
-                <DropDown opciones_in={crocantesOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange}/>
+                <DropDown opciones_in={crocantesOptions} selectedValue={selectedFruta} onDropdownChange={handleDropdownChange}/>
             </div>
             
             <div className="row">

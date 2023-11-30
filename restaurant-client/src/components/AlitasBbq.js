@@ -4,9 +4,8 @@ import DropDown from './x10DropDown';
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
 const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
-    const pizzaOptions = [
-        'Con Papas',
-        'Sin Papas'
+    const alitasOptions = [
+        'Orden de 6',
     ];
     const aderezos = [
         'BBQ',
@@ -26,14 +25,14 @@ const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
     
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedMaruchan, setSelectedMaruchan] = useState('Camarón');
+    const [selectedAlitasBBQ, setselectedAlitasBBQ] = useState('orden_de_6');
 
-    const handleDropdownChangeMaruchan = (value) => {
-        setSelectedMaruchan(value);
+    const handleDropdownChangeMaruchan = (e) => {
+        setselectedAlitasBBQ(e.value);
     };
 
-    const [hide_show_toggle, setToggleChecked] = useState(false);
-    const [hide_show_display, setToggleDisplay] = useState('none');
+    const [hide_show_toggle, setToggleChecked] = useState(true);
+    const [hide_show_display, setToggleDisplay] = useState('block');
 
     const handleToggleChange = () => {
         if (hide_show_toggle) {
@@ -53,7 +52,8 @@ const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
     return (
         <div>
             <div>
-                <DropDown opciones_in={pizzaOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[95, 80]}/>
+                <DropDown opciones_in={alitasOptions} selectedValue={selectedAlitasBBQ} onDropdownChange={handleDropdownChangeMaruchan} precios={[80]}
+                                                                                                                                    precios_papas={[95]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>
             </div>
             
             <div className="row">

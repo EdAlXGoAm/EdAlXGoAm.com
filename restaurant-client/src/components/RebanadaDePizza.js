@@ -4,13 +4,12 @@ import DropDown from './x10DropDown';
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
 const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
-    const cpapasOptions = [
-        'Sin Papas',
-        'Con Papas'
+    const tamanoPizza = [
+        'Rebanada',
     ];
-    const pizzaOptions = [
+    const saborPizza = [
         'Pepperoni',
-        'Hawaiana'
+        'Mexicana',
     ];
     const aderezos = [
         'Catsup',
@@ -28,11 +27,19 @@ const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleCh
     
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedMaruchan, setSelectedMaruchan] = useState('Camarón');
+    const [selectedTamanoPizza, setselectedTamanoPizza] = useState('rebanada');
 
-    const handleDropdownChangeMaruchan = (value) => {
-        setSelectedMaruchan(value);
+    const handleDropdownChangeTamanoPizza = (e) => {
+        setselectedTamanoPizza(e.value);
     };
+
+    // Estado para almacenar el valor seleccionado del dropdown
+    const [selectedSaborPizza, setselectedSaborPizza] = useState('pepperoni');
+
+    const handleDropdownChangeSaborPizza = (e) => {
+        setselectedSaborPizza(e.value);
+    };
+
 
     const [hide_show_toggle, setToggleChecked] = useState(false);
     const [hide_show_display, setToggleDisplay] = useState('none');
@@ -55,10 +62,11 @@ const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleCh
     return (
         <div>
             <div>
-                <DropDown opciones_in={cpapasOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[25, 40]}/>
+                <DropDown opciones_in={tamanoPizza} selectedValue={selectedTamanoPizza} onDropdownChange={handleDropdownChangeTamanoPizza} precios={[25]}
+                                                                                                                                        precios_papas={[40]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>
             </div>
             <div>
-                <DropDown opciones_in={pizzaOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan}/>
+                <DropDown opciones_in={saborPizza} selectedValue={selectedSaborPizza} onDropdownChange={handleDropdownChangeSaborPizza}/>
             </div>
             
             <div className="row">

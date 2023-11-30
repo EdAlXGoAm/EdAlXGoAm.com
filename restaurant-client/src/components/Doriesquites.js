@@ -12,7 +12,8 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
         'Dor. Flaming Hot (Morados)',
         'Dor. Mix',
         'Cheetos Naranjas',
-        'Cheetos Flaming Hot'
+        'Cheetos Flaming Hot',
+        'Otros'
     ];
     const aderezos = [
         'Mayonesa',
@@ -22,16 +23,16 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('$30 Mediano');
+    const [selectedDoritos, setselectedDoritos] = useState('dor._nachos_(rojos)');
 
-    const handleDropdownChange = (value) => {
-        setSelectedTamano(value);
+    const handleDropdownChange = (e) => {
+        setselectedDoritos(e.value);
     };
 
     return (
         <div>
             <div>
-                <DropDown opciones_in={doritosOptions} selectedSabor={selectedTamano} onDropdownChange={handleDropdownChange} precios={[35, 35, 35, 35, 35, 35, 35, 35]}/>
+                <DropDown opciones_in={doritosOptions} selectedValue={selectedDoritos} onDropdownChange={handleDropdownChange} precios={[35, 35, 35, 35, 35, 35, 35, 35, 35]}/>
             </div>
             
             <div className="row">

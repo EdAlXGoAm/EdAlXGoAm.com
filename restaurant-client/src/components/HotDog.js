@@ -4,7 +4,7 @@ import DropDown from './x10DropDown';
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
 const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
-    const pizzaOptions = [
+    const HotDogOptions = [
         'Sencillo',
         'Q Oaxaca',
         'Q Manchego',
@@ -35,10 +35,10 @@ const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
     
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedMaruchan, setSelectedMaruchan] = useState('Camarón');
+    const [selectedHotDog, setselectedHotDog] = useState('sencillo');
 
-    const handleDropdownChangeMaruchan = (value) => {
-        setSelectedMaruchan(value);
+    const handleDropdownChangeMaruchan = (e) => {
+        setselectedHotDog(e.value);
     };
 
     const [hide_show_toggle, setToggleChecked] = useState(false);
@@ -62,7 +62,8 @@ const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
     return (
         <div>
             <div>
-                <DropDown opciones_in={pizzaOptions} selectedSabor={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[30, 38, 38, 38, 45, 45]}/>
+                <DropDown opciones_in={HotDogOptions} selectedValue={selectedHotDog} onDropdownChange={handleDropdownChangeMaruchan} precios={[30, 38, 38, 38, 45, 45]}
+                                                                                                                                    precios_papas={[50, 58, 58, 58, 65, 65]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>
             </div>
             
             
