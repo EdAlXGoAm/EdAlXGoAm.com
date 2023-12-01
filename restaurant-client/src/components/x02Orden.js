@@ -6,7 +6,7 @@ import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { faUnlock } from '@fortawesome/free-solid-svg-icons';
-const TOTAL_BUTTONS = 27;
+const TOTAL_BUTTONS = 32;
 const BUTTONS_PER_SLIDE = 4;
 
 
@@ -53,6 +53,7 @@ const Orden = ({ Interfaz, Order }) => {
         ["Cerezas", true, [0, 40, 45]],
         ["Vasos de Esquites", true, [0, 20, 25, 75]],
         ["Doriesquites", true, [0, 35]],
+        ["Dorilocos", true, [0, 30]],
         ["Maruchan Loca", true, [0, 55]],
         ["Maruchan con Suadero", true, [0, 45]],
         ["Maruchan Sola", true, [0, 25]],
@@ -87,6 +88,7 @@ const Orden = ({ Interfaz, Order }) => {
         'icons/btn_cerezas.png',
         'icons/btn_vasos_de_esquites.png',
         'icons/btn_doriesquites.png',
+        'icons/btn_dorilocos.png',
         'icons/btn_maruchan_loca.png',
         'icons/btn_maruchan_con_suadero.png',
         'icons/btn_maruchan_loca.png',
@@ -191,6 +193,11 @@ const Orden = ({ Interfaz, Order }) => {
         if (buttonValue == 'Doriesquites'){
             // Reproducir audio de doriesquites
             const audio = new Audio("/ComandaAudios/Solicitan un-0005.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Dorilocos'){
+            // Reproducir audio de dorilocos
+            const audio = new Audio("/ComandaAudios/Solicitan un-Dorilocos.wav");
             audio.play();
         }
         if (buttonValue == 'MaruchanLoca'){

@@ -8,6 +8,7 @@ import ChesseCakeZarzamora from './ChesseCakeZarzamora';
 import Cerezas from './Cerezas';
 import VasosDeEsquites from './VasosDeEsquites';
 import Doriesquites from './Doriesquites';
+import Dorilocos from './Dorilocos';
 import MaruchanLoca from './MaruchanLoca';
 import MaruchanConSuadero from './MaruchanConSuadero';
 import MaruchanSola from './MaruchanSola';
@@ -50,13 +51,12 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock }) => {
     margin: '0px 10px 10px 10px',
   };
   const ComandaStyleText = {
-    fontSize: "20px",
     color: toggleChecked_Status ? '#fff' : '#000',
     backgroundColor: toggleChecked_Status ? '#2d2d2d' : '#00ff04', // Color de fondo pastel
     borderRadius: '40px',       // Bordes redondeados
     padding: '0px 10px',       // Padding para no pegar el texto a los bordes
     margin: '0px 10px 0px 10px',
-    fontSize: '30px',
+    fontSize: '40px',
     
   };
   const divStyle = {
@@ -155,6 +155,8 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock }) => {
               {platillo == 'VasosDeEsquites' && <VasosDeEsquites key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
               {/* Si buttonValue == 'Doriesquites, desplegar Componente Doriesquites */}
               {platillo == 'Doriesquites' && <Doriesquites key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {/* <Dorilocos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/> */}
+              {platillo == 'Dorilocos' && <Dorilocos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
               {/* Si buttonValue == 'Maruchan Loca, desplegar Componente Maruchan Loca */}
               {platillo == 'MaruchanLoca' && <MaruchanLoca key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
               {/* Si buttonValue == 'Maruchan con Suadero, desplegar Componente Maruchan con Suadero */}

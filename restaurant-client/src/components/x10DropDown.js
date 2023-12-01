@@ -24,7 +24,7 @@ const DropDown = ({ opciones_in, selectedValue, onDropdownChange, precios, preci
   }));
 
   const MyComponent = ({selectedValue, handleChange}) => (
-    <div className="mb-3" style={{ fontWeight: 'bold', fontSize: '20px' }}>
+    <div className="mb-3" style={{ fontWeight: 'bold', fontSize: '30px' }}>
       {console.log('selectedValue', selectedValue)}
       {/* set selectedValue has selected option */}
       <Select
