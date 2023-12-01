@@ -49,12 +49,16 @@ const Orden = ({ Interfaz, Order }) => {
         ["Postre", true, [0, 30, 35, 40]],
         ["Pay de Limón", true, [0, 40]],
         ["Pastel Imposible", true, [0, 40]],
+        ["Chesse Cake Zarzamora", true, [0, 50]],
+        ["Cerezas", true, [0, 40, 45]],
         ["Vasos de Esquites", true, [0, 20, 25, 75]],
         ["Doriesquites", true, [0, 35]],
         ["Maruchan Loca", true, [0, 55]],
         ["Maruchan con Suadero", true, [0, 45]],
         ["Maruchan Sola", true, [0, 25]],
         ["Papas a la Francesa", true, [0, 40]],
+        ["Salchipulpos", true, [0, 50]],
+        ["Nuggets", true, [0, 50]],
         ["Rebanada de Pizza", true, [0, 25]],
         ["Hot Dog", true, [0, 30, 38, 45]],
         ["Sincronizadas", true, [0, 45]],
@@ -79,12 +83,16 @@ const Orden = ({ Interfaz, Order }) => {
         'icons/btn_postre.png',
         'icons/btn_pay_de_limon.png',
         'icons/btn_pastel_imposible.png',
+        'icons/btn_chesse_cacke_zarzamora.png',
+        'icons/btn_cerezas.png',
         'icons/btn_vasos_de_esquites.png',
         'icons/btn_doriesquites.png',
         'icons/btn_maruchan_loca.png',
         'icons/btn_maruchan_con_suadero.png',
         'icons/btn_maruchan_loca.png',
         'icons/btn_papas_a_la_francesa.png',
+        'icons/btn_salchipulpos.png',
+        'icons/btn_nuggets.png',
         'icons/btn_rebanada_de_pizza.png',
         'icons/btn_hotdog.png',
         'icons/btn_sincronizadas.png',
@@ -165,6 +173,16 @@ const Orden = ({ Interfaz, Order }) => {
             const audio = new Audio("/ComandaAudios/Solicitan un-0003.wav");
             audio.play();
         }
+        if (buttonValue == 'ChesseCakeZarzamora'){
+            // Reproducir audio de chesse cacke de zarzamora
+            const audio = new Audio("/ComandaAudios/Solicitan un-CheeseCakeZarzamora.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Cerezas'){
+            // Reproducir audio de cerezas
+            const audio = new Audio("/ComandaAudios/Solicitan un-Cerezas.wav");
+            audio.play();
+        }
         if (buttonValue == 'VasosDeEsquites'){
             // Reproducir audio de vasos de esquites
             const audio = new Audio("/ComandaAudios/Solicitan un-0004.wav");
@@ -193,6 +211,16 @@ const Orden = ({ Interfaz, Order }) => {
         if (buttonValue == 'PapasALaFrancesa'){
             // Reproducir audio de papas a la francesa
             const audio = new Audio("/ComandaAudios/Solicitan un-0008.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Salchipulpos'){
+            // Reproducir audio de salchipulpos
+            const audio = new Audio("/ComandaAudios/Solicitan un-Salchipulpos.wav");
+            audio.play();
+        }
+        if (buttonValue == 'Nuggets'){
+            // Reproducir audio de nuggets
+            const audio = new Audio("/ComandaAudios/Solicitan un-Nuggets.wav");
             audio.play();
         }
         if (buttonValue == 'RebanadaDePizza'){

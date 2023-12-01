@@ -4,12 +4,16 @@ import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import Postre from './Postre';
 import PayDeLimón from './PayDeLimon';
 import PastelImposible from './PastelImposible';
+import ChesseCakeZarzamora from './ChesseCakeZarzamora';
+import Cerezas from './Cerezas';
 import VasosDeEsquites from './VasosDeEsquites';
 import Doriesquites from './Doriesquites';
 import MaruchanLoca from './MaruchanLoca';
 import MaruchanConSuadero from './MaruchanConSuadero';
 import MaruchanSola from './MaruchanSola';
 import PapasALaFrancesa from './PapasALaFrancesa';
+import Salchipulpos from './Salchipulpos';
+import Nuggets from './Nuggets';
 import RebanadaDePizza from './RebanadaDePizza';
 import HotDog from './HotDog';
 import Sincronizadas from './Sincronizadas';
@@ -143,6 +147,10 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock }) => {
               {platillo == 'PayDeLimón' && <PayDeLimón key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
               {/* Si buttonValue == 'Pastel Imposible, desplegar Componente Pastel Imposible */}
               {platillo == 'PastelImposible' && <PastelImposible key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {/* Si buttonValue == 'Chesse Cake Zarzamora, desplegar Componente Chesse Cake Zarzamora */}
+              {platillo == 'ChesseCakeZarzamora' && <ChesseCakeZarzamora key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {/* Si platillo == 'Cerezas, desplegar Componente Cerezas */}
+              {platillo == 'Cerezas' && <Cerezas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
               {/* Si buttonValue == 'Vasos de Esquites, desplegar Componente Vasos de Esquites */}
               {platillo == 'VasosDeEsquites' && <VasosDeEsquites key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
               {/* Si buttonValue == 'Doriesquites, desplegar Componente Doriesquites */}
@@ -155,6 +163,10 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock }) => {
               {platillo == 'MaruchanSola' && <MaruchanSola key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
               {/* Si buttonValue == 'Papas a la Francesa, desplegar Componente Papas a la Francesa */}
               {platillo == 'PapasALaFrancesa' && <PapasALaFrancesa key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {/* Si platillo == 'Salchipulpos, desplegar Componente Salchipulpos */}
+              {platillo == 'Salchipulpos' && <Salchipulpos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {/* Si platillo == 'Nuggets, desplegar Componente Nuggets */}
+              {platillo == 'Nuggets' && <Nuggets key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
               {/* Si buttonValue == 'Rebanada de Pizza, desplegar Componente Rebanada de Pizza */}
               {platillo == 'RebanadaDePizza' && <RebanadaDePizza key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
               {/* Si buttonValue == 'Hot Dog, desplegar Componente Hot Dog */}
