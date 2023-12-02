@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
-const PlatanosFritos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const PlatanosFritos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     
     const aderezos = [
         'Crema',

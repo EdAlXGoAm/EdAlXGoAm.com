@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 
 import DropDown from './x10DropDown';
 
-const AguasFrescas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const AguasFrescas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const dessertOptions = [
         '1 Litro',
         '2 Litros',
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('1_litro');
+    const [selectedTamano, setSelectedTamano] = useState(propiedadesComanda.selectedTamano);
 
     const handleDropdownChange = (e) => {
         setSelectedTamano(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.selectedTamano = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (

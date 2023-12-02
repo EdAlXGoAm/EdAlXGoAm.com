@@ -122,6 +122,23 @@ const Orden = ({ Interfaz, Order }) => {
     const [CobroPendiente, setCobroPendiente] = useState(0);
     const [slide, setSlide] = useState(1);
     const [comandas, setComandas] = useState([]);
+    const handleUpdateComanda = (comanda) => {
+        
+        // console.log('comanda.switch_llevar_aqui:', comanda.switch_llevar_aqui);
+        // console.log('comanda.switch_preparando_entregado:', comanda.switch_preparando_entregado);
+        // console.log('comanda.switch_nota:', comanda.switch_nota);
+        // find the index of the comanda in comandas
+        const index = comandas.findIndex(c => c.UniqueID === comanda.UniqueID);
+        // update the comanda in comandas
+        setComandas(prevComandas => {
+            const newComandas = [...prevComandas];
+            newComandas[index] = comanda;
+            return newComandas;
+        });
+        // update the comanda in Order.ComandasList
+        const index2 = Order.ComandasList.findIndex(c => c.UniqueID === comanda.UniqueID);
+        Order.ComandasList[index2] = comanda;
+    };
     const [comandaCount, setComandaCount] = useState(0);
     const [orderFoldStatus, setOrderFoldStatus] = useState(false); // false: desplegado, true: plegado
     const [orderLockStatus, setOrderLockStatus] = useState(false); // false: desbloqueado, true: bloqueado
@@ -160,166 +177,7 @@ const Orden = ({ Interfaz, Order }) => {
         console.log("buttonName: ", buttonName);
         const buttonValue = capitalizeFirstLetter(buttonName[0]);
         const comandaId = `${Order.OrderID}_${comandaCount}`;
-        if (buttonValue == 'Postre'){
-            // Reproducir audio de postres
-            const audio = new Audio("/ComandaAudios/Solicitan un-0001.wav");
-            audio.play();
-        }
-        if (buttonValue == 'PayDeLimón'){
-            // Reproducir audio de pay de limón
-            const audio = new Audio("/ComandaAudios/Solicitan un-0002.wav");
-            audio.play();
-        }
-        if (buttonValue == 'PastelImposible'){
-            // Reproducir audio de pastel imposible
-            const audio = new Audio("/ComandaAudios/Solicitan un-0003.wav");
-            audio.play();
-        }
-        if (buttonValue == 'ChesseCakeZarzamora'){
-            // Reproducir audio de chesse cacke de zarzamora
-            const audio = new Audio("/ComandaAudios/Solicitan un-CheeseCakeZarzamora.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Cerezas'){
-            // Reproducir audio de cerezas
-            const audio = new Audio("/ComandaAudios/Solicitan un-Cerezas.wav");
-            audio.play();
-        }
-        if (buttonValue == 'VasosDeEsquites'){
-            // Reproducir audio de vasos de esquites
-            const audio = new Audio("/ComandaAudios/Solicitan un-0004.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Doriesquites'){
-            // Reproducir audio de doriesquites
-            const audio = new Audio("/ComandaAudios/Solicitan un-0005.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Dorilocos'){
-            // Reproducir audio de dorilocos
-            const audio = new Audio("/ComandaAudios/Solicitan un-Dorilocos.wav");
-            audio.play();
-        }
-        if (buttonValue == 'MaruchanLoca'){
-            // Reproducir audio de maruchan loca
-            const audio = new Audio("/ComandaAudios/Solicitan un-0006.wav");
-            audio.play();
-        }
-        if (buttonValue == 'MaruchanConSuadero'){
-            // Reproducir audio de maruchan con suadero
-            const audio = new Audio("/ComandaAudios/Solicitan un-0007.wav");
-            audio.play();
-        }
-        if (buttonValue == 'MaruchanSola'){
-            // Reproducir audio de maruchan sola
-            const audio = new Audio("/ComandaAudios/Solicitan un-MaruchanSola.wav");
-            audio.play();
-        }
-        if (buttonValue == 'PapasALaFrancesa'){
-            // Reproducir audio de papas a la francesa
-            const audio = new Audio("/ComandaAudios/Solicitan un-0008.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Salchipulpos'){
-            // Reproducir audio de salchipulpos
-            const audio = new Audio("/ComandaAudios/Solicitan un-Salchipulpos.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Nuggets'){
-            // Reproducir audio de nuggets
-            const audio = new Audio("/ComandaAudios/Solicitan un-Nuggets.wav");
-            audio.play();
-        }
-        if (buttonValue == 'RebanadaDePizza'){
-            // Reproducir audio de rebanada de pizza
-            const audio = new Audio("/ComandaAudios/Solicitan un-0009.wav");
-            audio.play();
-        }
-        if (buttonValue == 'HotDog'){
-            // Reproducir audio de hotdog
-            const audio = new Audio("/ComandaAudios/Solicitan un-0010.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Sincronizadas'){
-            // Reproducir audio de sincronizadas
-            const audio = new Audio("/ComandaAudios/Solicitan un-0011.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Ensaladas'){
-            // Reproducir audio de ensaladas
-            const audio = new Audio("/ComandaAudios/Solicitan un-0012.wav");
-            audio.play();
-        }
-        if (buttonValue == 'AlitasBbq'){
-            // Reproducir audio de alitas BBQ
-            const audio = new Audio("/ComandaAudios/Solicitan un-0013.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Hamburguesas'){
-            // Reproducir audio de hamburguesas
-            const audio = new Audio("/ComandaAudios/Solicitan un-0014.wav");
-            audio.play();
-        }
-        if (buttonValue == 'PizzaCompleta'){
-            // Reproducir audio de pizza completa
-            const audio = new Audio("/ComandaAudios/Solicitan un-PizzaCompleta.wav");
-            audio.play();
-        }
-        if (buttonValue == 'BubbleWaffles'){
-            // Reproducir audio de bubble waffles
-            const audio = new Audio("/ComandaAudios/Solicitan un-0015.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Donas'){
-            // Reproducir audio de donas
-            const audio = new Audio("/ComandaAudios/Solicitan un-0016.wav");
-            audio.play();
-        }
-        if (buttonValue == 'PlatanosFritos'){
-            // Reproducir audio de platanos fritos
-            const audio = new Audio("/ComandaAudios/Solicitan un-PlatanosFritos.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Ponche'){
-            // Reproducir audio de ponche
-            const audio = new Audio("/ComandaAudios/Solicitan un-Ponche.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Frappés'){
-            // Reproducir audio de frappes
-            const audio = new Audio("/ComandaAudios/Solicitan un-0017.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Malteadas'){
-            // Reproducir audio de malteadas
-            const audio = new Audio("/ComandaAudios/Solicitan un-0018.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Esquimos'){
-            // Reproducir audio de esquimos
-            const audio = new Audio("/ComandaAudios/Solicitan un-0019.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Cafés'){
-            // Reproducir audio de cafes
-            const audio = new Audio("/ComandaAudios/Solicitan un-0020.wav");
-            audio.play();
-        }
-        if (buttonValue == 'BubbleSodas'){
-            // Reproducir audio de bubble sodas
-            const audio = new Audio("/ComandaAudios/Solicitan un-0021.wav");
-            audio.play();
-        }
-        if (buttonValue == 'AguasFrescas'){
-            // Reproducir audio de aguas frescas
-            const audio = new Audio("/ComandaAudios/Solicitan un-0023.wav");
-            audio.play();
-        }
-        if (buttonValue == 'Refrescos'){
-            // Reproducir audio de refrescos
-            const audio = new Audio("/ComandaAudios/Solicitan un-0024.wav");
-            audio.play();
-        }
+        
         let precio = buttonName[2][0];
         /* Switch case if the buttonName selected has just 2 indices in the array buttonName[2] */
         switch (buttonName[2].length) {
@@ -329,15 +187,439 @@ const Orden = ({ Interfaz, Order }) => {
             default:
                 break;
         }
+
         const newComanda = {
             ComandaID: comandaCount,
             UniqueID: comandaId,
             Platillo: buttonValue,
             Platillo_espacios: buttonName[0],
-            Propiedades: [],
             Precio: precio,
-            Status: "Preparando"
+            Status: "Preparando",
+
+            Propiedades: [],
+            switch_llevar_aqui: false, // false: Llevar, true: Aquí
+            switch_preparando_entregado: false, // false: Preparando, true: Entregado
+            switch_nota: false, // false: No hay nota, true: Hay nota
+            text_nota: "", // Nota
         };
+        if (buttonValue == 'Postre'){
+            // Reproducir audio de postres
+            const audio = new Audio("/ComandaAudios/Solicitan un-0001.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedTamano: 'mediano',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'PayDeLimón'){
+            // Reproducir audio de pay de limón
+            const audio = new Audio("/ComandaAudios/Solicitan un-0002.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'PastelImposible'){
+            // Reproducir audio de pastel imposible
+            const audio = new Audio("/ComandaAudios/Solicitan un-0003.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'ChesseCakeZarzamora'){
+            // Reproducir audio de chesse cacke de zarzamora
+            const audio = new Audio("/ComandaAudios/Solicitan un-CheeseCakeZarzamora.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Cerezas'){
+            // Reproducir audio de cerezas
+            const audio = new Audio("/ComandaAudios/Solicitan un-Cerezas.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedTamano: 'vaso_de_cerezas',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'VasosDeEsquites'){
+            // Reproducir audio de vasos de esquites
+            const audio = new Audio("/ComandaAudios/Solicitan un-0004.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedTamano: 'mediano',
+                cb_mayonesa: false,
+                cb_qrayado: false,
+                cb_chilepiquin: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Doriesquites'){
+            // Reproducir audio de doriesquites
+            const audio = new Audio("/ComandaAudios/Solicitan un-0005.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedDoritos: 'dor._nachos_(rojos)',
+                cb_mayonesa: false,
+                cb_qrayado: false,
+                cb_qamarillo: false,
+                cb_chilepiquin: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Dorilocos'){
+            // Reproducir audio de dorilocos
+            const audio = new Audio("/ComandaAudios/Solicitan un-Dorilocos.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedDoritos: 'dor._nachos_(rojos)',
+                cb_chamoy: false,
+                cb_tajin: false,
+                cb_valentina: false,
+                cb_botanera: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'MaruchanLoca'){
+            // Reproducir audio de maruchan loca
+            const audio = new Audio("/ComandaAudios/Solicitan un-0006.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedMaruchan: 'camarón',
+                selectedDoritos: 'dor._nachos_(rojos)',
+                cb_mayonesa: false,
+                cb_qrayado: false,
+                cb_qamarillo: false,
+                cb_chilepiquin: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'MaruchanConSuadero'){
+            // Reproducir audio de maruchan con suadero
+            const audio = new Audio("/ComandaAudios/Solicitan un-0007.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedMaruchan: 'camarón',
+                cb_cebolla: false,
+                cb_cilantro: false,
+                cb_salsadetacos: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'MaruchanSola'){
+            // Reproducir audio de maruchan sola
+            const audio = new Audio("/ComandaAudios/Solicitan un-MaruchanSola.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedMaruchan: 'camarón',
+                cb_valentina: false,
+                cb_limón: false,
+                cb_sal: false,
+                cb_jugomaggi: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'PapasALaFrancesa'){
+            // Reproducir audio de papas a la francesa
+            const audio = new Audio("/ComandaAudios/Solicitan un-0008.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                cb_qamarillo: false,
+                cb_mayonesa: false,
+                cb_catsup: false,
+                cb_valentina: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Salchipulpos'){
+            // Reproducir audio de salchipulpos
+            const audio = new Audio("/ComandaAudios/Solicitan un-Salchipulpos.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                cb_qamarillo: false,
+                cb_mayonesa: false,
+                cb_catsup: false,
+                cb_valentina: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Nuggets'){
+            // Reproducir audio de nuggets
+            const audio = new Audio("/ComandaAudios/Solicitan un-Nuggets.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                cb_qamarillo: false,
+                cb_mayonesa: false,
+                cb_catsup: false,
+                cb_valentina: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'RebanadaDePizza'){
+            // Reproducir audio de rebanada de pizza
+            const audio = new Audio("/ComandaAudios/Solicitan un-0009.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedTamanoPizza: 'rebanada',
+                selectedSaborPizza: 'pepperoni',
+                cb_catsup: false,
+                cb_valentina: false,
+                cb_jugomaggi: false,
+                cb_salsainglesa: false,
+                switch_papas: false,
+                papas_cb_qamarillo: false,
+                papas_cb_mayonesa: false,
+                papas_cb_catsup: false,
+                papas_cb_valentina: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'HotDog'){
+            // Reproducir audio de hotdog
+            const audio = new Audio("/ComandaAudios/Solicitan un-0010.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedHotDog: 'sencillo',
+                cb_jitomate: false,
+                cb_cebolla: false,
+                cb_chiles: false,
+                cb_mayonesa: false,
+                cb_catsup: false,
+                cb_mostaza: false,
+                switch_papas: false,
+                papas_cb_qamarillo: false,
+                papas_cb_mayonesa: false,
+                papas_cb_catsup: false,
+                papas_cb_valentina: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Sincronizadas'){
+            // Reproducir audio de sincronizadas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0011.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                cb_lechuga: false,
+                cb_jitomate: false,
+                cb_qamarillo: false,
+                cb_chile: false,
+                cb_mayonesa: false,
+                cb_catsup: false,
+                switch_papas: false,
+                papas_cb_qamarillo: false,
+                papas_cb_mayonesa: false,
+                papas_cb_catsup: false,
+                papas_cb_valentina: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Ensaladas'){
+            // Reproducir audio de ensaladas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0012.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedProteina: 'pollo',
+                selectedCrocante: 'crotones',
+                cb_miel_con_mostaza: false,
+                cb_tamarindo: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'AlitasBbq'){
+            // Reproducir audio de alitas BBQ
+            const audio = new Audio("/ComandaAudios/Solicitan un-0013.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedAlitasBBQ: 'orden_de_6',
+                cb_bbq: false,
+                cb_catsup: false,
+                cb_valentina: false,
+                cb_jugomaggi: false,
+                cb_salsainglesa: false,
+                cb_tajin: false,
+                switch_papas: true,
+                papas_cb_qamarillo: false,
+                papas_cb_mayonesa: false,
+                papas_cb_catsup: false,
+                papas_cb_valentina: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Hamburguesas'){
+            // Reproducir audio de hamburguesas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0014.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedHamburguesa: 'sencilla',
+                cb_lechuga: false,
+                cb_jitomate: false,
+                cb_cebolla: false,
+                cb_mayonesa: false,
+                cb_mostaza: false,
+                cb_catsup: false,
+                cb_chiles: false,
+                switch_papas: true,
+                papas_cb_qamarillo: false,
+                papas_cb_mayonesa: false,
+                papas_cb_catsup: false,
+                papas_cb_valentina: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'PizzaCompleta'){
+            // Reproducir audio de pizza completa
+            const audio = new Audio("/ComandaAudios/Solicitan un-PizzaCompleta.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedMitad1: 'pepperoni',
+                selectedMitad2: 'pepperoni',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'BubbleWaffles'){
+            // Reproducir audio de bubble waffles
+            const audio = new Audio("/ComandaAudios/Solicitan un-0015.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedSaborWaffle: 'brillitos',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Donas'){
+            // Reproducir audio de donas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0016.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedBase: 'lechera',
+                selectedFruta: 'fresas',
+                cb_turin: false,
+                cb_gotas_bicolor: false,
+                cb_gotas_blancas: false,
+                cb_oreo: false,
+                cb_lunetas: false,
+                cb_laposse: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'PlatanosFritos'){
+            // Reproducir audio de platanos fritos
+            const audio = new Audio("/ComandaAudios/Solicitan un-PlatanosFritos.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                cb_crema: false,
+                cb_lechera: false,
+                cb_mermelada: false,
+                cb_chispas: false,
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Ponche'){
+            // Reproducir audio de ponche
+            const audio = new Audio("/ComandaAudios/Solicitan un-Ponche.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedTamano: 'vaso',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Frappés'){
+            // Reproducir audio de frappes
+            const audio = new Audio("/ComandaAudios/Solicitan un-0017.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedSaborFrappe: 'oreo',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Malteadas'){
+            // Reproducir audio de malteadas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0018.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedSaborMalteada: 'fresa',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Esquimos'){
+            // Reproducir audio de esquimos
+            const audio = new Audio("/ComandaAudios/Solicitan un-0019.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedSaborEsquimo: 'fresa',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Cafés'){
+            // Reproducir audio de cafes
+            const audio = new Audio("/ComandaAudios/Solicitan un-0020.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedSaborCafe: 'americano',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'BubbleSodas'){
+            // Reproducir audio de bubble sodas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0021.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedJarabe: 'mora_azul',
+                selectedPerlas: 'mora_azul',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'AguasFrescas'){
+            // Reproducir audio de aguas frescas
+            const audio = new Audio("/ComandaAudios/Solicitan un-0023.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedTamano: '1_litro',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
+        if (buttonValue == 'Refrescos'){
+            // Reproducir audio de refrescos
+            const audio = new Audio("/ComandaAudios/Solicitan un-0024.wav");
+            audio.play();
+            const newPropiedades = {
+                precio: precio,
+                selectedTamano: 'coca_600_ml_(taquera)',
+            }
+            newComanda.Propiedades = newPropiedades;
+        }
         // version de setComandas con función callback
         setComandas(prevComandas => {
             const newComandas = [...prevComandas, newComanda];
@@ -368,7 +650,7 @@ const Orden = ({ Interfaz, Order }) => {
 
     const renderComandas = () => {
         return comandas.map((comanda, i) => (
-            <Comanda key={(Order.OrderID*1000)+comanda.ComandaID} index={(Order.OrderID*1000)+comanda.ComandaID} comanda={comanda} platillo={comanda.Platillo} platillo_espacios={comanda.Platillo_espacios} lock={orderLockStatus}/>
+            <Comanda key={(Order.OrderID*1000)+comanda.ComandaID} index={(Order.OrderID*1000)+comanda.ComandaID} comanda={comanda} platillo={comanda.Platillo} platillo_espacios={comanda.Platillo_espacios} lock={orderLockStatus} handleUpdateComanda={handleUpdateComanda}/>
         ));
     };
 

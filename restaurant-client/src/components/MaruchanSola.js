@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 
 import DropDown from './x10DropDown';
+import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
-const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const maruchanOptions = [
         'Camarón',
         'Camarón Habanero',
         'Camarón Piquin',
         'Pollo',
         'Res'
+    ];
+    const aderezos = [
+        'Valentina',
+        'Limón',
+        'Sal',
+        'Jugo Maggi',
     ];
     
     
@@ -23,6 +30,12 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
         <div>
             <div>
                 <DropDown opciones_in={maruchanOptions} selectedValue={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[25, 25, 25, 25, 25]}/>
+            </div>
+            
+            <div className="row">
+                <div className="col">
+                    <ToogleButton_CheckButtons index={index} platillo='MaruchanSola' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
+                </div>
             </div>
         </div>
     );

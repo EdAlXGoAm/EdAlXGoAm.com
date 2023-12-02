@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './x10DropDown';
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
-const Ensaladas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const Ensaladas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const proteinasOptions = [
         'Pollo',
         'Atun',

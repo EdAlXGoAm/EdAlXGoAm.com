@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const ChesseCakeZarzamora = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const ChesseCakeZarzamora = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const Label = ["$40 Rebanada"];
     
     return (

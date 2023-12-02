@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import DropDown from './x10DropDown';
 
-const Refrescos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const Refrescos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const dessertOptions = [
         'Vaso',
         'Medio litro',

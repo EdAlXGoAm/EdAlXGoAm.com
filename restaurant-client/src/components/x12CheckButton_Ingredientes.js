@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import checkbox_css from '../css/checkbox.css'; //La ruta de este archivo es: src/css/checkbox.css
 
-const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegue, toggleChecked_Status, setToggleChecked_Status }) => {
+const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegue, toggleChecked_Status, setToggleChecked_Status, statusCheckBoxes, handleUpdateStatusCheckBoxes }) => {
     // Asignar opciones_in directamente a opciones
     const opcionesPredeterminadas = ['Opciones'];
     const opciones = opciones_in && opciones_in.length > 0 ? opciones_in : opcionesPredeterminadas;
 
     // Mantén un estado local para cada checkbox
-    const [checkboxStates, setCheckboxStates] = useState(opciones.map(() => false));
+    const [checkboxStates, setCheckboxStates] = useState(statusCheckBoxes);
 
     // Función para manejar el cambio de estado de un checkbox individual
     const handleCheckboxChange = (index) => {
@@ -27,7 +27,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
 
     return (
         <div className="row">
-            {console.log('status: ', toggleChecked_Status)}
+            {console.log('status: ', statusCheckBoxes)}
             <div className="col">
                 {/* Align text to left, padding left */}
                 {despliegue==='vertical' &&

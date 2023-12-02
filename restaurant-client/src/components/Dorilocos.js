@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './x10DropDown';
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
-const Dorilocos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const Dorilocos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const doritosOptions = [
         'Dor. Nachos (Rojos)',
         'Dor. Diablo (Naranjas)',

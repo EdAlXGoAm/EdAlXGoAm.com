@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DropDown from './x10DropDown';
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
-const Donas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const Donas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const proteinasOptions = [
         'Lechera',
         'Mermelada',
@@ -20,7 +20,7 @@ const Donas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Stat
         'Otra'
     ];
     const aderezos = [
-        'Tutin',
+        'Turin',
         'Gotas Bicolor',
         'Gotas Blancas',
         'Oreo',

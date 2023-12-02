@@ -34,21 +34,43 @@ import BubbleSodas from './BubbleSodas';
 import AguasFrescas from './AguasFrescas';
 import Refrescos from './Refrescos';
 // Component Comanda
-const Comanda = ({ index, comanda, platillo, platillo_espacios, lock }) => {
+const Comanda = ({ index, comanda, platillo, platillo_espacios, lock, handleUpdateComanda }) => {
   const [toggleChecked_LlevarAqui, setToggleChecked_LlevarAqui] = useState(false);
   const handleToggleChange_LlevarAqui = () => {
     setToggleChecked_LlevarAqui(!toggleChecked_LlevarAqui);
+    comanda.switch_llevar_aqui = !toggleChecked_LlevarAqui;
+    handleUpdateComanda(comanda);
+    console.log('comanda.switch_llevar_aqui:', comanda.switch_llevar_aqui);
   };
   const [toggleChecked_Status, setToggleChecked_Status] = useState(false);
   const handleToggleChange_Status = () => {
     setToggleChecked_Status(!toggleChecked_Status);
+    comanda.switch_preparando_entregado = !toggleChecked_Status;
+    handleUpdateComanda(comanda);
+    console.log('comanda.switch_preparando_entregado:', comanda.switch_preparando_entregado);
   };
   const [toggleChecked_Comment, setToggleChecked_Comment] = useState(false);
+  // With callback
   const handleToggleChange_Comment = () => {
     setToggleChecked_Comment(!toggleChecked_Comment);
+    comanda.switch_nota = !toggleChecked_Comment;
+    handleUpdateComanda(comanda);
+    console.log('comanda.switch_nota:', comanda.switch_nota);
+  };
+  const handleUpdateComment = (comment) => {
+    comanda.text_nota = comment;
+    handleUpdateComanda(comanda);
+    console.log('comanda.text_nota:', comanda.text_nota);
   };
   const ComandaStyleFondo = {
     margin: '0px 10px 10px 10px',
+  };
+  let[propiedadesComanda, setPropiedadesComanda] = useState(comanda.Propiedades);
+  const handleUpdatePropiedadesComanda = (propiedadesComanda) => {
+    setPropiedadesComanda(propiedadesComanda);
+    comanda.Propiedades = propiedadesComanda;
+    handleUpdateComanda(comanda);
+    console.log('comanda.Propiedades:', comanda.Propiedades);
   };
   const ComandaStyleText = {
     color: toggleChecked_Status ? '#fff' : '#000',
@@ -142,69 +164,69 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock }) => {
                   ["Refrescos", true, [0, 20, 20]],
                   ]; */}
               {/* Si buttonValue == 'Postre, desplegar Componente Postre */}
-              {platillo == 'Postre' && <Postre key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Postre' && <Postre key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Pay de Limón, desplegar Componente Pay de Limón */}
-              {platillo == 'PayDeLimón' && <PayDeLimón key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'PayDeLimón' && <PayDeLimón key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Pastel Imposible, desplegar Componente Pastel Imposible */}
-              {platillo == 'PastelImposible' && <PastelImposible key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'PastelImposible' && <PastelImposible key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Chesse Cake Zarzamora, desplegar Componente Chesse Cake Zarzamora */}
-              {platillo == 'ChesseCakeZarzamora' && <ChesseCakeZarzamora key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'ChesseCakeZarzamora' && <ChesseCakeZarzamora key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si platillo == 'Cerezas, desplegar Componente Cerezas */}
-              {platillo == 'Cerezas' && <Cerezas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Cerezas' && <Cerezas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Vasos de Esquites, desplegar Componente Vasos de Esquites */}
-              {platillo == 'VasosDeEsquites' && <VasosDeEsquites key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'VasosDeEsquites' && <VasosDeEsquites key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Doriesquites, desplegar Componente Doriesquites */}
-              {platillo == 'Doriesquites' && <Doriesquites key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Doriesquites' && <Doriesquites key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* <Dorilocos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/> */}
-              {platillo == 'Dorilocos' && <Dorilocos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Dorilocos' && <Dorilocos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Maruchan Loca, desplegar Componente Maruchan Loca */}
-              {platillo == 'MaruchanLoca' && <MaruchanLoca key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'MaruchanLoca' && <MaruchanLoca key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Maruchan con Suadero, desplegar Componente Maruchan con Suadero */}
-              {platillo == 'MaruchanConSuadero' && <MaruchanConSuadero key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'MaruchanConSuadero' && <MaruchanConSuadero key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si platillo == 'Maruchan Sola, desplegar Componente Maruchan Sola */}
-              {platillo == 'MaruchanSola' && <MaruchanSola key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'MaruchanSola' && <MaruchanSola key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Papas a la Francesa, desplegar Componente Papas a la Francesa */}
-              {platillo == 'PapasALaFrancesa' && <PapasALaFrancesa key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'PapasALaFrancesa' && <PapasALaFrancesa key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si platillo == 'Salchipulpos, desplegar Componente Salchipulpos */}
-              {platillo == 'Salchipulpos' && <Salchipulpos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Salchipulpos' && <Salchipulpos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si platillo == 'Nuggets, desplegar Componente Nuggets */}
-              {platillo == 'Nuggets' && <Nuggets key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Nuggets' && <Nuggets key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Rebanada de Pizza, desplegar Componente Rebanada de Pizza */}
-              {platillo == 'RebanadaDePizza' && <RebanadaDePizza key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'RebanadaDePizza' && <RebanadaDePizza key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Hot Dog, desplegar Componente Hot Dog */}
-              {platillo == 'HotDog' && <HotDog key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'HotDog' && <HotDog key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Sincronizadas, desplegar Componente Sincronizadas */}
-              {platillo == 'Sincronizadas' && <Sincronizadas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Sincronizadas' && <Sincronizadas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Ensaladas, desplegar Componente Ensaladas */}
-              {platillo == 'Ensaladas' && <Ensaladas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Ensaladas' && <Ensaladas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Alitas BBQ, desplegar Componente Alitas BBQ */}
-              {platillo == 'AlitasBbq' && <AlitasBBQ key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'AlitasBbq' && <AlitasBBQ key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Hamburguesa, desplegar Componente Hamburguesa */}
-              {platillo == 'Hamburguesas' && <Hamburguesa key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Hamburguesas' && <Hamburguesa key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'PizzaCompleta, desplegar Componente PizzaCompleta */}
-              {platillo == 'PizzaCompleta' && <PizzaCompleta key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'PizzaCompleta' && <PizzaCompleta key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Bubble Waffles, desplegar Componente Bubble Waffles */}
-              {platillo == 'BubbleWaffles' && <BubbleWaffles key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'BubbleWaffles' && <BubbleWaffles key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Donas, desplegar Componente Donas */}
-              {platillo == 'Donas' && <Donas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Donas' && <Donas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Platanos Fritos, desplegar Componente Platanos Fritos */}
-              {platillo == 'PlatanosFritos' && <PlatanosFritos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'PlatanosFritos' && <PlatanosFritos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Ponche, desplegar Componente Ponche */}
-              {platillo == 'Ponche' && <Ponche key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Ponche' && <Ponche key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Frappés, desplegar Componente Frappés */}
-              {platillo == 'Frappés' && <Frappés key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Frappés' && <Frappés key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Malteadas, desplegar Componente Malteadas */}
-              {platillo == 'Malteadas' && <Malteadas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Malteadas' && <Malteadas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Esquimos, desplegar Componente Esquimos */}
-              {platillo == 'Esquimos' && <Esquimos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Esquimos' && <Esquimos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Cafés, desplegar Componente Cafés */}
-              {platillo == 'Cafés' && <Cafés key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Cafés' && <Cafés key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Bubble Sodas, desplegar Componente Bubble Sodas */}
-              {platillo == 'BubbleSodas' && <BubbleSodas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'BubbleSodas' && <BubbleSodas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Aguas Frescas, desplegar Componente Aguas Frescas */}
-              {platillo == 'AguasFrescas' && <AguasFrescas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'AguasFrescas' && <AguasFrescas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Refrescos, desplegar Componente Refrescos */}
-              {platillo == 'Refrescos' && <Refrescos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status}/>}
+              {platillo == 'Refrescos' && <Refrescos key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
 
             </div>
           </div>
@@ -213,7 +235,7 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock }) => {
               {/* Text box editable backgroudn red and text blanco BOLD */}
               <div className='row'>
                 <div className='col'>
-                  <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Agregar notas"
+                  <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Agregar notas" onChange={(e) => handleUpdateComment(e.target.value)}
                   style={{backgroundColor: '#FF2559', color: '#fff', fontWeight: 'bold', fontSize: '30px'
                 }}
                   ></textarea>

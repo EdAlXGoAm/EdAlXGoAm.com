@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import CheckButton_Ingredientes from './x12CheckButton_Ingredientes';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 
-const ToogleButton_CheckButtons = ({ index, platillo, tipo_ingrediente, ingredientes_checkbutton, despliegue, toggleChecked_Status, setToggleChecked_Status }) => {
+const ToogleButton_CheckButtons = ({ index, platillo, tipo_ingrediente, ingredientes_checkbutton, despliegue, toggleChecked_Status, setToggleChecked_Status, statusCheckBoxes, handleUpdateStatusCheckBoxes }) => {
   const [toggleChecked, setToggleChecked] = useState(false);
 
   const handleToggleChange = () => {
@@ -15,6 +15,7 @@ const ToogleButton_CheckButtons = ({ index, platillo, tipo_ingrediente, ingredie
 
   return (
     <div>
+      {console.log('•status: ', statusCheckBoxes)}
       <div className="row mb-3">
         <div className="col">
           {/* align BootstrapSwitchButton to the right of the col */}
@@ -40,6 +41,8 @@ const ToogleButton_CheckButtons = ({ index, platillo, tipo_ingrediente, ingredie
         despliegue={despliegue}
         toggleChecked_Status={toggleChecked_Status}
         setToggleChecked_Status={setToggleChecked_Status}
+        statusCheckBoxes={statusCheckBoxes}
+        handleUpdateStatusCheckBoxes={handleUpdateStatusCheckBoxes}
         />
     </div>
   );

@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import DropDown from './x10DropDown';
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
-const Sincronizadas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const Sincronizadas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const Label = ["$45 Orden"];
     
     const vegetales = [
         'Lechuga',
         'Jitomate',
-        'Queso Amarillo',
+        'Q Amarillo',
         'Chile'
     ];
     const aderezos = [
@@ -24,13 +24,6 @@ const Sincronizadas = ({ index, comanda, platillo, platillo_espacios, toggleChec
         'Valentina',
     ];
     
-    
-    // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedMaruchan, setSelectedMaruchan] = useState('Camarón');
-
-    const handleDropdownChangeMaruchan = (value) => {
-        setSelectedMaruchan(value);
-    };
 
     const [hide_show_toggle, setToggleChecked] = useState(false);
     const [hide_show_display, setToggleDisplay] = useState('none');

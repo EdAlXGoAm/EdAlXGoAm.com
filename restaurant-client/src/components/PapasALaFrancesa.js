@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
 
-const PapasALaFrancesa = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status }) => {
+const PapasALaFrancesa = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const Label = ["$40 Orden"];
     const aderezos = [
         'Q Amarillo',
