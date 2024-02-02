@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import ordersApi from '../../api/ordersApi';
 
 import io from 'socket.io-client';
-const socket = io('http://192.168.3.4:3010');
+const socket = io('http://192.168.100.38:3010');
 
 const ShowComandasInterface = ({ modeInterface }) => {
 
@@ -137,51 +137,7 @@ const ShowComandasInterface = ({ modeInterface }) => {
         .then(() => {
             fetchOrders();
             console.log(`Msg for Socket = ${Action}`)
-            if (Action === "AddVaso de Postre") {
-                socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            }
-            else if (Action === "AddHamburguesa") {
-                socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
-            // else if (Action === "AddHamburguesa") {
-            //     socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-            // }
+            socket.emit('NuevaComandaDesdeCliente', {msg: Action});
         })
         .catch(err => {
             console.log(err)
