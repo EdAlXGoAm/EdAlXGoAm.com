@@ -158,6 +158,15 @@ const ShowComandasInterface = ({ modeInterface }) => {
                 });
             }
     };
+    const [TotalDia, setTotalDia] = useState(0);
+
+    useEffect(() => {
+        let newTotal = 0;
+        for (let order of orders) {
+            newTotal += order.CuentaTotal;
+        }
+        setTotalDia(newTotal);
+    },[]);
 
     useEffect(() => {
         socket.on('NuevaComandaDesdeServidor', (data) => {
@@ -171,6 +180,94 @@ const ShowComandasInterface = ({ modeInterface }) => {
                 const audio = new Audio("ComandaAudios/Solicitan-VasoDePostre.wav");
                 audio.play();
             }
+            else if (data.msg === "AddPay de Limón") {
+                const audio = new Audio("ComandaAudios/Solicitan-Pay-de-Limon.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddCheese Cake") {
+                const audio = new Audio("ComandaAudios/Solicitan-Cheese-Cake.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddMaruchan Loca") {
+                const audio = new Audio("ComandaAudios/Solicitan-Maruchan-Loca.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddVaso de Esquites") {
+                const audio = new Audio("ComandaAudios/Solicitan-Esquites.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddDoriesquites") {
+                const audio = new Audio("ComandaAudios/Solicitan-Doriesquites.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddMaruchan con Suadero") {
+                const audio = new Audio("ComandaAudios/Solicitan-Maruchan-Suadero.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddAlitas a la BBQ") {
+                const audio = new Audio("ComandaAudios/Solicitan-Alitas.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddRebanada de Pizza") {
+                const audio = new Audio("ComandaAudios/Solicitan-Rebanada-Pizza.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddPapas a la Francesa") {
+                const audio = new Audio("ComandaAudios/Solicitan-Papas.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddHot Dog") {
+                const audio = new Audio("ComandaAudios/Solicitan-Hotdog.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddSalchipulpos") {
+                const audio = new Audio("ComandaAudios/Solicitan-Salchipulpos.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddSincronizadas") {
+                const audio = new Audio("ComandaAudios/Solicitan-Sincronizadas.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddDonitas") {
+                const audio = new Audio("ComandaAudios/Solicitan-Donitas.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddBubble Waffle") {
+                const audio = new Audio("ComandaAudios/Solicitan-Waffle.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddCafé") {
+                const audio = new Audio("ComandaAudios/Solicitan-Cafe.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddFrappé") {
+                const audio = new Audio("ComandaAudios/Solicitan-Frappe.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddMalteada") {
+                const audio = new Audio("ComandaAudios/Solicitan-Malteada.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddEsquimo") {
+                const audio = new Audio("ComandaAudios/Solicitan-Esquimo.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddBubble Soda") {
+                const audio = new Audio("ComandaAudios/Solicitan-Bubble-Soda.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddAgua Fresca") {
+                const audio = new Audio("ComandaAudios/Solicitan-Agua-Fresca.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddRefresco") {
+                const audio = new Audio("ComandaAudios/Solicitan-Refresco.wav");
+                audio.play();
+            }
+            else if (data.msg === "AddEnsalada") {
+                const audio = new Audio("ComandaAudios/Solicitan-Ensalada.wav");
+                audio.play();
+            }
         });
         return () => {
             socket.off('NuevaComandaDesdeCliente');
@@ -180,7 +277,7 @@ const ShowComandasInterface = ({ modeInterface }) => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col">
-                    <h1 style={{ color: "#ffffff" }}>Comandas</h1>
+                    <h1 style={{ color: "#ffffff" }}>Comandas ${TotalDia}</h1>
                     <Button variant="primary" onClick={() => setComandasPerScreen(6)}>6</Button>
                     <Button variant="primary" onClick={() => setComandasPerScreen(4)}>4</Button>
                     <Button variant="primary" onClick={() => setComandasPerScreen(3)}>3</Button>
