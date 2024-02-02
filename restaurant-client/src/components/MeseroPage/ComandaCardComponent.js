@@ -82,6 +82,10 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
             setToggleArrowStatus(false);
             setColorStatus("#00ff6e");
         }
+        else {
+            setToggleArrowStatus(true);
+            setColorStatus("#ffffff");
+        }
     },[Comanda]);
 
     return(
