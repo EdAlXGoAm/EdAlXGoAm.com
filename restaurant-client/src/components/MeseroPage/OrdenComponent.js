@@ -90,10 +90,12 @@ const Orden = ({modeInterface, iInterface, Order, UpdateOrder, DeleteOrder}) => 
             </div>
             {toggleArrowStatus && (
             <div>
-                <PlatilloSelector addPlatilloToOrder={addComanda}/>
+                {modeInterface && (
+                    <PlatilloSelector addPlatilloToOrder={addComanda}/>
+                )}
                 {Order.ComandasList.map((comanda, indexComanda) => (
                 <div key={indexComanda}>
-                <ComandaCard Comanda={comanda} updateComanda={updateComanda} removeComanda={removeComanda} />
+                <ComandaCard modeInterface={modeInterface} Comanda={comanda} updateComanda={updateComanda} removeComanda={removeComanda} />
                 </div>
                 ))}
             </div>

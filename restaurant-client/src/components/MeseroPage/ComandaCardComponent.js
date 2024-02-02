@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCashRegister } from '@fortawesome/free-solid-svg-icons';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
-const ComandaCard = ({Comanda, updateComanda, removeComanda}) => {
+const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => {
 
     const [nota, setNota] = useState('');
     const [liveStatusNota, setLiveStatusNota] = useState('#33d457')
@@ -75,9 +75,18 @@ const ComandaCard = ({Comanda, updateComanda, removeComanda}) => {
     },[])
     const [toggleArrowStatus, setToggleArrowStatus] = useState(true); // false: plegado, true: desplegado
 
+    const [colorStatus, setColorStatus] = useState('#ffffff');
+
+    useEffect(() => {
+        if (Comanda.ComandaPrepStatus === "Served") {
+            setToggleArrowStatus(false);
+            setColorStatus("#00ff6e");
+        }
+    },[]);
+
     return(
         <div className="row"><div className="col-12">
-            <div className="card-body mb-1 divStyle">
+            <div className="card-body mb-1 divStyle" style={{backgroundColor: colorStatus}}>
             <div className="row mb-3">
                 <div className='col'>
                 <div className='row mb-2' style={{padding: "0px 20px"}}>
