@@ -1,5 +1,5 @@
 import Axios from "axios";
-const baseURL = "http://192.168.100.38:3010/api/orders";
+const baseURL = `${process.env.REACT_APP_API_URL}:3010/api/orders`;
 
 const ordersApi = {
     getOrders : async () => {

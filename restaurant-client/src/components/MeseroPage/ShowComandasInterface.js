@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import ordersApi from '../../api/ordersApi';
 
 import io from 'socket.io-client';
-const socket = io('http://192.168.100.38:3010');
+const socket = io(`${process.env.REACT_APP_API_URL}:3010`);
 
 const ShowComandasInterface = ({ modeInterface }) => {
 

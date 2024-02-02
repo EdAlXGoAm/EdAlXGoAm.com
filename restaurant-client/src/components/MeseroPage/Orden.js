@@ -7,7 +7,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 
 import io from 'socket.io-client';
-const socket = io('http://192.168.100.38:3010');
+const socket = io(`${process.env.REACT_APP_API_URL}:3010`);
 
 const TOTAL_BUTTONS = 34;
 const BUTTONS_PER_SLIDE = 3;
