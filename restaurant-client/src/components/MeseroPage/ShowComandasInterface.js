@@ -166,7 +166,7 @@ const ShowComandasInterface = ({ modeInterface }) => {
             newTotal += order.CuentaTotal;
         }
         setTotalDia(newTotal);
-    },[]);
+    },[orders]);
 
     useEffect(() => {
         socket.on('NuevaComandaDesdeServidor', (data) => {
