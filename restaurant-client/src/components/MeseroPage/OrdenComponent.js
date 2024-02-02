@@ -29,6 +29,7 @@ const Orden = ({modeInterface, iInterface, Order, UpdateOrder, DeleteOrder}) => 
 
     const addComanda = (platillo) => {
         const Comanda = {
+            OrderID: Order.OrderID,
             ComandaId: Order.ComandasList.length > 0 ? Order.ComandasList[Order.ComandasList.length - 1].ComandaId + 1 : 1,
             Platillo: platillo.NombrePlatillo,
             Precio: platillo.Variants[0].Precio,
@@ -70,8 +71,8 @@ const Orden = ({modeInterface, iInterface, Order, UpdateOrder, DeleteOrder}) => 
             <div className="row">
                 <div className="col-2 d-flex align-items-center">
                     <div className="toggleArrowButtons">
-                        <button style={{backgroundColor:  toggleArrowStatus ? "#7ed65b" : "#ffffff"}} onClick={() => setToggleArrowStatus(!toggleArrowStatus)}>
-                            <FontAwesomeIcon style={{color: toggleArrowStatus ? "#ffffff" : "#5d5d5d"}} icon={toggleArrowStatus ? faAngleUp : faAngleDown} size="2x" />
+                        <button style={{backgroundColor:  toggleArrowStatus ? "#ffffff" : "#7ed65b"}} onClick={() => setToggleArrowStatus(!toggleArrowStatus)}>
+                            <FontAwesomeIcon style={{color: toggleArrowStatus ? "#5d5d5d" : "#ffffff"}} icon={toggleArrowStatus ? faAngleUp : faAngleDown} size="2x" />
                         </button>
                     </div>
                 </div>
