@@ -12,10 +12,15 @@ const BubbleWaffles = ({ index, comanda, platillo, platillo_espacios, toggleChec
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedSaborWaffle, setselectedSaborWaffle] = useState('brillitos');
+    const [selectedSaborWaffle, setselectedSaborWaffle] = useState(propiedadesComanda.selectedSaborWaffle);
 
     const handleDropdownChange = (e) => {
         setselectedSaborWaffle(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedSaborWaffle = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (

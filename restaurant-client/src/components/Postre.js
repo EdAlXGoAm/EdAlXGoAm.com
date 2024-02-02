@@ -16,13 +16,13 @@ const Postre = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
         setSelectedTamano(e.value);
 
         const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
         newPropiedades.selectedTamano = e.value;
         handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (
         <div>
-            {console.log('propiedadesComanda: ', propiedadesComanda)}
             <DropDown opciones_in={dessertOptions} selectedValue={selectedTamano} onDropdownChange={handleDropdownChange} precios={[30, 35, 40]}/>
         </div>
     );

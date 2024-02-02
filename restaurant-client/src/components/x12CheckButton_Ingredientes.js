@@ -15,19 +15,21 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
             const newCheckboxStates = [...checkboxStates];
             newCheckboxStates[index] = !checkboxStates[index];
             setCheckboxStates(newCheckboxStates);
+            handleUpdateStatusCheckBoxes(newCheckboxStates);
         }
     };
 
     // Actualiza el estado de los checkboxes cuando toggleChecked cambia
     useEffect(() => {
       if (toggleChecked) {
-        setCheckboxStates(opciones.map(() => true));
+        const newCheckboxStates = opciones.map(() => true);
+        setCheckboxStates(newCheckboxStates);
+        handleUpdateStatusCheckBoxes(newCheckboxStates);
       }
     }, [toggleChecked]);
 
     return (
         <div className="row">
-            {console.log('status: ', statusCheckBoxes)}
             <div className="col">
                 {/* Align text to left, padding left */}
                 {despliegue==='vertical' &&
@@ -40,7 +42,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
                                     paddingLeft: "15px",
                                     borderRadius: "10px",
                                     background: checkboxStates[local_index] ? (toggleChecked_Status ? '#2D2D2D' : '#38E54D') : '' ,
-                                    color: checkboxStates[local_index] ? 'white' : 'grey'
+                                    color: checkboxStates[local_index] ? 'black' : 'grey'
                                     }}>
                                     {opcion}
                                 </div>
@@ -70,7 +72,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
                                             paddingLeft: "15px",
                                             borderRadius: "10px",
                                             background: checkboxStates[local_index] ? (toggleChecked_Status ? '#2D2D2D' : '#38E54D') : '' ,
-                                            color: checkboxStates[local_index] ? 'white' : 'grey'
+                                            color: checkboxStates[local_index] ? 'black' : 'grey'
                                             }}>
                                             {opcion}
                                         </div>
@@ -95,7 +97,7 @@ const CheckButton_Ingredientes = ({ index, opciones_in, toggleChecked, despliegu
                                             paddingLeft: "15px",
                                             borderRadius: "10px",
                                             background: checkboxStates[local_index+opciones.length/2] ? (toggleChecked_Status ? '#2D2D2D' : '#38E54D') : '' ,
-                                            color: checkboxStates[local_index+opciones.length/2] ? 'white' : 'grey'
+                                            color: checkboxStates[local_index+opciones.length/2] ? 'black' : 'grey'
                                             }}>
                                             {opcion}
                                         </div>

@@ -18,17 +18,26 @@ const BubbleSodas = ({ index, comanda, platillo, platillo_espacios, toggleChecke
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedJarabe, setselectedJarabe] = useState('mora_azul');
+    const [selectedJarabe, setselectedJarabe] = useState(propiedadesComanda.selectedJarabe);
 
     const handleDropdownChangeMaruchan = (e) => {
         setselectedJarabe(e.value);
+        
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedJarabe = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedPerlas, setselectedPerlas] = useState('mora_azul');
+    const [selectedPerlas, setselectedPerlas] = useState(propiedadesComanda.selectedPerlas);
 
     const handleDropdownChange = (e) => {
         setselectedPerlas(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.selectedPerlas = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (

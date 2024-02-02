@@ -10,10 +10,15 @@ const Refrescos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('vaso');
+    const [selectedTamano, setSelectedTamano] = useState(propiedadesComanda.selectedTamano);
 
     const handleDropdownChange = (e) => {
         setSelectedTamano(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedTamano = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (

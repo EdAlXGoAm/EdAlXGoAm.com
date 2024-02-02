@@ -15,17 +15,26 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
     
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedMitad1, setselectedMitad1] = useState('pepperoni');
+    const [selectedMitad1, setselectedMitad1] = useState(propiedadesComanda.selectedMitad1);
 
     const handleDropdownChangeMaruchan = (e) => {
         setselectedMitad1(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedMitad1 = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedMitad2, setselectedMitad2] = useState('pepperoni');
+    const [selectedMitad2, setselectedMitad2] = useState(propiedadesComanda.selectedMitad2);
 
     const handleDropdownChange = (e) => {
         setselectedMitad2(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.selectedMitad2 = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (

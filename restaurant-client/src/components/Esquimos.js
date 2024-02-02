@@ -15,10 +15,15 @@ const Esquimos = ({ index, comanda, platillo, platillo_espacios, toggleChecked_S
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedSaborEsquimo, setselectedSaborEsquimo] = useState('fresa');
+    const [selectedSaborEsquimo, setselectedSaborEsquimo] = useState(propiedadesComanda.selectedSaborEsquimo);
 
     const handleDropdownChange = (e) => {
         setselectedSaborEsquimo(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedSaborEsquimo = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (

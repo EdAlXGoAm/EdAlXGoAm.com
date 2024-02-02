@@ -20,6 +20,7 @@ import HotDog from './HotDog';
 import Sincronizadas from './Sincronizadas';
 import Ensaladas from './Ensaladas';
 import AlitasBBQ from './AlitasBbq';
+import CostillasBBQ from './CostillasBbq';
 import Hamburguesa from './Hamburguesa';
 import PizzaCompleta from './PizzaCompleta';
 import BubbleWaffles from './BubbleWaffles';
@@ -34,20 +35,18 @@ import BubbleSodas from './BubbleSodas';
 import AguasFrescas from './AguasFrescas';
 import Refrescos from './Refrescos';
 // Component Comanda
-const Comanda = ({ index, comanda, platillo, platillo_espacios, lock, handleUpdateComanda }) => {
+const Comanda = ({ index, comanda, platillo, platillo_espacios, lock, handleUpdateComanda, handleRemoveComanda }) => {
   const [toggleChecked_LlevarAqui, setToggleChecked_LlevarAqui] = useState(false);
   const handleToggleChange_LlevarAqui = () => {
     setToggleChecked_LlevarAqui(!toggleChecked_LlevarAqui);
     comanda.switch_llevar_aqui = !toggleChecked_LlevarAqui;
     handleUpdateComanda(comanda);
-    console.log('comanda.switch_llevar_aqui:', comanda.switch_llevar_aqui);
   };
   const [toggleChecked_Status, setToggleChecked_Status] = useState(false);
   const handleToggleChange_Status = () => {
     setToggleChecked_Status(!toggleChecked_Status);
     comanda.switch_preparando_entregado = !toggleChecked_Status;
     handleUpdateComanda(comanda);
-    console.log('comanda.switch_preparando_entregado:', comanda.switch_preparando_entregado);
   };
   const [toggleChecked_Comment, setToggleChecked_Comment] = useState(false);
   // With callback
@@ -55,12 +54,10 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock, handleUpda
     setToggleChecked_Comment(!toggleChecked_Comment);
     comanda.switch_nota = !toggleChecked_Comment;
     handleUpdateComanda(comanda);
-    console.log('comanda.switch_nota:', comanda.switch_nota);
   };
   const handleUpdateComment = (comment) => {
     comanda.text_nota = comment;
     handleUpdateComanda(comanda);
-    console.log('comanda.text_nota:', comanda.text_nota);
   };
   const ComandaStyleFondo = {
     margin: '0px 10px 10px 10px',
@@ -70,15 +67,16 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock, handleUpda
     setPropiedadesComanda(propiedadesComanda);
     comanda.Propiedades = propiedadesComanda;
     handleUpdateComanda(comanda);
-    console.log('comanda.Propiedades:', comanda.Propiedades);
   };
+  
   const ComandaStyleText = {
     color: toggleChecked_Status ? '#fff' : '#000',
     backgroundColor: toggleChecked_Status ? '#2d2d2d' : '#00ff04', // Color de fondo pastel
     borderRadius: '40px',       // Bordes redondeados
     padding: '0px 10px',       // Padding para no pegar el texto a los bordes
     margin: '0px 10px 0px 10px',
-    fontSize: '40px',
+    fontSize: '30px',
+    fontWeight: 'bold',
     
   };
   const divStyle = {
@@ -96,8 +94,14 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock, handleUpda
           <div className="row mb-3">
             <div className='col'>
               <div className='row mb-2'>
-                <div className='col-12'>
-                  <h1 className="title" style={ComandaStyleText}>{platillo}</h1>
+                <div className='col-2'>
+                  <img src={comanda.Propiedades.image} alt="icon"className="img-fluid" style={{ width: '60px'}}></img>
+                </div>
+                <div className='col-8'>
+                  <h1 className="title" style={ComandaStyleText} onDoubleClick={() => handleRemoveComanda(comanda)}>{platillo_espacios.toUpperCase()}</h1>
+                </div>
+                <div className='col-2'>
+                  <img src={comanda.Propiedades.image} alt="icon"className="img-fluid" style={{ width: '60px'}}></img>
                 </div>
               </div>
               <div className='row'>
@@ -201,6 +205,8 @@ const Comanda = ({ index, comanda, platillo, platillo_espacios, lock, handleUpda
               {platillo == 'Ensaladas' && <Ensaladas key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Alitas BBQ, desplegar Componente Alitas BBQ */}
               {platillo == 'AlitasBbq' && <AlitasBBQ key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
+              {/* Si platillo == 'Costillas BBQ, desplegar Componente Costillas BBQ */}
+              {platillo == 'CostillasBbq' && <CostillasBBQ key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'Hamburguesa, desplegar Componente Hamburguesa */}
               {platillo == 'Hamburguesas' && <Hamburguesa key={index} index={index} comanda={comanda} platillo={platillo} toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} propiedadesComanda={propiedadesComanda} handleUpdatePropiedadesComanda={handleUpdatePropiedadesComanda}/>}
               {/* Si buttonValue == 'PizzaCompleta, desplegar Componente PizzaCompleta */}

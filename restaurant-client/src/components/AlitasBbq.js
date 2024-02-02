@@ -77,9 +77,8 @@ const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
     const [selectedAlitasBBQ, setselectedAlitasBBQ] = useState(propiedadesComanda.selectedAlitasBBQ);
 
     const handleDropdownChangeAlitasBBQ = (e) => {
-        setselectedAlitasBBQ(e.value);
-
         const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
         newPropiedades.selectedAlitasBBQ = e.value;
         handleUpdatePropiedadesComanda(newPropiedades);
     };
@@ -107,7 +106,6 @@ const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
 
     return (
         <div>
-            {console.log('statusAderezos: ', statusAderezos)}
             <div>
                 <DropDown opciones_in={alitasOptions} selectedValue={selectedAlitasBBQ} onDropdownChange={handleDropdownChangeAlitasBBQ} precios={[80]}
                                                                                                                                     precios_papas={[95]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>

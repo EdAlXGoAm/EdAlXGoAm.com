@@ -15,7 +15,6 @@ const ToogleButton_CheckButtons = ({ index, platillo, tipo_ingrediente, ingredie
 
   return (
     <div>
-      {console.log('•status: ', statusCheckBoxes)}
       <div className="row mb-3">
         <div className="col">
           {/* align BootstrapSwitchButton to the right of the col */}

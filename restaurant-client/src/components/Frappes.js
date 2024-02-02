@@ -17,10 +17,15 @@ const Frappes = ({ index, comanda, platillo, platillo_espacios, toggleChecked_St
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedSaborFrappe, setselectedSaborFrappe] = useState('oreo');
+    const [selectedSaborFrappe, setselectedSaborFrappe] = useState(propiedadesComanda.selectedSaborFrappe);
 
     const handleDropdownChange = (e) => {
         setselectedSaborFrappe(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedSaborFrappe = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (

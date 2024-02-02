@@ -13,10 +13,15 @@ const Cafés = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedSaborCafe, setselectedSaborCafe] = useState('americano');
+    const [selectedSaborCafe, setselectedSaborCafe] = useState(propiedadesComanda.selectedSaborCafe);
 
     const handleDropdownChange = (e) => {
         setselectedSaborCafe(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedSaborCafe = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (

@@ -15,6 +15,7 @@ const AguasFrescas = ({ index, comanda, platillo, platillo_espacios, toggleCheck
         setSelectedTamano(e.value);
 
         const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
         newPropiedades.selectedTamano = e.value;
         handleUpdatePropiedadesComanda(newPropiedades);
     };

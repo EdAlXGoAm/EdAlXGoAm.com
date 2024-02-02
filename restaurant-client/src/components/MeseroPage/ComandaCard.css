@@ -1,0 +1,21 @@
+.comandaTextStyle {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    border-radius: 40px;
+    padding: 0px 10px;
+    margin: 0px 10px;
+    font-size: 27px;
+    font-family: 'Salsa', cursive;
+    font-weight: bold;
+}
+
+.divStyle {
+    font-weight: bold;
+    border: 10px solid #2d2d2d;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.personalizarTitle {
+    padding-left: 25px;
+}

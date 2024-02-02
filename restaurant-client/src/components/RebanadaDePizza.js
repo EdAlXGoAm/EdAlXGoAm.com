@@ -9,7 +9,7 @@ const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleCh
     ];
     const saborPizza = [
         'Pepperoni',
-        'Mexicana',
+        'Suadero',
     ];
     const aderezos = [
         'Catsup',
@@ -25,24 +25,83 @@ const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleCh
         'Valentina',
     ];
     
+
+    const [statusAderezos, setStatusAderezos] = useState(
+        [
+            propiedadesComanda.cb_catsup,
+            propiedadesComanda.cb_valentina,
+            propiedadesComanda.cb_jugomaggi,
+            propiedadesComanda.cb_salsainglesa
+        ]);
+
+    const handleUpdateStatusAderezos = (newStatus) => {
+        setStatusAderezos(newStatus);
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.cb_catsup = newStatus[0];
+        newPropiedades.cb_valentina = newStatus[1];
+        newPropiedades.cb_jugomaggi = newStatus[2];
+        newPropiedades.cb_salsainglesa = newStatus[3];
+        handleUpdatePropiedadesComanda(newPropiedades);
+    };
+
+    const [switch_papas, setSwitchPapas] = useState(propiedadesComanda.switch_papas);
+    
+    const handleUpdateSwitchPapas = (newStatus) => {
+        setSwitchPapas(newStatus);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.switch_papas = newStatus;
+        handleUpdatePropiedadesComanda(newPropiedades);
+    };
+
+    const [statusIngredientes_Papas_Opcional, setStatusIngredientes_Papas_Opcional] = useState(
+        [
+            propiedadesComanda.papas_cb_qamarillo,
+            propiedadesComanda.papas_cb_mayonesa,
+            propiedadesComanda.papas_cb_catsup,
+            propiedadesComanda.papas_cb_valentina,
+        ]);
+
+    const handleUpdateStatusIngredientes_Papas_Opcional = (newStatus) => {
+        setStatusIngredientes_Papas_Opcional(newStatus);
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.papas_cb_qamarillo = newStatus[0];
+        newPropiedades.papas_cb_mayonesa = newStatus[1];
+        newPropiedades.papas_cb_catsup = newStatus[2];
+        newPropiedades.papas_cb_valentina = newStatus[3];
+        handleUpdatePropiedadesComanda(newPropiedades);
+    };
+
+
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamanoPizza, setselectedTamanoPizza] = useState('rebanada');
+    const [selectedTamanoPizza, setselectedTamanoPizza] = useState(propiedadesComanda.selectedTamanoPizza);
 
     const handleDropdownChangeTamanoPizza = (e) => {
         setselectedTamanoPizza(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.selectedTamanoPizza = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedSaborPizza, setselectedSaborPizza] = useState('pepperoni');
+    const [selectedSaborPizza, setselectedSaborPizza] = useState(propiedadesComanda.selectedSaborPizza);
 
     const handleDropdownChangeSaborPizza = (e) => {
         setselectedSaborPizza(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedSaborPizza = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
 
-    const [hide_show_toggle, setToggleChecked] = useState(false);
-    const [hide_show_display, setToggleDisplay] = useState('none');
+    const [hide_show_toggle, setToggleChecked] = useState(switch_papas);
+    const [hide_show_display, setToggleDisplay] = useState(
+        switch_papas ? 'block' : 'none'
+    );
 
     const handleToggleChange = () => {
         if (hide_show_toggle) {
@@ -52,6 +111,7 @@ const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleCh
             setToggleDisplay('block');
         }
         setToggleChecked(!hide_show_toggle);
+        handleUpdateSwitchPapas(!hide_show_toggle);
     };
     const hide_show_style = {
         display: hide_show_display,
@@ -62,16 +122,16 @@ const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleCh
     return (
         <div>
             <div>
-                <DropDown opciones_in={tamanoPizza} selectedValue={selectedTamanoPizza} onDropdownChange={handleDropdownChangeTamanoPizza} precios={[25]}
-                                                                                                                                        precios_papas={[40]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>
+                <DropDown opciones_in={tamanoPizza} selectedValue={selectedTamanoPizza} onDropdownChange={handleDropdownChangeTamanoPizza}/>
             </div>
             <div>
-                <DropDown opciones_in={saborPizza} selectedValue={selectedSaborPizza} onDropdownChange={handleDropdownChangeSaborPizza}/>
+                <DropDown opciones_in={saborPizza} selectedValue={selectedSaborPizza} onDropdownChange={handleDropdownChangeSaborPizza} precios={[25, 30]}
+                                                                                                                                        precios_papas={[40, 45]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>
             </div>
             
             <div className="row">
                 <div className="col">
-                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
+                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} statusCheckBoxes={statusAderezos} handleUpdateStatusCheckBoxes={handleUpdateStatusAderezos} />
                 </div>
             </div>
             <hr />
@@ -95,7 +155,7 @@ const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleCh
                         <img src="papas.png" alt="Papas Fritas"className="img-fluid" style={{ width: '150px' }}></img>
                     </div>
                     <div className="col-6">
-                        <ToogleButton_CheckButtons index={index} platillo='Papas' tipo_ingrediente='aderezos' ingredientes_checkbutton={ingredientes_papas_opcional} despliegue='vertical' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} />
+                        <ToogleButton_CheckButtons index={index} platillo='Papas' tipo_ingrediente='aderezos' ingredientes_checkbutton={ingredientes_papas_opcional} despliegue='vertical' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} statusCheckBoxes={statusIngredientes_Papas_Opcional} handleUpdateStatusCheckBoxes={handleUpdateStatusIngredientes_Papas_Opcional} />
                     </div>
                 </div>
             </div>

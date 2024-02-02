@@ -9,10 +9,15 @@ const Cerezas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_St
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedTamano, setSelectedTamano] = useState('vaso_de_cerezas');
+    const [selectedTamano, setSelectedTamano] = useState(propiedadesComanda.selectedTamano);
 
     const handleDropdownChange = (e) => {
         setSelectedTamano(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedTamano = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (

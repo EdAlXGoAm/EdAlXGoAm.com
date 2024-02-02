@@ -12,10 +12,15 @@ const Malteadas = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
     ];
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedSaborMalteada, setselectedSaborMalteada] = useState('fresa');
+    const [selectedSaborMalteada, setselectedSaborMalteada] = useState(propiedadesComanda.selectedSaborMalteada);
 
     const handleDropdownChange = (e) => {
         setselectedSaborMalteada(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedSaborMalteada = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     return (
