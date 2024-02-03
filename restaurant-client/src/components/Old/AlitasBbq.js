@@ -1,29 +1,19 @@
 import React, { useState } from 'react';
 
-import DropDown from './x10DropDown';
-import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
+import DropDown from '../x10DropDown';
+import ToogleButton_CheckButtons from '../x11ToogleButton_CheckButtons';
 
-const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
-    const HotDogOptions = [
-        'Sencillo',
-        'Q Oaxaca',
-        'Q Manchego',
-        'Tocino',
-        'Especial (Q Oaxaca, Tocino)',
-        'Especial (Q Manchego, Tocino)',
-    ];
-    
-    const vegetales = [
-        'Jitomate',
-        'Cebolla',
-        'Chiles',
-        ''
+const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
+    const alitasOptions = [
+        'Orden de 6',
     ];
     const aderezos = [
-        'Mayonesa',
+        'BBQ',
         'Catsup',
-        'Mostaza',
-        ''
+        'Valentina',
+        'Jugo Maggi',
+        'Salsa Inglesa',
+        'Tajin'
     ];
 
     const ingredientes_papas_opcional = [
@@ -32,38 +22,26 @@ const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
         'Catsup',
         'Valentina',
     ];
-
-    const [statusVegetales, setStatusVegetales] = useState(
-        [
-            propiedadesComanda.cb_jitomate,
-            propiedadesComanda.cb_cebolla,
-            propiedadesComanda.cb_chiles,
-            false
-        ]);
-
-    const handleUpdateStatusVegetales = (newStatus) => {
-        setStatusVegetales(newStatus);
-        const newPropiedades = propiedadesComanda;
-        newPropiedades.cb_jitomate = newStatus[0];
-        newPropiedades.cb_cebolla = newStatus[1];
-        newPropiedades.cb_chiles = newStatus[2];
-        handleUpdatePropiedadesComanda(newPropiedades);
-    };
-
+    
     const [statusAderezos, setStatusAderezos] = useState(
         [
-            propiedadesComanda.cb_mayonesa,
+            propiedadesComanda.cb_bbq,
             propiedadesComanda.cb_catsup,
-            propiedadesComanda.cb_mostaza,
-            false
+            propiedadesComanda.cb_valentina,
+            propiedadesComanda.cb_jugomaggi,
+            propiedadesComanda.cb_salsainglesa,
+            propiedadesComanda.cb_tajin
         ]);
-
+    
     const handleUpdateStatusAderezos = (newStatus) => {
         setStatusAderezos(newStatus);
         const newPropiedades = propiedadesComanda;
-        newPropiedades.cb_mayonesa = newStatus[0];
+        newPropiedades.cb_bbq = newStatus[0];
         newPropiedades.cb_catsup = newStatus[1];
-        newPropiedades.cb_mostaza = newStatus[2];
+        newPropiedades.cb_valentina = newStatus[2];
+        newPropiedades.cb_jugomaggi = newStatus[3];
+        newPropiedades.cb_salsainglesa = newStatus[4];
+        newPropiedades.cb_tajin = newStatus[5];
         handleUpdatePropiedadesComanda(newPropiedades);
     };
 
@@ -71,7 +49,7 @@ const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
 
     const handleUpdateSwitchPapas = (newStatus) => {
         setSwitchPapas(newStatus);
-        
+
         const newPropiedades = propiedadesComanda;
         newPropiedades.switch_papas = newStatus;
         handleUpdatePropiedadesComanda(newPropiedades);
@@ -96,18 +74,16 @@ const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
     };
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedHotDog, setselectedHotDog] = useState(propiedadesComanda.selectedHotDog);
+    const [selectedAlitasBBQ, setselectedAlitasBBQ] = useState(propiedadesComanda.selectedAlitasBBQ);
 
-    const handleDropdownChangeMaruchan = (e) => {
-        setselectedHotDog(e.value);
-
+    const handleDropdownChangeAlitasBBQ = (e) => {
         const newPropiedades = propiedadesComanda;
         newPropiedades.precio = e.precio;
-        newPropiedades.selectedHotDog = e.value;
+        newPropiedades.selectedAlitasBBQ = e.value;
         handleUpdatePropiedadesComanda(newPropiedades);
     };
 
-    const [hide_show_toggle, setToggleChecked] = useState(switch_papas)
+    const [hide_show_toggle, setToggleChecked] = useState(switch_papas);
     const [hide_show_display, setToggleDisplay] = useState(
         switch_papas ? 'block' : 'none'
     );
@@ -131,16 +107,10 @@ const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
     return (
         <div>
             <div>
-                <DropDown opciones_in={HotDogOptions} selectedValue={selectedHotDog} onDropdownChange={handleDropdownChangeMaruchan} precios={[30, 38, 38, 38, 45, 45]}
-                                                                                                                                    precios_papas={[50, 58, 58, 58, 65, 65]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>
+                <DropDown opciones_in={alitasOptions} selectedValue={selectedAlitasBBQ} onDropdownChange={handleDropdownChangeAlitasBBQ} precios={[80]}
+                                                                                                                                    precios_papas={[95]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>
             </div>
             
-            
-            <div className="row">
-                <div className="col">
-                    <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='vegetales' ingredientes_checkbutton={vegetales} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} statusCheckBoxes={statusVegetales} handleUpdateStatusCheckBoxes={handleUpdateStatusVegetales} />
-                </div>
-                </div>
             <div className="row">
                 <div className="col">
                     <ToogleButton_CheckButtons index={index} platillo='Burguer' tipo_ingrediente='aderezos' ingredientes_checkbutton={aderezos} despliegue='horizontal' toggleChecked_Status={toggleChecked_Status} setToggleChecked_Status={setToggleChecked_Status} statusCheckBoxes={statusAderezos} handleUpdateStatusCheckBoxes={handleUpdateStatusAderezos} />
@@ -175,4 +145,4 @@ const HotDog = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Sta
     );
 };
 
-export default HotDog;
+export default AlitasBbq;

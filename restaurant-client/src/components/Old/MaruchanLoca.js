@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 
-import DropDown from './x10DropDown';
-import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
+import DropDown from '../x10DropDown';
+import ToogleButton_CheckButtons from '../x11ToogleButton_CheckButtons';
 
 const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
+    const maruchanOptions = [
+        'Camarón',
+        'Camarón Habanero',
+        'Camarón Piquin',
+        'Pollo',
+        'Res'
+    ];
     const doritosOptions = [
         'Dor. Nachos (Rojos)',
         'Dor. Diablo (Naranjas)',
@@ -40,6 +47,19 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
         handleUpdatePropiedadesComanda(newPropiedades);
     };
     
+    
+    // Estado para almacenar el valor seleccionado del dropdown
+    const [selectedMaruchan, setSelectedMaruchan] = useState(propiedadesComanda.selectedMaruchan);
+
+    const handleDropdownChangeMaruchan = (e) => {
+        setSelectedMaruchan(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedMaruchan = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
+    };
+
     // Estado para almacenar el valor seleccionado del dropdown
     const [selectedDoritos, setselectedDoritos] = useState(propiedadesComanda.selectedDoritos);
 
@@ -47,7 +67,6 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
         setselectedDoritos(e.value);
 
         const newPropiedades = propiedadesComanda;
-        newPropiedades.precio = e.precio;
         newPropiedades.selectedDoritos = e.value;
         handleUpdatePropiedadesComanda(newPropiedades);
     };
@@ -55,7 +74,11 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
     return (
         <div>
             <div>
-                <DropDown opciones_in={doritosOptions} selectedValue={selectedDoritos} onDropdownChange={handleDropdownChange} precios={[40, 40, 40, 40, 40, 40, 40, 40, 40]}/>
+                <DropDown opciones_in={maruchanOptions} selectedValue={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[60, 60, 60, 60, 60]}/>
+            </div>
+
+            <div>
+                <DropDown opciones_in={doritosOptions} selectedValue={selectedDoritos} onDropdownChange={handleDropdownChange}/>
             </div>
             
             <div className="row">

@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 
-import DropDown from './x10DropDown';
-import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
+import DropDown from '../x10DropDown';
+import ToogleButton_CheckButtons from '../x11ToogleButton_CheckButtons';
 
-const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
-    const alitasOptions = [
-        'Orden de 6',
+const RebanadaDePizza = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
+    const tamanoPizza = [
+        'Rebanada',
+    ];
+    const saborPizza = [
+        'Pepperoni',
+        'Suadero',
     ];
     const aderezos = [
-        'BBQ',
         'Catsup',
         'Valentina',
         'Jugo Maggi',
-        'Salsa Inglesa',
-        'Tajin'
+        'Salsa Inglesa'
     ];
 
     const ingredientes_papas_opcional = [
@@ -23,30 +25,27 @@ const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
         'Valentina',
     ];
     
+
     const [statusAderezos, setStatusAderezos] = useState(
         [
-            propiedadesComanda.cb_bbq,
             propiedadesComanda.cb_catsup,
             propiedadesComanda.cb_valentina,
             propiedadesComanda.cb_jugomaggi,
-            propiedadesComanda.cb_salsainglesa,
-            propiedadesComanda.cb_tajin
+            propiedadesComanda.cb_salsainglesa
         ]);
-    
+
     const handleUpdateStatusAderezos = (newStatus) => {
         setStatusAderezos(newStatus);
         const newPropiedades = propiedadesComanda;
-        newPropiedades.cb_bbq = newStatus[0];
-        newPropiedades.cb_catsup = newStatus[1];
-        newPropiedades.cb_valentina = newStatus[2];
-        newPropiedades.cb_jugomaggi = newStatus[3];
-        newPropiedades.cb_salsainglesa = newStatus[4];
-        newPropiedades.cb_tajin = newStatus[5];
+        newPropiedades.cb_catsup = newStatus[0];
+        newPropiedades.cb_valentina = newStatus[1];
+        newPropiedades.cb_jugomaggi = newStatus[2];
+        newPropiedades.cb_salsainglesa = newStatus[3];
         handleUpdatePropiedadesComanda(newPropiedades);
     };
 
     const [switch_papas, setSwitchPapas] = useState(propiedadesComanda.switch_papas);
-
+    
     const handleUpdateSwitchPapas = (newStatus) => {
         setSwitchPapas(newStatus);
 
@@ -72,16 +71,32 @@ const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
         newPropiedades.papas_cb_valentina = newStatus[3];
         handleUpdatePropiedadesComanda(newPropiedades);
     };
+
+
     
     // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedAlitasBBQ, setselectedAlitasBBQ] = useState(propiedadesComanda.selectedAlitasBBQ);
+    const [selectedTamanoPizza, setselectedTamanoPizza] = useState(propiedadesComanda.selectedTamanoPizza);
 
-    const handleDropdownChangeAlitasBBQ = (e) => {
+    const handleDropdownChangeTamanoPizza = (e) => {
+        setselectedTamanoPizza(e.value);
+
         const newPropiedades = propiedadesComanda;
-        newPropiedades.precio = e.precio;
-        newPropiedades.selectedAlitasBBQ = e.value;
+        newPropiedades.selectedTamanoPizza = e.value;
         handleUpdatePropiedadesComanda(newPropiedades);
     };
+
+    // Estado para almacenar el valor seleccionado del dropdown
+    const [selectedSaborPizza, setselectedSaborPizza] = useState(propiedadesComanda.selectedSaborPizza);
+
+    const handleDropdownChangeSaborPizza = (e) => {
+        setselectedSaborPizza(e.value);
+
+        const newPropiedades = propiedadesComanda;
+        newPropiedades.precio = e.precio;
+        newPropiedades.selectedSaborPizza = e.value;
+        handleUpdatePropiedadesComanda(newPropiedades);
+    };
+
 
     const [hide_show_toggle, setToggleChecked] = useState(switch_papas);
     const [hide_show_display, setToggleDisplay] = useState(
@@ -107,8 +122,11 @@ const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
     return (
         <div>
             <div>
-                <DropDown opciones_in={alitasOptions} selectedValue={selectedAlitasBBQ} onDropdownChange={handleDropdownChangeAlitasBBQ} precios={[80]}
-                                                                                                                                    precios_papas={[95]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>
+                <DropDown opciones_in={tamanoPizza} selectedValue={selectedTamanoPizza} onDropdownChange={handleDropdownChangeTamanoPizza}/>
+            </div>
+            <div>
+                <DropDown opciones_in={saborPizza} selectedValue={selectedSaborPizza} onDropdownChange={handleDropdownChangeSaborPizza} precios={[25, 30]}
+                                                                                                                                        precios_papas={[40, 45]} hide_show_toggle={hide_show_toggle} setToggleChecked={setToggleChecked}/>
             </div>
             
             <div className="row">
@@ -145,4 +163,4 @@ const AlitasBbq = ({ index, comanda, platillo, platillo_espacios, toggleChecked_
     );
 };
 
-export default AlitasBbq;
+export default RebanadaDePizza;

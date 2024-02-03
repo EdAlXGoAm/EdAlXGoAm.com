@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import DropDown from './x10DropDown';
-import ToogleButton_CheckButtons from './x11ToogleButton_CheckButtons';
+import DropDown from '../x10DropDown';
+import ToogleButton_CheckButtons from '../x11ToogleButton_CheckButtons';
 
 const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleChecked_Status, setToggleChecked_Status, propiedadesComanda, handleUpdatePropiedadesComanda}) => {
     const maruchanOptions = [
@@ -11,42 +11,29 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
         'Pollo',
         'Res'
     ];
-    const doritosOptions = [
-        'Dor. Nachos (Rojos)',
-        'Dor. Diablo (Naranjas)',
-        'Dor. Pizzerolas (Verdes)',
-        'Dor. Incognita (Negros)',
-        'Dor. Flaming Hot (Morados)',
-        'Dor. Mix',
-        'Cheetos Naranjas',
-        'Cheetos Flaming Hot',
-        'Otros'
-    ];
     const aderezos = [
-        'Mayonesa',
-        'Q Rayado',
-        'Q Amarillo',
-        'Chile Piquin',
+        'Cebolla',
+        'Cilantro',
+        'Salsa de Tacos',
+        ''
     ];
-
+    
     const [statusAderezos, setStatusAderezos] = useState(
         [
-            propiedadesComanda.cb_mayonesa,
-            propiedadesComanda.cb_qrayado,
-            propiedadesComanda.cb_qamarillo,
-            propiedadesComanda.cb_chilepiquin
+            propiedadesComanda.cb_cebolla,
+            propiedadesComanda.cb_cilantro,
+            propiedadesComanda.cb_salsadetacos,
+            false
         ]);
 
     const handleUpdateStatusAderezos = (newStatus) => {
         setStatusAderezos(newStatus);
         const newPropiedades = propiedadesComanda;
-        newPropiedades.cb_mayonesa = newStatus[0];
-        newPropiedades.cb_qrayado = newStatus[1];
-        newPropiedades.cb_qamarillo = newStatus[2];
-        newPropiedades.cb_chilepiquin = newStatus[3];
+        newPropiedades.cb_cebolla = newStatus[0];
+        newPropiedades.cb_cilantro = newStatus[1];
+        newPropiedades.cb_salsadetacos = newStatus[2];
         handleUpdatePropiedadesComanda(newPropiedades);
-    };
-    
+    }
     
     // Estado para almacenar el valor seleccionado del dropdown
     const [selectedMaruchan, setSelectedMaruchan] = useState(propiedadesComanda.selectedMaruchan);
@@ -60,25 +47,10 @@ const Doriesquites = ({ index, comanda, platillo, platillo_espacios, toggleCheck
         handleUpdatePropiedadesComanda(newPropiedades);
     };
 
-    // Estado para almacenar el valor seleccionado del dropdown
-    const [selectedDoritos, setselectedDoritos] = useState(propiedadesComanda.selectedDoritos);
-
-    const handleDropdownChange = (e) => {
-        setselectedDoritos(e.value);
-
-        const newPropiedades = propiedadesComanda;
-        newPropiedades.selectedDoritos = e.value;
-        handleUpdatePropiedadesComanda(newPropiedades);
-    };
-
     return (
         <div>
             <div>
-                <DropDown opciones_in={maruchanOptions} selectedValue={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[60, 60, 60, 60, 60]}/>
-            </div>
-
-            <div>
-                <DropDown opciones_in={doritosOptions} selectedValue={selectedDoritos} onDropdownChange={handleDropdownChange}/>
+                <DropDown opciones_in={maruchanOptions} selectedValue={selectedMaruchan} onDropdownChange={handleDropdownChangeMaruchan} precios={[45, 45, 45, 45, 45]}/>
             </div>
             
             <div className="row">
