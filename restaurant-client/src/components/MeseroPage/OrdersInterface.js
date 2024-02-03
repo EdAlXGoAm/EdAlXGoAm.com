@@ -38,7 +38,7 @@ const OrdersInterface = ({ modeInterface }) => {
         const OrdersArray = [];
         if (modeInterface) {
             const start = (numOrders - (slide - 1));
-            const end = Math.max((numOrders - (slide + ComandasPerScreen - 1)), 0);
+            const end = Math.max((numOrders - (slide + (modeInterface ? 100 : ComandasPerScreen) - 1)), 0);
             for (let i = start - 1; i >= end; i--) {
                 let iInterfaceFlag = false;
                 if (i === start - 1) {
@@ -47,7 +47,8 @@ const OrdersInterface = ({ modeInterface }) => {
                 OrdersArray.push(
                 <div key={orders[i].OrderID} className={`col-xl-${12/ComandasPerScreen} d-flex justify-content-center`}>
                     <Orden modeInterface={modeInterface} iInterface={iInterfaceFlag} Order={orders[i]}
-                    UpdateOrder={handleUpdateOrder} DeleteOrder={handleDeleteOrder}/>
+                    DeleteOrder={handleDeleteOrder}
+                    UpdateOrder={handleUpdateOrder}/>
                 </div>
                 )
             }
@@ -59,7 +60,8 @@ const OrdersInterface = ({ modeInterface }) => {
                 OrdersArray.push(
                 <div key={orders[i].OrderID} className={`col-xl-${12/ComandasPerScreen} d-flex justify-content-center`}>
                     <Orden modeInterface={modeInterface} iInterface={i} Order={orders[i]}
-                    UpdateOrder={handleUpdateOrder} DeleteOrder={handleDeleteOrder}/>
+                    DeleteOrder={handleDeleteOrder}
+                    UpdateOrder={handleUpdateOrder}/>
                 </div>
                 )
             }
@@ -111,26 +113,21 @@ const OrdersInterface = ({ modeInterface }) => {
                 });
             }
     };
-    const calculateCuentaTotal = (order) => {
-        let CuentaTotal = 0;
-        for (let i = 0; i < order.ComandasList.length; i ++) {
-            CuentaTotal += order.ComandasList[i].Precio;
-        }
-        const newOrder = {...order, CuentaTotal: CuentaTotal};
-        return newOrder;
-    };
-    const handleUpdateOrder = (order, Action) => {
-        const newOrder = calculateCuentaTotal(order);
+    const handleUpdateOrder = (order, cuentaTotal) => {
+        console.log(`CuentaTotal`, cuentaTotal);
+        console.log(`Order`, order);
+        const newOrder = {...order, CuentaTotal: cuentaTotal};
         ordersApi.updateOrder(newOrder)
         .then(() => {
             fetchOrders();
-            socket.emit('NuevaComandaDesdeCliente', {msg: Action});
         })
         .catch(err => {
             console.log(err)
             alert("Error al actualizar una comanda");
         });
-    };
+
+    }
+    
 
     const [TotalDia, setTotalDia] = useState(0);
     useEffect(() => { // Total Dia calculation
@@ -167,111 +164,6 @@ const OrdersInterface = ({ modeInterface }) => {
 
         return () => {
             socket.off('OrdenEliminadaDesdeServidor');
-        };
-    }, []);
-    useEffect(() => { // UpdateComanda
-        socket.on('NuevaComandaDesdeServidor', (data) => {
-            console.log("Mensaje: ", data.msg)
-            fetchOrders();
-            if (data.msg === "AddHamburguesa") {
-                const audio = new Audio("ComandaAudios/Solicitan-Hamburguesa.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddVaso de Postre") {
-                const audio = new Audio("ComandaAudios/Solicitan-VasoDePostre.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddPay de Limón") {
-                const audio = new Audio("ComandaAudios/Solicitan-Pay-de-Limon.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddCheese Cake") {
-                const audio = new Audio("ComandaAudios/Solicitan-Cheese-Cake.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddMaruchan Loca") {
-                const audio = new Audio("ComandaAudios/Solicitan-Maruchan-Loca.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddVaso de Esquites") {
-                const audio = new Audio("ComandaAudios/Solicitan-Esquites.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddDoriesquites") {
-                const audio = new Audio("ComandaAudios/Solicitan-Doriesquites.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddMaruchan con Suadero") {
-                const audio = new Audio("ComandaAudios/Solicitan-Maruchan-Suadero.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddAlitas a la BBQ") {
-                const audio = new Audio("ComandaAudios/Solicitan-Alitas.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddRebanada de Pizza") {
-                const audio = new Audio("ComandaAudios/Solicitan-Rebanada-Pizza.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddPapas a la Francesa") {
-                const audio = new Audio("ComandaAudios/Solicitan-Papas.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddHot Dog") {
-                const audio = new Audio("ComandaAudios/Solicitan-Hotdog.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddSalchipulpos") {
-                const audio = new Audio("ComandaAudios/Solicitan-Salchipulpos.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddSincronizadas") {
-                const audio = new Audio("ComandaAudios/Solicitan-Sincronizadas.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddDonitas") {
-                const audio = new Audio("ComandaAudios/Solicitan-Donitas.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddBubble Waffle") {
-                const audio = new Audio("ComandaAudios/Solicitan-Waffle.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddCafé") {
-                const audio = new Audio("ComandaAudios/Solicitan-Cafe.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddFrappé") {
-                const audio = new Audio("ComandaAudios/Solicitan-Frappe.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddMalteada") {
-                const audio = new Audio("ComandaAudios/Solicitan-Malteada.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddEsquimo") {
-                const audio = new Audio("ComandaAudios/Solicitan-Esquimo.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddBubble Soda") {
-                const audio = new Audio("ComandaAudios/Solicitan-Bubble-Soda.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddAgua Fresca") {
-                const audio = new Audio("ComandaAudios/Solicitan-Agua-Fresca.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddRefresco") {
-                const audio = new Audio("ComandaAudios/Solicitan-Refresco.wav");
-                audio.play();
-            }
-            else if (data.msg === "AddEnsalada") {
-                const audio = new Audio("ComandaAudios/Solicitan-Ensalada.wav");
-                audio.play();
-            }
-        });
-        return () => {
-            socket.off('NuevaComandaDesdeCliente');
         };
     }, []);
     return (

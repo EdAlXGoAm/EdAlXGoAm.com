@@ -58,7 +58,7 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
                 ...Comanda,
                 Notas: nota
             }
-            console.log("liveStatusNota: ", liveStatusNota);
+            console.log("liveStatusNota: ", updatedComanda.Notas);
             updateComanda(updatedComanda);
             setLiveStatusNota('#33d457')
         }
@@ -72,7 +72,7 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
 
     useEffect(() => {
         fetchNota();
-    },[])
+    },[Comanda])
     const [toggleArrowStatus, setToggleArrowStatus] = useState(true); // false: plegado, true: desplegado
 
     const [colorStatus, setColorStatus] = useState('#ffffff');

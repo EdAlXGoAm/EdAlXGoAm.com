@@ -11,7 +11,7 @@ const ordersApi = {
             const comandas = await Promise.all(comandasPromises);
             
             const ordersWithComandas = orders.data.map((order, index) => {
-                order.ComandasList = comandas[index];
+                // order.ComandasList = comandas[index];
                 return order;
             });
             return ordersWithComandas;
@@ -45,31 +45,10 @@ const ordersApi = {
         try {
             // Delete ComandasList from order
             const orderWithoutComandas = { ...order };
+            console.log(`Order`, order)
             delete orderWithoutComandas.ComandasList;
             await Axios.put(`${baseURL}/update`, orderWithoutComandas);
 
-            // Segundo, obtén las comandas existentes
-            const existingComandas = await comandasApi.getComandasByOrderId(order.OrderID);
-    
-            // Tercero, determina qué comandas eliminar (las que están en existingComandas pero no en order.ComandasList)
-            const existingComandasIds = existingComandas.map(c => c._id);
-            const updateComandasIds = order.ComandasList.map(c => c._id);
-            const comandasToDelete = existingComandasIds.filter(id => !updateComandasIds.includes(id));
-
-            // Cuarto, elimina las comandas que ya no están presentes
-            const deletePromises = comandasToDelete.map(id => comandasApi.deleteComanda(id));
-            await Promise.all(deletePromises);
-
-            const comandasPromises = order.ComandasList.map(comanda => {
-                // First evaluate if comanda._id is undefined, then add new comanda
-                if (comanda._id === undefined) {
-                    return comandasApi.addComanda(comanda);
-                }
-                // Otherwise, update comanda
-                return comandasApi.updateComanda(comanda);
-            });
-            await Promise.all(comandasPromises);
-    
             return { message: "Order updated successfully!" };
         } catch (error) {
             console.error("ordersAPI error: ", error);

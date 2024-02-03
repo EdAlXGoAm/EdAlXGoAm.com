@@ -153,11 +153,14 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
         };
         if (anyFalse === true) {
             setComponentsIsExpanded(true);
-        };
+        }
+        else {
+            setComponentsIsExpanded(false);
+        }
     };
     useEffect(() => {
         fetchComponentsExpanded();
-    }, []);
+    }, [Comanda]);
     const toggleComponentsIsExpanded = () => {
         if (componentsIsExpanded) {
             const confirm = window.confirm("Deseas cancelar la personalización?");
@@ -184,11 +187,14 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
         };
         if (anyTrue === true) {
             setExtrasIsExpanded(true);
-        };
+        }
+        else {
+            setExtrasIsExpanded(false);
+        }
     };
     useEffect(() => {
         fetchExtrasExpanded();
-    }, []);
+    }, [Comanda]);
     const toggleExtrasIsExpanded = () => {
         if (extrasIsExpanded) {
             const confirm = window.confirm("Deseas cancelar los ing. extras?");
@@ -215,11 +221,14 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
         };
         if (anyTrue === true) {
             setAdicionalesIsExpanded(true);
-        };
+        }
+        else {
+            setAdicionalesIsExpanded(false);
+        }
     };
     useEffect(() => {
         fetchAdicionalesExpanded();
-    }, []);
+    }, [Comanda]);
     const toggleAdicionalesIsExpanded = () => {
         if (adicionalesIsExpanded) {
             const confirm = window.confirm("Deseas cancelar los adicionales?");
