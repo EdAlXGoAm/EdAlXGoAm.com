@@ -1,4 +1,4 @@
-import './Orden.css';
+import './OrdenComponent.css';
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +15,7 @@ const Orden = ({modeInterface, iInterface, Order, UpdateOrder, DeleteOrder}) => 
                 setToggleArrowStatus(true);
             }
             else {
-                setToggleArrowStatus(false);
+                setToggleArrowStatus(true);
             }
         }
         else {

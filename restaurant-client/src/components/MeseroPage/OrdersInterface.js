@@ -7,7 +7,7 @@ import ordersApi from '../../api/ordersApi';
 import io from 'socket.io-client';
 const socket = io(`${process.env.REACT_APP_API_URL}:3010`);
 
-const ShowComandasInterface = ({ modeInterface }) => {
+const OrdersInterface = ({ modeInterface }) => {
 
     const [orders, setOrders] = useState([]);
     const [numOrders, setNumOrders] = useState(0);
@@ -305,4 +305,4 @@ const ShowComandasInterface = ({ modeInterface }) => {
     )
 }
 
-export default ShowComandasInterface
+export default OrdersInterface

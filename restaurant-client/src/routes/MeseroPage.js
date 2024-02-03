@@ -1,6 +1,6 @@
 import './MeseroPage.css';
 import React, { useState } from 'react';
-import ShowComandasInterface from '../components/MeseroPage/ShowComandasInterface';
+import OrdersInterface from '../components/MeseroPage/OrdersInterface';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 
 const MeseroPage = () => {
@@ -23,7 +23,7 @@ const MeseroPage = () => {
             </div>
             <div className="row">
                 <div className="col">
-                <ShowComandasInterface modeInterface={modeInterface} />
+                <OrdersInterface modeInterface={modeInterface} />
                 </div>
             </div>
         </div>
