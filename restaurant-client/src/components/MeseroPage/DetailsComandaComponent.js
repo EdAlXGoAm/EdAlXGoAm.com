@@ -279,7 +279,7 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
                     <div>
                         <div className="row" ref={containerRef}>
                             {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Componentes.map((componente, indexComponente) => (
-                                <div className={`col-${12/numCheckBoxPerRow}`}>
+                                <div key={indexComponente} className={`col-${12/numCheckBoxPerRow}`}>
                                     <label className="container">
                                         <div>
                                             {componente.Name ? componente.Name : "Nombre Componente"}
@@ -297,7 +297,7 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
                 </div>
             )}
             {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Opciones.map((opcion, indexOpcion) => (
-                <div>
+                <div key={indexOpcion}>
                 <h2 className="titleComponents">{opcion.Name.toUpperCase()}</h2>
                 <DropDown
                     opciones_in={opcion.Items.map((item, indexItem) => (item.Name))}
@@ -314,13 +314,13 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
                     </div></div>
                     {true && (
                         <div>{Comanda.Details.Variants[Comanda.Details.SelectedVariant].Ingredientes.map((ingrediente, indexIngrediente) => (
-                            <div>
+                            <div key={indexIngrediente}>
                                 <div className="row"><div className="col">
                                     <h2 className="titleOption">{ingrediente.Name}</h2>
                                 </div></div>
                                 <div className="row" ref={containerRef}>
                                 {ingrediente.Items.map((item, indexItem) => (
-                                    <div className={`col-${12/numCheckBoxPerRow}`}>
+                                    <div key={indexItem} className={`col-${12/numCheckBoxPerRow}`}>
                                         <label className="container">
                                             <div> {item.Name ? item.Name : "Nombre Ingrediente"} </div>
                                             <input type="checkbox" id="Checked" checked={item.Checked} onChange={(e) => handleVariantIngredienteItem(indexIngrediente, indexItem, e)}/>
@@ -347,7 +347,7 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
                     <div>
                         <div className="row" ref={containerRef}>
                             {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Extras.map((extra, indexExtra) => (
-                                <div className={`col-${12/numCheckBoxPerRow}`}>
+                                <div key={indexExtra} className={`col-${12/numCheckBoxPerRow}`}>
                                     <label className="container">
                                         <div> 
                                             {extra.Extra ? extra.Extra : "Nombre Ing Extra"}
@@ -376,7 +376,7 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
                     <div>
                         <div className="row" ref={containerRef}>
                             {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Adicionales.map((adicional, indexAdicional) => (
-                                <div className={`col-${12/numCheckBoxPerRow}`}>
+                                <div key={indexAdicional} className={`col-${12/numCheckBoxPerRow}`}>
                                     <label className="container">
                                         <div>
                                             {adicional.Adicional ? adicional.Adicional : "Nombre Adicional"}
