@@ -11,8 +11,6 @@ const OrdersInterface = ({ modeInterface }) => {
 
     const [orders, setOrders] = useState([]);
     const [numOrders, setNumOrders] = useState(0);
-    const [ComandasPerScreen, setComandasPerScreen] = useState(3);
-    const [slide, setSlide] = useState(1);
     const fetchOrders = () => {
         ordersApi.getOrders()
         .then(data => {
@@ -24,9 +22,12 @@ const OrdersInterface = ({ modeInterface }) => {
             alert("Error al cargar las comandas");
         });
     };
-    useEffect(() => {
+    useEffect(() => { // fetchOrders
         fetchOrders();
     }, []);
+
+    const [ComandasPerScreen, setComandasPerScreen] = useState(3);
+    const [slide, setSlide] = useState(1);
     const handleSlideChange = (newSlide) => {
         const maxSlide = numOrders;
         if (newSlide > 0 && newSlide <= maxSlide) {
@@ -65,34 +66,7 @@ const OrdersInterface = ({ modeInterface }) => {
         }
         return OrdersArray;
     };
-    const SocketNewOrder = () => {
-        socket.emit('NuevaOrdenDesdeCliente', {});
-    };
-    useEffect(() => {
-        socket.on('NuevaOrdenDesdeServidor', (data) => {
-            console.log("Mensaje: ", data)
-            fetchOrders();
-            const audio = new Audio("ComandaAudios/Pedido.wav");
-            audio.play();
-        });
 
-        return () => {
-            socket.off('NuevaOrdenDesdeServidor');
-        };
-    }, []);
-    const SocketDeleteOrder = () => {
-        socket.emit('OrdenEliminadaDesdeCliente', {});
-    };
-    useEffect(() => {
-        socket.on('OrdenEliminadaDesdeServidor', (data) => {
-            console.log("Mensaje: ", data)
-            fetchOrders();
-        });
-
-        return () => {
-            socket.off('OrdenEliminadaDesdeServidor');
-        };
-    }, []);
     const handleNewOrderClick = () => {
         ordersApi.getLastOrderID()
         .then(data => {
@@ -108,10 +82,10 @@ const OrdersInterface = ({ modeInterface }) => {
             };
             ordersApi.addOrder(newOrder)
             .then(() => {
-                const audio = new Audio("ComandaAudios/Pedido.wav");
-                audio.play();
                 fetchOrders();
                 SocketNewOrder();
+                const audio = new Audio("ComandaAudios/Pedido.wav");
+                audio.play();
             })
             .catch(err => {
                 console.log(err)
@@ -121,27 +95,6 @@ const OrdersInterface = ({ modeInterface }) => {
         .catch(err => {
             console.log(err)
             alert("Error de comunicación con la base de datos para 'Ordenes'");
-        });
-    };
-    const calculateCuentaTotal = (order) => {
-        let CuentaTotal = 0;
-        for (let i = 0; i < order.ComandasList.length; i ++) {
-            CuentaTotal += order.ComandasList[i].Precio;
-        }
-        const newOrder = {...order, CuentaTotal: CuentaTotal};
-        return newOrder;
-    };
-    const handleUpdateOrder = (order, Action) => {
-        const newOrder = calculateCuentaTotal(order);
-        ordersApi.updateOrder(newOrder)
-        .then(() => {
-            fetchOrders();
-            console.log(`Msg for Socket = ${Action}`)
-            socket.emit('NuevaComandaDesdeCliente', {msg: Action});
-        })
-        .catch(err => {
-            console.log(err)
-            alert("Error al actualizar una comanda");
         });
     };
     const handleDeleteOrder = (OrderID) => {
@@ -158,9 +111,29 @@ const OrdersInterface = ({ modeInterface }) => {
                 });
             }
     };
-    const [TotalDia, setTotalDia] = useState(0);
+    const calculateCuentaTotal = (order) => {
+        let CuentaTotal = 0;
+        for (let i = 0; i < order.ComandasList.length; i ++) {
+            CuentaTotal += order.ComandasList[i].Precio;
+        }
+        const newOrder = {...order, CuentaTotal: CuentaTotal};
+        return newOrder;
+    };
+    const handleUpdateOrder = (order, Action) => {
+        const newOrder = calculateCuentaTotal(order);
+        ordersApi.updateOrder(newOrder)
+        .then(() => {
+            fetchOrders();
+            socket.emit('NuevaComandaDesdeCliente', {msg: Action});
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Error al actualizar una comanda");
+        });
+    };
 
-    useEffect(() => {
+    const [TotalDia, setTotalDia] = useState(0);
+    useEffect(() => { // Total Dia calculation
         let newTotal = 0;
         for (let order of orders) {
             newTotal += order.CuentaTotal;
@@ -168,7 +141,35 @@ const OrdersInterface = ({ modeInterface }) => {
         setTotalDia(newTotal);
     },[orders]);
 
-    useEffect(() => {
+    const SocketNewOrder = () => {
+        socket.emit('NuevaOrdenDesdeCliente', {});
+    };
+    const SocketDeleteOrder = () => {
+        socket.emit('OrdenEliminadaDesdeCliente', {});
+    };
+    useEffect(() => { //Socket NewOrder
+        socket.on('NuevaOrdenDesdeServidor', (data) => {
+            console.log("Mensaje: ", data)
+            fetchOrders();
+            const audio = new Audio("ComandaAudios/Pedido.wav");
+            audio.play();
+        });
+
+        return () => {
+            socket.off('NuevaOrdenDesdeServidor');
+        };
+    }, []);
+    useEffect(() => { // Socket DelOrder
+        socket.on('OrdenEliminadaDesdeServidor', (data) => {
+            console.log("Mensaje: ", data)
+            fetchOrders();
+        });
+
+        return () => {
+            socket.off('OrdenEliminadaDesdeServidor');
+        };
+    }, []);
+    useEffect(() => { // UpdateComanda
         socket.on('NuevaComandaDesdeServidor', (data) => {
             console.log("Mensaje: ", data.msg)
             fetchOrders();
