@@ -109,9 +109,6 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
                     </div>
                     <div className="col-8 d-flex align-items-center personalizarTitle">
                         <h2 className="title comandaTextStyle">{Comanda.Platillo}&nbsp;&nbsp;<span style={{textShadow: "0px 0px 10px red"}}>${Comanda.Precio}</span></h2>
-                        {/* <div className="faButton" onClick={() => removeComanda(Comanda)} style={{ cursor: 'pointer' }}>
-                        <FontAwesomeIcon icon={faTrash} style={{color: 'red'}} size="xl" />
-                        </div> */}
                     </div>
                     <div className='col-2'>
                     <img src={Comanda.Imagen} alt="icon"className="img-fluid" style={{ width: '60px'}}></img>
@@ -119,42 +116,27 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
                 </div>
                 <div className='row'>
                     <div className="col-3">
-                    <BootstrapSwitchButton
-                        checked={Comanda.ComandaDeliverMode === "Delivery" ? false : true}
-                        onlabel='Aqui'
-                        offlabel='Llevar'
-                        width={100}
-                        onChange={handleUpdateComandaDeliverMode}
-                    />
+                        <BootstrapSwitchButton checked={Comanda.ComandaDeliverMode === "Delivery" ? false : true}
+                            onlabel='Aqui' offlabel='Llevar' width={100} onChange={handleUpdateComandaDeliverMode} />
                     </div>
                     <div className="col-3">
                         <img src="icons/Mesa.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: (Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
                         <img src="icons/Llevar.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: !(Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
                     </div>
                     <div className="col-3">
-                    <BootstrapSwitchButton
-                        checked={Comanda.ComandaPrepStatus === "Preparing" ? false : true}
-                        onlabel='Entregada'
-                        offlabel='Preparando'
-                        width={100}
-                        onChange={handleUpdateComandaPrepStatus}
-                    />
+                        <BootstrapSwitchButton checked={Comanda.ComandaPrepStatus === "Preparing" ? false : true}
+                            onlabel='Entregada' offlabel='Preparando' width={100} onChange={handleUpdateComandaPrepStatus} />
                     </div>
                     <div className="col-3">
-                    <BootstrapSwitchButton
-                        checked={Comanda.ComandaSwitchNota}
-                        onlabel='Nota'
-                        offlabel='Nota'
-                        width={100}
-                        onChange={handleUpdateComandaSwitchNota}
-                    />
+                        <BootstrapSwitchButton checked={Comanda.ComandaSwitchNota}
+                            onlabel='Nota' offlabel='Nota' width={100} onChange={handleUpdateComandaSwitchNota} />
                     </div>
                 </div>
                 </div>
             </div>
             {toggleArrowStatus && (
             <div>
-                <div className="row" style={{display: Comanda.ComandaPaidStatus === "Pending" ? true : false ? 'none' : 'flex'}}>
+                <div className="row">
                     <div className='col'>
                     <DetailsComanda Comanda={Comanda} updateComanda={updateComanda} />
                     </div>

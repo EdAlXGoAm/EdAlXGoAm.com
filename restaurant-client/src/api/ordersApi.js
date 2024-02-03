@@ -7,8 +7,7 @@ const ordersApi = {
     getOrders : async () => {
         try {
             const orders = await Axios.get(`${baseURL}/get`);
-            const comandasPromises = orders.data.map(
-                order => comandasApi.getComandasByOrderId(order.OrderID));
+            const comandasPromises = orders.data.map( order => comandasApi.getComandasByOrderId(order.OrderID) );
             const comandas = await Promise.all(comandasPromises);
             
             const ordersWithComandas = orders.data.map((order, index) => {
@@ -54,7 +53,7 @@ const ordersApi = {
     
             // Tercero, determina qué comandas eliminar (las que están en existingComandas pero no en order.ComandasList)
             const existingComandasIds = existingComandas.map(c => c._id);
-            const updateComandasIds = order.ComandasList.map(c => c._id).filter(id => id !== undefined);
+            const updateComandasIds = order.ComandasList.map(c => c._id);
             const comandasToDelete = existingComandasIds.filter(id => !updateComandasIds.includes(id));
 
             // Cuarto, elimina las comandas que ya no están presentes

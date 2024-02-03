@@ -18,11 +18,6 @@ const DropDown = ({ opciones_in, selectedValue, onDropdownChange, prefix, precio
     onDropdownChange(customValue);
   }
 
-  useEffect(() => {
-    console.log(`prefix: `, prefix);
-  },[])
-
-
   // Asignar opciones_in directamente a opciones
   const opcionesPredeterminadas = ['Opciones'];
   const opciones_dropdown = opciones_in && opciones_in.length > 0 ? opciones_in : opcionesPredeterminadas;

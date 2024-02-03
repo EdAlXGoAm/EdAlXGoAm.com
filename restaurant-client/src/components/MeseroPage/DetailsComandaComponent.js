@@ -237,12 +237,9 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
     const [numCheckBoxPerRow, setNumCheckBoxPerRow] = useState (1);
     const containerRef = useRef(null);
     const updateNumCheckBoxPerRow = (width) => {
-        console.log(`Width: ${width}`)
         const checkBoxWidth = 500;
-        console.log(`checkBoxWidth: ${checkBoxWidth}`)
         const newNumCheckBoxPerRow = Math.floor(width / checkBoxWidth)*2;
         setNumCheckBoxPerRow(prevNumCheckBoxPerRow => {
-            console.log(`Productos por fila: ${newNumCheckBoxPerRow > 0 ? newNumCheckBoxPerRow : 1}`)
             return newNumCheckBoxPerRow > 0 ? newNumCheckBoxPerRow : 1;
         });
     };
