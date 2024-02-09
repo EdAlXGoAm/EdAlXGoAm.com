@@ -20,6 +20,17 @@ const ordersApi = {
             throw error;
         }
     },
+
+    getOrdersByOrderCustStatus : async (OrderCustStatus) => {
+        try {
+            const response = await Axios.get(`${baseURL}/getByOrderCustStatus/${OrderCustStatus}`);
+            return response.data;
+        } catch (error) {
+            console.error("ordersAPI error: ", error);
+            throw error;
+        }
+    },
+
     
     // getOrder : async (id) => {
     //     try {
@@ -45,7 +56,6 @@ const ordersApi = {
         try {
             // Delete ComandasList from order
             const orderWithoutComandas = { ...order };
-            console.log(`Order`, order)
             delete orderWithoutComandas.ComandasList;
             await Axios.put(`${baseURL}/update`, orderWithoutComandas);
 

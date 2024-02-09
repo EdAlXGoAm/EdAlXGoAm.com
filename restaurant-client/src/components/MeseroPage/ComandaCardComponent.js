@@ -2,32 +2,47 @@ import './ComandaCard.css';
 import React, { useState, useEffect } from 'react';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import DetailsComanda from './DetailsComandaComponent';
+import ResumeComanda from './ResumeComandaComponent';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCashRegister } from '@fortawesome/free-solid-svg-icons';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faFilePen } from '@fortawesome/free-solid-svg-icons';
 
-const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => {
+const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComanda}) => {
 
     const [nota, setNota] = useState('');
     const [liveStatusNota, setLiveStatusNota] = useState('#33d457')
 
-    const handleUpdateComandaPaidStatus = () => {
+    const handleUpdateComandaPaidStatus = (status) => {
         const updatedComanda = {
             ...Comanda,
-            ComandaPaidStatus: Comanda.ComandaPaidStatus === "Pending" ? "Paid" : "Pending"
+            ComandaPaidStatus: status
         }
-        console.log("newComanda after UpdateComandaPaidStatus: ", updatedComanda);
         updateComanda(updatedComanda);
     };
 
-    const handleUpdateComandaPrepStatus = () => {
-        const updatedComanda = {
-            ...Comanda,
-            ComandaPrepStatus: Comanda.ComandaPrepStatus === "Preparing" ? "Served" : "Preparing"
+    const handleUpdateComandaPrepStatus = (status) => {
+        let Status = status;
+        if (Status === "Served"){
+            const updatedComanda = {
+                ...Comanda,
+                ComandaPrepStatus: Status
+            }
+            updateComanda(updatedComanda);
         }
-        console.log("newComanda after UpdateComandaPaidStatus: ", updatedComanda);
-        updateComanda(updatedComanda);
+        else {
+            if (Comanda.ComandaPaidStatus === "Editing"){
+                alert("No puedes marcar la tarea Completada mientras Editas");
+            }
+            else {
+                const updatedComanda = {
+                    ...Comanda,
+                    ComandaPrepStatus: Comanda.ComandaPrepStatus === "Preparing" ? "ReadyToServe" : "Preparing"
+                }
+                updateComanda(updatedComanda);
+            }
+        }
     };
 
     const handleUpdateComandaDeliverMode = () => {
@@ -35,7 +50,6 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
             ...Comanda,
             ComandaDeliverMode: Comanda.ComandaDeliverMode === "Delivery" ? "Table-0" : "Delivery"
         }
-        console.log("newComanda after UpdateComandaDeliverMode: ", updatedComanda);
         updateComanda(updatedComanda);
     };
 
@@ -44,7 +58,6 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
             ...Comanda,
             ComandaSwitchNota: !Comanda.ComandaSwitchNota
         }
-        console.log("newComanda after UpdateComandaSwitchNota: ", updatedComanda);
         updateComanda(updatedComanda);
     };
 
@@ -58,7 +71,6 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
                 ...Comanda,
                 Notas: nota
             }
-            console.log("liveStatusNota: ", updatedComanda.Notas);
             updateComanda(updatedComanda);
             setLiveStatusNota('#33d457')
         }
@@ -69,18 +81,28 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
     const fetchNota = () => {
         setNota(Comanda.Notas);
     };
-
     useEffect(() => {
         fetchNota();
     },[Comanda])
+
     const [toggleArrowStatus, setToggleArrowStatus] = useState(true); // false: plegado, true: desplegado
 
     const [colorStatus, setColorStatus] = useState('#ffffff');
 
     useEffect(() => {
-        if (Comanda.ComandaPrepStatus === "Served") {
+        if (Comanda.ComandaPrepStatus === "ReadyToServe" && Comanda.ComandaPaidStatus === "Pending") {
             setToggleArrowStatus(false);
-            setColorStatus("#00ff6e");
+            setColorStatus("#00ff5e");
+        }
+        else if (Comanda.ComandaPrepStatus === "Preparing" && Comanda.ComandaPaidStatus === "Editing")
+        {
+            setToggleArrowStatus(true);
+            setColorStatus("#fef6d5");
+        }
+        else if (Comanda.ComandaPrepStatus === "Served")
+        {
+            setToggleArrowStatus(false);
+            setColorStatus("#2d2d2d");
         }
         else {
             setToggleArrowStatus(true);
@@ -93,68 +115,169 @@ const ComandaCard = ({modeInterface, Comanda, updateComanda, removeComanda}) => 
             <div className="card-body mb-1 divStyle" style={{backgroundColor: colorStatus}}>
             <div className="row mb-3">
                 <div className='col'>
-                <div className='row mb-2' style={{padding: "0px 20px"}}>
-                    <div className="toggleArrowButtons">
-                        <button style={{backgroundColor:  toggleArrowStatus ? "#7ed65b" : "#ffffff"}} onClick={() => setToggleArrowStatus(!toggleArrowStatus)}>
-                            <FontAwesomeIcon style={{color: toggleArrowStatus ? "#ffffff" : "#5d5d5d"}} icon={toggleArrowStatus ? faAngleUp : faAngleDown} size="2x" />
-                        </button>
+                    <div className='row mb-2' style={{padding: "0px 20px"}}>
+                        <div className="toggleArrowButtons">
+                            <button style={{backgroundColor:  toggleArrowStatus ? "#7ed65b" : "#ffffff"}} onClick={() => setToggleArrowStatus(!toggleArrowStatus)}>
+                                <FontAwesomeIcon style={{color: toggleArrowStatus ? "#ffffff" : "#5d5d5d"}} icon={toggleArrowStatus ? faAngleUp : faAngleDown} size="2x" />
+                            </button>
+                        </div>
+                            <div className="faButton ml-auto" onClick={() => removeComanda(Comanda)} style={{ cursor: 'pointer' }}>
+                            <FontAwesomeIcon icon={faTrash} style={{color: 'red'}} size="xl" />
+                        </div>
                     </div>
-                        <div className="faButton ml-auto" onClick={() => removeComanda(Comanda)} style={{ cursor: 'pointer' }}>
-                        <FontAwesomeIcon icon={faTrash} style={{color: 'red'}} size="xl" />
-                    </div>
-                </div>
-                <div className='row mb-2'>
-                    <div className='col-2'>
-                    <img src={Comanda.Imagen} alt="icon"className="img-fluid" style={{ width: '60px'}}></img>
-                    </div>
-                    <div className="col-8 d-flex align-items-center personalizarTitle">
-                        <h2 className="title comandaTextStyle">{Comanda.Platillo}&nbsp;&nbsp;<span style={{textShadow: "0px 0px 10px red"}}>${Comanda.Precio}</span></h2>
-                    </div>
-                    <div className='col-2'>
-                    <img src={Comanda.Imagen} alt="icon"className="img-fluid" style={{ width: '60px'}}></img>
-                    </div>
-                </div>
-                <div className='row'>
-                    <div className="col-3">
-                        <BootstrapSwitchButton checked={Comanda.ComandaDeliverMode === "Delivery" ? false : true}
-                            onlabel='Aqui' offlabel='Llevar' width={100} onChange={handleUpdateComandaDeliverMode} />
-                    </div>
-                    <div className="col-3">
-                        <img src="icons/Mesa.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: (Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
-                        <img src="icons/Llevar.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: !(Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
-                    </div>
-                    <div className="col-3">
-                        <BootstrapSwitchButton checked={Comanda.ComandaPrepStatus === "Preparing" ? false : true}
-                            onlabel='Entregada' offlabel='Preparando' width={100} onChange={handleUpdateComandaPrepStatus} />
-                    </div>
-                    <div className="col-3">
-                        <BootstrapSwitchButton checked={Comanda.ComandaSwitchNota}
-                            onlabel='Nota' offlabel='Nota' width={100} onChange={handleUpdateComandaSwitchNota} />
-                    </div>
-                </div>
+                    {modeInterface ? (
+                        <div className='row mb-2'>
+                            <div className='col-2'>
+                            <img src={Comanda.Imagen} alt="icon"className="img-fluid" style={{ width: '60px'}}></img>
+                            </div>
+                            <div className="col-8 d-flex align-items-center personalizarTitle">
+                                <h2 className="title comandaTextStyle">{Comanda.Platillo}&nbsp;&nbsp;<span style={{textShadow: "0px 0px 10px red"}}>${Comanda.Precio}</span></h2>
+                            </div>
+                            <div className='col-2'>
+                            <img src={Comanda.Imagen} alt="icon"className="img-fluid" style={{ width: '60px'}}></img>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className='row mb-2'>
+                            <div className='col-2'>
+                            <img src={Comanda.Imagen} alt="icon"className="img-fluid" style={{ height: '180px'}}></img>
+                            </div>
+                            <div className="col-8 d-flex align-items-center personalizarTitle">
+                                <h2 className="title comandaTextStyle" style={{fontSize:"80px"}}>{Comanda.Platillo}&nbsp;&nbsp;<span style={{textShadow: "0px 0px 10px red"}}>${Comanda.Precio}</span></h2>
+                            </div>
+                            <div className='col-2'>
+                            <img src={Comanda.ComandaDeliverMode === "Delivery" ? "iconscocina/Llevar.png" : "iconscocina/Aqui.png" } alt="icon"className="img-fluid" style={{ height: '250px'}}></img>
+                            </div>
+                        </div>
+                    )}
+                    
+                    {modeInterface && (
+                    <div className='row'>
+                        <div className="col-3">
+                            <BootstrapSwitchButton checked={Comanda.ComandaDeliverMode === "Delivery" ? false : true}
+                                onlabel='Aqui' offlabel='Llevar' width={100} onChange={handleUpdateComandaDeliverMode} />
+                        </div>
+                        <div className="col-3">
+                            <img src="icons/Mesa.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: (Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
+                            <img src="icons/Llevar.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: !(Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
+                        </div>
+                        <div className="col-3">
+                            <BootstrapSwitchButton checked={Comanda.ComandaPrepStatus === "Preparing" ? false : true}
+                                onlabel='Entregada' offlabel='Preparando' width={100} onChange={() => handleUpdateComandaPrepStatus("")} />
+                        </div>
+                        <div className="col-3">
+                            <BootstrapSwitchButton checked={Comanda.ComandaSwitchNota}
+                                onlabel='Nota' offlabel='Nota' width={100} onChange={handleUpdateComandaSwitchNota} />
+                        </div>
+                    </div>)}
                 </div>
             </div>
             {toggleArrowStatus && (
-            <div>
-                <div className="row">
-                    <div className='col'>
-                    <DetailsComanda Comanda={Comanda} updateComanda={updateComanda} />
-                    </div>
-                </div>
-                <div className="row" style={{display: !Comanda.ComandaSwitchNota ? 'none' : 'flex'}}>
-                    <div className='col'>
-                    {/* Text box editable backgroudn red and text blanco BOLD */}
-                        <div className='row'>
-                            <div className='col'>
-                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
-                            value={nota} style={{backgroundColor: liveStatusNota, color: '#fff', fontWeight: 'bold', fontSize: '30px'
-                            }}
-                            ></textarea>
+                modeInterface ? (
+                    Comanda.ComandaPaidStatus === "Editing" ? (
+                        <div>
+                            <div className="row">
+                                <div className='col'>
+                                <DetailsComanda Comanda={Comanda} updateComanda={updateComanda} />
+                                </div>
+                            </div>
+                            <div className="row" style={{display: !Comanda.ComandaSwitchNota ? 'none' : 'flex'}}>
+                                <div className='col'>
+                                {/* Text box editable backgroudn red and text blanco BOLD */}
+                                    <div className='row'>
+                                        <div className='col'>
+                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
+                                        value={nota} style={{backgroundColor: liveStatusNota, color: '#fff', fontWeight: 'bold', fontSize: '30px'
+                                        }}
+                                        ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className='col-10'>
+                                </div>
+                                <div className='col-2'>
+                                    <div className="faButton" onClick={() => handleUpdateComandaPaidStatus("Pending")} style={{ cursor: 'pointer' }}>
+                                        <FontAwesomeIcon icon={faPaperPlane} style={{color: '#7ed65b'}} size="2x" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    )
+                    : (
+                        <div>
+                                <div className="row">
+                                    <div className='col'>
+                                    <DetailsComanda Comanda={Comanda} updateComanda={updateComanda} />
+                                    </div>
+                                </div>
+                            <div className="row" style={{display: !Comanda.ComandaSwitchNota ? 'none' : 'flex'}}>
+                                <div className='col'>
+                                {/* Text box editable backgroudn red and text blanco BOLD */}
+                                    <div className='row'>
+                                        <div className='col'>
+                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
+                                        value={nota} style={{backgroundColor: liveStatusNota, color: '#fff', fontWeight: 'bold', fontSize: '30px'
+                                        }}
+                                        ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className='col-10'>
+                                </div>
+                                <div className='col-2'>
+                                    <div className="faButton" onClick={() => handleUpdateComandaPaidStatus("Editing")} style={{ cursor: 'pointer' }}>
+                                        <FontAwesomeIcon icon={faFilePen} style={{color: '#7ed65b'}} size="2x" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    )
+                )
+                : (
+                    Comanda.ComandaPaidStatus === "Editing" ? (
+                        <div>
+                            <div style={{padding: "50px 0px"}}>
+                                <h1>Editando Comanda...</h1>
+                            </div>
+                        </div>
+                    )
+                    : (
+                        <div>
+                            <div className="row">
+                                <div className='col'>
+                                <ResumeComanda Comanda={Comanda} updateComanda={updateComanda} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className='col-10'>
+                                </div>
+                                <div className='col-2'>
+                                    <div className="faButton" onClick={() => handleUpdateComandaPaidStatus("Editing")} style={{ cursor: 'pointer' }}>
+                                        <FontAwesomeIcon icon={faFilePen} style={{color: '#7ed65b'}} size="2x" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row" style={{display: !Comanda.ComandaSwitchNota ? 'none' : 'flex'}}>
+                                <div className='col'>
+                                {/* Text box editable backgroudn red and text blanco BOLD */}
+                                    <div className='row'>
+                                        <div className='col'>
+                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
+                                        value={nota} style={{backgroundColor: liveStatusNota, color: '#fff', fontWeight: 'bold', fontSize: '50px'
+                                        }}
+                                        ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                )
             )}
             </div>
         </div></div>

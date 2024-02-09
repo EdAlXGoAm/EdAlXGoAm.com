@@ -3,11 +3,7 @@ import React, { useState } from 'react';
 import OrdersInterface from '../components/MeseroPage/OrdersInterface';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 
-const MeseroPage = () => {
-    const [modeInterface, setModeInterface] = useState(true);
-    const handleModeInterface = () => {
-        setModeInterface(!modeInterface);
-    };
+const MeseroPage = ({ modeInterface }) => {
 
     return (
     <div className="App">
@@ -15,10 +11,12 @@ const MeseroPage = () => {
             {/* Row with Switch Button */}
             <div className="row">
                 <div className="col">
-                <BootstrapSwitchButton
-                    checked={modeInterface} onChange={handleModeInterface}
-                    onlabel='Mesero' offlabel='Cocina'
-                    width={100}/>
+                {modeInterface ? (
+                    <h2 style={{color:"#ffffff"}}>Mesero</h2>
+                ) : (
+                    <h2 style={{color:"#ffffff"}}>Cocina</h2>
+                )
+                }
                 </div>
             </div>
             <div className="row">

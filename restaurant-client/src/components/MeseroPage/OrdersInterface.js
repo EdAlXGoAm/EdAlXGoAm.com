@@ -12,19 +12,35 @@ const OrdersInterface = ({ modeInterface }) => {
     const [orders, setOrders] = useState([]);
     const [numOrders, setNumOrders] = useState(0);
     const fetchOrders = () => {
-        ordersApi.getOrders()
-        .then(data => {
-            setOrders(prevOrders => {return (data);});
-            setNumOrders(prevNumOrders => {return data.length;});
-        })
-        .catch(err => {
-            console.log(err)
-            alert("Error al cargar las comandas");
-        });
+        console.log("modeInterface: ",modeInterface)
+        if (modeInterface) {
+            ordersApi.getOrders()
+            .then(data => {
+                console.log("Recargando comandas sin filtro: ", data)
+                setOrders(prevOrders => {return (data);});
+                setNumOrders(prevNumOrders => {return data.length;});
+            })
+            .catch(err => {
+                console.log(err)
+                alert("Error al cargar las comandas");
+            });
+        }
+        else {
+            ordersApi.getOrdersByOrderCustStatus("InPlace")
+            .then(data => {
+                console.log("Recargando comandas con filtro: ", data)
+                setOrders(prevOrders => {return (data);});
+                setNumOrders(prevNumOrders => {return data.length;});
+            })
+            .catch(err => {
+                console.log(err)
+                alert("Error al cargar las comandas");
+            });
+        }
     };
     useEffect(() => { // fetchOrders
         fetchOrders();
-    }, []);
+    }, [modeInterface]);
 
     const [ComandasPerScreen, setComandasPerScreen] = useState(3);
     const [slide, setSlide] = useState(1);
@@ -34,6 +50,20 @@ const OrdersInterface = ({ modeInterface }) => {
             setSlide(prevSlide => {return(newSlide);})
         }
     };
+    
+    const handleOrderCustStatus = (OrderID, Status) => {
+        const newOrder = {...orders.find(order => order.OrderID === OrderID)}
+        newOrder.OrderCustStatus = Status;
+        ordersApi.updateOrder(newOrder)
+        .then(() => {
+            fetchOrders();
+            SocketUpdateOrder();
+        })
+        .catch(err => {
+            console.log(err)
+            alert("Error al actualizar una comanda");
+        });
+    }
     const renderOrders = () => {
         const OrdersArray = [];
         if (modeInterface) {
@@ -48,7 +78,8 @@ const OrdersInterface = ({ modeInterface }) => {
                 <div key={orders[i].OrderID} className={`col-xl-${12/ComandasPerScreen} d-flex justify-content-center`}>
                     <Orden modeInterface={modeInterface} iInterface={iInterfaceFlag} Order={orders[i]}
                     DeleteOrder={handleDeleteOrder}
-                    UpdateOrder={handleUpdateOrder}/>
+                    UpdateOrder={handleUpdateOrder}
+                    handleOrderCustStatus={handleOrderCustStatus}/>
                 </div>
                 )
             }
@@ -61,7 +92,8 @@ const OrdersInterface = ({ modeInterface }) => {
                 <div key={orders[i].OrderID} className={`col-xl-${12/ComandasPerScreen} d-flex justify-content-center`}>
                     <Orden modeInterface={modeInterface} iInterface={i} Order={orders[i]}
                     DeleteOrder={handleDeleteOrder}
-                    UpdateOrder={handleUpdateOrder}/>
+                    UpdateOrder={handleUpdateOrder}
+                    handleOrderCustStatus={handleOrderCustStatus}/>
                 </div>
                 )
             }
@@ -115,7 +147,6 @@ const OrdersInterface = ({ modeInterface }) => {
     };
     const handleUpdateOrder = (order, cuentaTotal) => {
         console.log(`CuentaTotal`, cuentaTotal);
-        console.log(`Order`, order);
         const newOrder = {...order, CuentaTotal: cuentaTotal};
         ordersApi.updateOrder(newOrder)
         .then(() => {
@@ -128,7 +159,6 @@ const OrdersInterface = ({ modeInterface }) => {
 
     }
     
-
     const [TotalDia, setTotalDia] = useState(0);
     useEffect(() => { // Total Dia calculation
         let newTotal = 0;
@@ -143,6 +173,9 @@ const OrdersInterface = ({ modeInterface }) => {
     };
     const SocketDeleteOrder = () => {
         socket.emit('OrdenEliminadaDesdeCliente', {});
+    };
+    const SocketUpdateOrder = () => {
+        socket.emit('OrdenActualizadaDesdeCliente', {});
     };
     useEffect(() => { //Socket NewOrder
         socket.on('NuevaOrdenDesdeServidor', (data) => {
@@ -164,6 +197,16 @@ const OrdersInterface = ({ modeInterface }) => {
 
         return () => {
             socket.off('OrdenEliminadaDesdeServidor');
+        };
+    }, []);
+    useEffect(() => { // Socket DelOrder
+        socket.on('OrdenActualizadaDesdeServidor', (data) => {
+            console.log("OrdenActualizadaDesdeServidor Mensaje: ", data)
+            fetchOrders();
+        });
+
+        return () => {
+            socket.off('OrdenActualizadaDesdeServidor');
         };
     }, []);
     return (

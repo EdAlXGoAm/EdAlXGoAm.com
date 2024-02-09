@@ -9,9 +9,20 @@ import comandasApi from './../../api/comandasApi';
 import io from 'socket.io-client';
 const socket = io(`${process.env.REACT_APP_API_URL}:3010`);
 
-const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder}) => {
+const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder, handleOrderCustStatus}) => {
     const [comandas, setComandas] = useState([])
     const [toggleArrowStatus, setToggleArrowStatus] = useState(true); // false: plegado, true: desplegado
+    const [colorOrder, setColorOrder] = useState("#ffffff")
+    const fetchColorOrder = () => {
+        if (Order.OrderCustStatus === "Done") {
+            setColorOrder("#5d5d5d");
+        } else if (Order.OrderCustStatus === "InPlace") {
+            setColorOrder("#ffffff");
+        }
+    }
+    useEffect(() => {
+        fetchColorOrder();
+    }, []);
 
     const fetchComandas = () => {
         comandasApi.getComandasByOrderId(Order.OrderID)
@@ -50,7 +61,7 @@ const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder}) => 
         fetchToggleArrowStatus();
     },[modeInterface])
 
-    const handleComandas = (order, Action) => {
+    const handleComandas = (Action) => {
         console.log(`Action: ${Action}`);
         // Evaluar si Action split('-')[0] es igual a Add
         if (Action.split('-')[0] === "Add") {
@@ -196,7 +207,7 @@ const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder}) => 
             Platillo: platillo.NombrePlatillo,
             Precio: platillo.Variants[0].Precio,
             Imagen: platillo.Imagen,
-            ComandaPaidStatus: "Pending", // Paid
+            ComandaPaidStatus: "Editing", // Paid
             ComandaPrepStatus: "Preparing", // ReadyToServe-Served
             ComandaDeliverMode: "Delivery", // Table-0
             ComandaSwitchNota: false,
@@ -208,7 +219,7 @@ const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder}) => 
         comandasApi.addComanda(Comanda)
         .then((res) => {
             const socketMsg = "Add-" + Comanda.Platillo;
-            handleComandas(newOrder, socketMsg);
+            handleComandas(socketMsg);
             fetchComandas();
         })
         .catch((err) => {
@@ -217,12 +228,10 @@ const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder}) => 
     };
 
     const updateComanda = (comanda) => {
-        const newOrder = {...Order};
-        console.log("newOrder for UpdateComanda: ", newOrder)
         comandasApi.updateComanda(comanda)
         .then((res) => {
             const socketMsg = "Update-";
-            handleComandas(newOrder, socketMsg);
+            handleComandas(socketMsg);
             fetchComandas();
         })
         .catch((err) => {
@@ -237,7 +246,7 @@ const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder}) => 
                 comandasApi.deleteComanda(comanda._id)
                 .then((res) => {
                     const socketMsg = "Del-";
-                    handleComandas(newOrder, socketMsg);
+                    handleComandas(socketMsg);
                     fetchComandas();
                 })
                 .catch((err) => {
@@ -246,8 +255,50 @@ const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder}) => 
             }
     };
 
+    const handleOrderCustStatusButton = () => {
+        if (Order.OrderCustStatus === "InPlace") {
+            const confirm = window.confirm("La ORDEN ha sido COMPLETADA?");
+                if (confirm) {
+                    setColorOrder("#5d5d5d");
+                    // comandas.forEach((comanda) => {
+                    //     comanda.ComandaPrepStatus = "Served";
+                        
+                    //     comandasApi.updateComanda(comanda)
+                    //     .then((res) => {
+                    //     })
+                    //     .catch((err) => {
+                    //         console.log(err);
+                    //     });
+                    // })
+                    handleOrderCustStatus(Order.OrderID, "Done");
+                    // const socketMsg = "Update-";
+                    // handleComandas(socketMsg);
+                    // fetchComandas();
+                }
+        } else if (Order.OrderCustStatus === "Done") {
+            const confirm = window.confirm("La ORDEN ha sido PREPARADA?");
+                if (confirm) {
+                    setColorOrder("#ffffff");
+                    // comandas.forEach((comanda) => {
+                    //     comanda.ComandaPrepStatus = "ReadyToServe";
+                        
+                    //     comandasApi.updateComanda(comanda)
+                    //     .then((res) => {
+                    //     })
+                    //     .catch((err) => {
+                    //         console.log(err);
+                    //     });
+                    // })
+                    handleOrderCustStatus(Order.OrderID, "InPlace");
+                    // const socketMsg = "Update-";
+                    // handleComandas(socketMsg);
+                    // fetchComandas();
+                }
+        }
+    }
+
     return (
-        <div className="card">
+        <div className="card" style={{backgroundColor: colorOrder}}>
             <div className="row">
                 <div className="col-2 d-flex align-items-center">
                     <div className="toggleArrowButtons">
@@ -264,7 +315,7 @@ const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder}) => 
                 </div>
                 <div className="col-5 d-flex align-items-center orderTotal">
                     <div className="orderTotalText">{`Total: $${Order.CuentaTotal}`}</div>
-                    <button onClick={null}> {/* Will allow change Paid Prep and Cust Status */}
+                    <button onClick={() => handleOrderCustStatusButton(Order)}> {/* Will allow change Paid Prep and Cust Status */}
                         <FontAwesomeIcon icon={faCashRegister} size="2x" />
                     </button>
                 </div>
@@ -276,7 +327,7 @@ const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder}) => 
                 )}
                 {comandas.map((comanda, indexComanda) => (
                 <div key={indexComanda}>
-                <ComandaCard modeInterface={modeInterface} Comanda={comanda} updateComanda={updateComanda} removeComanda={removeComanda} />
+                <ComandaCard order={Order} modeInterface={modeInterface} Comanda={comanda} updateComanda={updateComanda} removeComanda={removeComanda} />
                 </div>
                 ))}
             </div>
