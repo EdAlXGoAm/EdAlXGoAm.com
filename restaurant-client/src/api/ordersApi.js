@@ -1,7 +1,7 @@
 import Axios from "axios";
 import comandasApi from './comandasApi';
 
-const baseURL = `${process.env.REACT_APP_API_URL}:3010/api/orders`;
+const baseURL = `${process.env.REACT_APP_API_URL}/api/orders`;
 
 const ordersApi = {
     getOrders : async () => {

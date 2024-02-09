@@ -1,5 +1,5 @@
 import Axios from "axios";
-const baseURL = `${process.env.REACT_APP_API_URL}:3010/api/comandas`;
+const baseURL = `${process.env.REACT_APP_API_URL}/api/comandas`;
 
 const comandasApi = {
     getComandas : async () => {

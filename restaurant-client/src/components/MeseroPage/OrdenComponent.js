@@ -7,7 +7,7 @@ import PlatilloSelector from './PlatilloSelectorComponent';
 import ComandaCard from './ComandaCardComponent'
 import comandasApi from './../../api/comandasApi';
 import io from 'socket.io-client';
-const socket = io(`${process.env.REACT_APP_API_URL}:3010`);
+const socket = io(`${process.env.REACT_APP_API_URL}`);
 
 const Orden = ({modeInterface, iInterface, Order, DeleteOrder, UpdateOrder, handleOrderCustStatus}) => {
     const [comandas, setComandas] = useState([])
