@@ -233,6 +233,10 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
                         const audio = new Audio("ComandaAudios/Solicitan--Nuggets.wav");
                         audio.play();
                     }
+                    else if (audioMsg === "Add-Pastel") {
+                        const audio = new Audio("ComandaAudios/Solicitan-Pastel.wav");
+                        audio.play();
+                    }
                 }
             }
         });
