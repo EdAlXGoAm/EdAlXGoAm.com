@@ -2,32 +2,15 @@ import './PlatilloSelector.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
-import platillosApi from '../../api/platillosApi';
 
-const PlatilloSelector = ({addPlatilloToOrder}) => {
-    const [platillos, setPlatillos] = useState([]);
-    const [numPlatillos, setNumPlatillos] = useState(0);
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const PlatilloSelector = ({addPlatilloToOrder, platillos, numPlatillos}) => {
     const notify = (message) => toast(message);
     const [numPlatilloButtonsPerSlide, setNumPlatilloButtonsPerSlide] = useState (4);
     const containerRef = useRef(null);
     const [slide, setSlide] = useState(1);
-    const fetchPlatillos = () => {
-        platillosApi.getPlatillos()
-        .then(data => {
-            setPlatillos(prevPlatillos => {return (data);});
-            setNumPlatillos(prevNumPlatillos => {return data.length;});
-        })
-        .catch(err => {
-            console.log(err)
-            alert("Error al cargar las comandas");
-        });
-    };
-    useEffect(() => {
-        fetchPlatillos();
-    }, []);
     const handleSlideChange = (newSlide) => {
         const maxSlide = Math.ceil(numPlatillos / numPlatilloButtonsPerSlide);
         if (newSlide > 0 && newSlide <= maxSlide) {

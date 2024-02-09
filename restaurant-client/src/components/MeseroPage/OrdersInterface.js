@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import ordersApi from '../../api/ordersApi';
+import platillosApi from '../../api/platillosApi';
 
 import io from 'socket.io-client';
 const socket = io(`${process.env.REACT_APP_API_URL}`);
@@ -14,14 +15,28 @@ const OrdersInterface = ({ modeInterface }) => {
     const notify = (message) => toast(message);
     const [orders, setOrders] = useState([]);
     const [numOrders, setNumOrders] = useState(0);
+    const [platillos, setPlatillos] = useState([]);
+    const [numPlatillos, setNumPlatillos] = useState(0);
     const fetchOrders = () => {
-        console.log("modeInterface: ",modeInterface)
+        console.log("fetching Orders")
         if (modeInterface) {
-            ordersApi.getOrders()
+            let orders = [];
+            ordersApi.getOrdersByOrderCustStatus("Done")
             .then(data => {
                 console.log("Recargando comandas sin filtro: ", data)
-                setOrders(prevOrders => {return (data);});
-                setNumOrders(prevNumOrders => {return data.length;});
+                orders = [...orders, ...data];
+                ordersApi.getOrdersByOrderCustStatus("InPlace")
+                .then(data2 => {
+                    console.log("Recargando comandas sin filtro: ", data2)
+                    orders = [...orders, ...data2];
+                    setOrders(prevOrders => {return (orders);});
+                    setNumOrders(prevNumOrders => {return orders.length;});
+                })
+                .catch(err => {
+                    console.log(err);
+                    notify(`Error al cargar las comandas: ${err}`);
+                    // alert("Error al cargar las comandas");
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -43,9 +58,24 @@ const OrdersInterface = ({ modeInterface }) => {
             });
         }
     };
+    
+    const fetchPlatillos = () => {
+        platillosApi.getPlatillos()
+        .then(data => {
+            setPlatillos(prevPlatillos => {return (data);});
+            setNumPlatillos(prevNumPlatillos => {return data.length;});
+        })
+        .catch(err => {
+            console.log(err);
+            notify(`Error al cargar las comandas: ${err}`);
+            // alert("Error al cargar las comandas");
+        });
+    };
+
     useEffect(() => { // fetchOrders
         fetchOrders();
-    }, [modeInterface]);
+        fetchPlatillos();
+    }, []);
 
     const [ComandasPerScreen, setComandasPerScreen] = useState(3);
     const [slide, setSlide] = useState(1);
@@ -62,7 +92,7 @@ const OrdersInterface = ({ modeInterface }) => {
         ordersApi.updateOrder(newOrder)
         .then(() => {
             fetchOrders();
-            SocketUpdateOrder();
+            SocketUpdateOrder(OrderID);
         })
         .catch(err => {
             console.log(err);
@@ -82,10 +112,12 @@ const OrdersInterface = ({ modeInterface }) => {
                 }
                 OrdersArray.push(
                 <div key={orders[i].OrderID} className={`col-xl-${12/ComandasPerScreen} d-flex justify-content-center`}>
-                    <Orden modeInterface={modeInterface} iInterface={iInterfaceFlag} Order={orders[i]}
+                    <Orden modeInterface={modeInterface} iInterface={iInterfaceFlag} OrderID={orders[i].OrderID}
                     DeleteOrder={handleDeleteOrder}
-                    UpdateOrder={handleUpdateOrder}
-                    handleOrderCustStatus={handleOrderCustStatus}/>
+                    handleOrderCustStatus={handleOrderCustStatus}
+                    platillos={platillos}
+                    numPlatillos={numPlatillos}
+                    />
                 </div>
                 )
             }
@@ -96,10 +128,12 @@ const OrdersInterface = ({ modeInterface }) => {
             for (let i = start; i < end; i++) {
                 OrdersArray.push(
                 <div key={orders[i].OrderID} className={`col-xl-${12/ComandasPerScreen} d-flex justify-content-center`}>
-                    <Orden modeInterface={modeInterface} iInterface={i} Order={orders[i]}
+                    <Orden modeInterface={modeInterface} iInterface={i} OrderID={orders[i].OrderID}
                     DeleteOrder={handleDeleteOrder}
-                    UpdateOrder={handleUpdateOrder}
-                    handleOrderCustStatus={handleOrderCustStatus}/>
+                    handleOrderCustStatus={handleOrderCustStatus}
+                    platillos={platillos}
+                    numPlatillos={numPlatillos}
+                    />
                 </div>
                 )
             }
@@ -154,19 +188,6 @@ const OrdersInterface = ({ modeInterface }) => {
                 });
             }
     };
-    const handleUpdateOrder = (order, cuentaTotal) => {
-        console.log(`CuentaTotal`, cuentaTotal);
-        const newOrder = {...order, CuentaTotal: cuentaTotal};
-        ordersApi.updateOrder(newOrder)
-        .then(() => {
-            fetchOrders();
-        })
-        .catch(err => {
-            console.log(err)
-            alert("Error al actualizar una comanda");
-        });
-
-    }
     
     const [TotalDia, setTotalDia] = useState(0);
     useEffect(() => { // Total Dia calculation
@@ -174,6 +195,7 @@ const OrdersInterface = ({ modeInterface }) => {
         for (let order of orders) {
             newTotal += order.CuentaTotal;
         }
+        console.log("Calculando el total del día")
         setTotalDia(newTotal);
     },[orders]);
 
@@ -183,8 +205,8 @@ const OrdersInterface = ({ modeInterface }) => {
     const SocketDeleteOrder = () => {
         socket.emit('OrdenEliminadaDesdeCliente', {});
     };
-    const SocketUpdateOrder = () => {
-        socket.emit('OrdenActualizadaDesdeCliente', {});
+    const SocketUpdateOrder = (OrderID) => {
+        socket.emit('OrdenActualizadaDesdeCliente', {msg: OrderID});
     };
     useEffect(() => { //Socket NewOrder
         socket.on('NuevaOrdenDesdeServidor', (data) => {
@@ -222,7 +244,7 @@ const OrdersInterface = ({ modeInterface }) => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col">
-                    <h1 style={{ color: "#ffffff" }}>Comandas ${TotalDia}</h1>
+                    <h1 style={{ color: "#ffffff" }}>Comandas ${TotalDia}</h1><ToastContainer />
                     <Button variant="primary" onClick={() => setComandasPerScreen(6)}>6</Button>
                     <Button variant="primary" onClick={() => setComandasPerScreen(4)}>4</Button>
                     <Button variant="primary" onClick={() => setComandasPerScreen(3)}>3</Button>
