@@ -47,6 +47,15 @@ const OrdersInterface = ({ modeInterface }) => {
         else {
             ordersApi.getOrdersByOrderCustStatus("InPlace")
             .then(data => {
+                if (data.length <= 3) {
+                    setComandasPerScreen(3);
+                }
+                else if (data.length === 4) {
+                    setComandasPerScreen(4);
+                }
+                else if (data.length > 4) {
+                    setComandasPerScreen(6);
+                }
                 console.log("Recargando comandas con filtro: ", data)
                 setOrders(prevOrders => {return (data);});
                 setNumOrders(prevNumOrders => {return data.length;});
