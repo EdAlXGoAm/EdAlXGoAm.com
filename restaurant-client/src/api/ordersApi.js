@@ -7,8 +7,8 @@ const ordersApi = {
     getOrders : async () => {
         try {
             const orders = await Axios.get(`${baseURL}/get`);
-            const comandasPromises = orders.data.map( order => comandasApi.getComandasByOrderId(order.OrderID) );
-            const comandas = await Promise.all(comandasPromises);
+            // const comandasPromises = orders.data.map( order => comandasApi.getComandasByOrderId(order.OrderID) );
+            // const comandas = await Promise.all(comandasPromises);
             
             const ordersWithComandas = orders.data.map((order, index) => {
                 // order.ComandasList = comandas[index];
@@ -32,15 +32,15 @@ const ordersApi = {
     },
 
     
-    // getOrder : async (id) => {
-    //     try {
-    //         const response = await Axios.get(`${baseURL}/get/${id}`);
-    //         return response.data;
-    //     } catch (error) {
-    //         console.error("ordersAPI error: ", error);
-    //         throw error;
-    //     }
-    // },
+    getOrder : async (id) => {
+        try {
+            const response = await Axios.get(`${baseURL}/get/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error("ordersAPI error: ", error);
+            throw error;
+        }
+    },
     
     addOrder : async (order) => {
         try {

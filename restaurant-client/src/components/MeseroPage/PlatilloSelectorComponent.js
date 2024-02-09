@@ -7,6 +7,10 @@ import platillosApi from '../../api/platillosApi';
 const PlatilloSelector = ({addPlatilloToOrder}) => {
     const [platillos, setPlatillos] = useState([]);
     const [numPlatillos, setNumPlatillos] = useState(0);
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+    const notify = (message) => toast(message);
     const [numPlatilloButtonsPerSlide, setNumPlatilloButtonsPerSlide] = useState (4);
     const containerRef = useRef(null);
     const [slide, setSlide] = useState(1);
@@ -70,7 +74,7 @@ const PlatilloSelector = ({addPlatilloToOrder}) => {
             }
             else {
                 buttons.push(
-                    <button key={i} className="platilloButton disabled" onClick={() => alert("Platillo no disponible")}>
+                    <button key={i} className="platilloButton disabled" onClick={() => notify("Platillo no disponible")}>
                         <div className="divImagePlatilloButton">
                             <img src={platillos[i].Imagen} alt={platillos[i].NombrePlatillo} style={{ width: '60px', height: '60px' }} />
                         </div>
@@ -100,6 +104,7 @@ const PlatilloSelector = ({addPlatilloToOrder}) => {
                     <FontAwesomeIcon icon={faArrowCircleRight} size="3x" /> {/* Increased size */}
                 </button>
             </div>
+            <ToastContainer />
         </div>
     )
 }

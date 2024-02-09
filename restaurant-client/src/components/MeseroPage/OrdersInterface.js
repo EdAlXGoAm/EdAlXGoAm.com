@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Orden from './OrdenComponent';
 import Button from 'react-bootstrap/Button';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import ordersApi from '../../api/ordersApi';
 
 import io from 'socket.io-client';
 const socket = io(`${process.env.REACT_APP_API_URL}`);
 
 const OrdersInterface = ({ modeInterface }) => {
-
+    const notify = (message) => toast(message);
     const [orders, setOrders] = useState([]);
     const [numOrders, setNumOrders] = useState(0);
     const fetchOrders = () => {
@@ -21,8 +24,9 @@ const OrdersInterface = ({ modeInterface }) => {
                 setNumOrders(prevNumOrders => {return data.length;});
             })
             .catch(err => {
-                console.log(err)
-                alert("Error al cargar las comandas");
+                console.log(err);
+                notify(`Error al cargar las comandas: ${err}`);
+                // alert("Error al cargar las comandas");
             });
         }
         else {
@@ -33,8 +37,9 @@ const OrdersInterface = ({ modeInterface }) => {
                 setNumOrders(prevNumOrders => {return data.length;});
             })
             .catch(err => {
-                console.log(err)
-                alert("Error al cargar las comandas");
+                console.log(err);
+                notify(`Error al cargar las comandas: ${err}`);
+                // alert("Error al cargar las comandas");
             });
         }
     };
@@ -60,8 +65,9 @@ const OrdersInterface = ({ modeInterface }) => {
             SocketUpdateOrder();
         })
         .catch(err => {
-            console.log(err)
-            alert("Error al actualizar una comanda");
+            console.log(err);
+            notify(`Error al actualizar una comanda: ${err}`);
+            // alert("Error al actualizar una comanda");
         });
     }
     const renderOrders = () => {
@@ -122,13 +128,15 @@ const OrdersInterface = ({ modeInterface }) => {
                 audio.play();
             })
             .catch(err => {
-                console.log(err)
-                alert("Error al agregar una nueva comanda");
+                console.log(err);
+                notify(`Error al agregar una nueva comanda: ${err}`);
+                // alert("Error al agregar una nueva comanda");
             });
         })
         .catch(err => {
-            console.log(err)
-            alert("Error de comunicación con la base de datos para 'Ordenes'");
+            console.log(err);
+            notify(`Error  de comunicación con la base de datos para 'Ordenes': ${err}`);
+            // alert("Error de comunicación con la base de datos para 'Ordenes'");
         });
     };
     const handleDeleteOrder = (OrderID) => {
@@ -140,8 +148,9 @@ const OrdersInterface = ({ modeInterface }) => {
                     SocketDeleteOrder();
                 })
                 .catch(err => {
-                    console.log(err)
-                    alert("Error al eliminar una comanda");
+                    console.log(err);
+                    notify(`Error al eliminar una comanda: ${err}`);
+                    // alert("Error al eliminar una comanda");
                 });
             }
     };
