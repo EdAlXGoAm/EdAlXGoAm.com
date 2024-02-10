@@ -39,8 +39,8 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
                 fetchOrder();
             };
         
-            // Crea un intervalo que ejecuta hacerAlgo cada 10 segundos (10000 milisegundos)
-            const intervalo = setInterval(hacerAlgo, 10000);
+            // Crea un intervalo que ejecuta hacerAlgo cada 5 segundos (5000 milisegundos)
+            const intervalo = setInterval(hacerAlgo, 5000);
         
             // Limpia el intervalo cuando el componente se desmonta
             // para evitar efectos secundarios no deseados
@@ -139,128 +139,6 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
         }
     };
 
-    useEffect(() => { // NewComanda
-        socket.on('NuevaComandaDesdeServidor', (data) => {
-            if (data.msg.split('-')[1] === OrderID.toString()) {
-                fetchOrder();
-                if (!modeInterface) {
-                    const audioMsg = `${data.msg.split('-')[0]}-${data.msg.split('-')[2]}`;
-                    console.log("MSG_Audio: ", audioMsg);
-                    if (audioMsg === "Add-Hamburguesa") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Hamburguesa.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Vaso de Postre") {
-                        const audio = new Audio("ComandaAudios/Solicitan-VasoDePostre.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Pay de Limón") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Pay-de-Limon.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Cheese Cake") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Cheese-Cake.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Maruchan Loca") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Maruchan-Loca.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Vaso de Esquites") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Esquites.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Doriesquites") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Doriesquites.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Maruchan con Suadero") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Maruchan-Suadero.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Alitas a la BBQ") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Alitas.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Rebanada de Pizza") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Rebanada-Pizza.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Papas a la Francesa") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Papas.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Hot Dog") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Hotdog.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Salchipulpos") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Salchipulpos.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Sincronizadas") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Sincronizadas.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Donitas") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Donitas.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Bubble Waffle") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Waffle.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Café") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Cafe.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Frappé") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Frappe.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Malteada") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Malteada.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Esquimo") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Esquimo.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Bubble Soda") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Bubble-Soda.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Agua Fresca") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Agua-Fresca.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Refresco") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Refresco.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Ensalada") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Ensalada.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Platanos Fritos") {
-                        const audio = new Audio("ComandaAudios/Solicitan--PlatanosFritos.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Nuggets con Papas") {
-                        const audio = new Audio("ComandaAudios/Solicitan--Nuggets.wav");
-                        audio.play();
-                    }
-                    else if (audioMsg === "Add-Pastel") {
-                        const audio = new Audio("ComandaAudios/Solicitan-Pastel.wav");
-                        audio.play();
-                    }
-                }
-            }
-        });
-        return () => {
-            socket.off('NuevaComandaDesdeServidor');
-        };
-    }, []);
     useEffect(() => { // UpdateComanda
         socket.on('UpdateComandaDesdeServidor', (data) => {
             console.log("Mensaje: ", data.msg)
@@ -290,6 +168,7 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
             Platillo: platillo.NombrePlatillo,
             Precio: platillo.Variants[0].Precio,
             Imagen: platillo.Imagen,
+            Categoria: platillo.Categoria,
             ComandaPaidStatus: "Editing", // Paid
             ComandaPrepStatus: "Preparing", // ReadyToServe-Served
             ComandaDeliverMode: "Delivery", // Table-0

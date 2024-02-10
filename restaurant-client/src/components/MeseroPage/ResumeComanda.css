@@ -1,0 +1,169 @@
+.textNotaCocina{
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+    animation: cambio-color 3s infinite linear;
+    text-align: left;
+}
+@keyframes cambio-color {
+    0% { background-color: red; }
+    4% { background-color: red; }
+    5% { background-color: rgb(255, 134, 154); }
+    9% { background-color: rgb(255, 134, 154); }
+    10% { background-color: red; }
+    14% { background-color: red; }
+    15% { background-color: rgb(255, 134, 154); }
+    19% { background-color: rgb(255, 134, 154); }
+    20% { background-color: red; }
+    100% { background-color: red; }
+  }
+.comandaTextStyleCocina{
+    background-color: #2d2d2d;
+    color: #ffffff;
+    border-radius: 40px;
+    padding: 0px 10px;
+    margin: 0px 10px;
+    font-size: 27px;
+    font-family: 'Salsa', cursive;
+    font-weight: bold;
+}
+.titleVariantCocina {
+    justify-content: center;
+    display: flex;
+    padding-left: 10px;
+    font-weight: bold;
+    color: red;
+    font-family: 'Salsa', cursive;
+    font-size: clamp(1rem, 1vw, 2.5rem);
+    margin: 0px;
+}
+.titleComponentsCocina {
+    display: flex;
+    padding-left: 10px;
+    font-weight: bold;
+    color: #00b3ff;
+    font-family: 'Salsa', cursive;
+    font-size: clamp(1rem, 0.5vw, 2.5rem);
+    margin: 0px;
+}
+.titleOpcionesCocina{
+    display: flex;
+    padding-left: 10px;
+    color: #00b3ff;
+    font-family: 'Salsa', cursive;
+    font-size: clamp(1rem, 0.5vw, 2.5rem);
+    margin: 0px;
+}
+.titleIngredientesCocina {
+    display: flex;
+    padding-left: 10px;
+    color: #00b3ff;
+    font-family: 'Salsa', cursive;
+    font-size: clamp(1rem, 0.5vw, 2.5rem);
+    margin: 0px;
+}
+.textoComponentsCocina{
+    color: black;
+    font-family: 'Salsa', cursive;
+    font-size: clamp(1rem, 0.5vw, 2.5rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.sinconComponentsCocina {
+    /* display: flex; */
+    padding-left: 10px;
+    color: #00b3ff;
+    font-family: 'Salsa', cursive;
+    font-size: clamp(1rem, 0.5vw, 2.5rem);
+}
+.titleIngredientes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    color: #00b3ff;
+    font-family: 'Salsa', cursive;
+    font-size: clamp(1rem, 1.2vw, 2.5rem);
+}
+
+.personalizarTitle > .faButton {
+    padding-bottom: 13px;
+}
+.personalizarTitle > h2 {
+    padding: 0px 20px;
+}
+.container > div {
+    margin-top: 2px;
+    padding-left: 2px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px #2d2d2d;
+    background-color: #fff;
+    color: #000;
+    text-align: left;
+}
+.containerIng {
+    padding: 0px !important;
+    margin-bottom: 0px;
+}
+.faButton {
+    padding: 0px !important;
+}
+.textOpcionesCocina {
+    font-family: 'Salsa', cursive;
+    font-size: clamp(1rem, 1vw, 2.5rem);
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px;
+}
+.textIngredientesCocina{
+    font-size: 18px;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+hr {
+    margin: 0px;
+}
+.linea-tachado {
+    position: absolute;
+    top: 0;
+    left: 40;
+    width: 75%; /* Asegura que la línea cubra completamente la imagen */
+    height: 100%; /* Asegura que la línea cubra completamente la altura de la imagen */
+    background: transparent;
+    z-index: 10;
+}
+
+.linea-tachado::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Cubre el ancho */
+    height: 100%; /* Cubre la altura */
+    background: linear-gradient(to bottom right, transparent 30%, red 40%, red 60%, transparent 70%);
+  }
+  .linea-tachado-delgada {
+      position: absolute;
+      top: 0;
+      left: 40;
+      width: 75%; /* Asegura que la línea cubra completamente la imagen */
+      height: 100%; /* Asegura que la línea cubra completamente la altura de la imagen */
+      background: transparent;
+      z-index: 10;
+  }
+  
+  .linea-tachado-delgada::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%; /* Cubre el ancho */
+      height: 100%; /* Cubre la altura */
+      background: linear-gradient(to bottom right, transparent 45%, red 49%, red 51%, transparent 55%);
+    }

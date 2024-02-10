@@ -97,7 +97,7 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
         else if (Comanda.ComandaPrepStatus === "Preparing" && Comanda.ComandaPaidStatus === "Editing")
         {
             setToggleArrowStatus(true);
-            setColorStatus("#fef6d5");
+            setColorStatus("#fe8878");
         }
         else if (Comanda.ComandaPrepStatus === "Served")
         {

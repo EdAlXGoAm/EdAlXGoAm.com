@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Orden from './OrdenComponent';
 import Button from 'react-bootstrap/Button';
-
+import './OrdersInterface.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import ordersApi from '../../api/ordersApi';
 import platillosApi from '../../api/platillosApi';
+
+import OrdenesCocina from './OrdenesCocinaComponent';
 
 import io from 'socket.io-client';
 const socket = io(`${process.env.REACT_APP_API_URL}`);
@@ -18,16 +20,13 @@ const OrdersInterface = ({ modeInterface }) => {
     const [platillos, setPlatillos] = useState([]);
     const [numPlatillos, setNumPlatillos] = useState(0);
     const fetchOrders = () => {
-        console.log("fetching Orders")
         if (modeInterface) {
             let orders = [];
             ordersApi.getOrdersByOrderCustStatus("Done")
             .then(data => {
-                console.log("Recargando comandas sin filtro: ", data)
                 orders = [...orders, ...data];
                 ordersApi.getOrdersByOrderCustStatus("InPlace")
                 .then(data2 => {
-                    console.log("Recargando comandas sin filtro: ", data2)
                     orders = [...orders, ...data2];
                     setOrders(prevOrders => {return (orders);});
                     setNumOrders(prevNumOrders => {return orders.length;});
@@ -56,7 +55,6 @@ const OrdersInterface = ({ modeInterface }) => {
                 else if (data.length > 4) {
                     setComandasPerScreen(6);
                 }
-                console.log("Recargando comandas con filtro: ", data)
                 setOrders(prevOrders => {return (data);});
                 setNumOrders(prevNumOrders => {return data.length;});
             })
@@ -93,8 +91,8 @@ const OrdersInterface = ({ modeInterface }) => {
                 fetchOrders();
             };
         
-            // Crea un intervalo que ejecuta hacerAlgo cada 10 segundos (10000 milisegundos)
-            const intervalo = setInterval(hacerAlgo, 10000);
+            // Crea un intervalo que ejecuta hacerAlgo cada 5 segundos (5000 milisegundos)
+            const intervalo = setInterval(hacerAlgo, 5000);
         
             // Limpia el intervalo cuando el componente se desmonta
             // para evitar efectos secundarios no deseados
@@ -146,24 +144,15 @@ const OrdersInterface = ({ modeInterface }) => {
                 </div>
                 )
             }
+            return (
+                <div class="row">
+                    {OrdersArray}
+                </div>
+                );
         }
         else {
-            const start = (slide - 1);
-            const end = Math.min(slide - 1 + ComandasPerScreen, numOrders);
-            for (let i = start; i < end; i++) {
-                OrdersArray.push(
-                <div key={orders[i].OrderID} className={`col-xl-${12/ComandasPerScreen} d-flex justify-content-center`}>
-                    <Orden modeInterface={modeInterface} iInterface={i} OrderID={orders[i].OrderID}
-                    DeleteOrder={handleDeleteOrder}
-                    handleOrderCustStatus={handleOrderCustStatus}
-                    platillos={platillos}
-                    numPlatillos={numPlatillos}
-                    />
-                </div>
-                )
-            }
+            return (<OrdenesCocina modeInterface={modeInterface} Orders={orders} />)
         }
-        return OrdersArray;
     };
 
     const handleNewOrderClick = () => {
@@ -220,7 +209,6 @@ const OrdersInterface = ({ modeInterface }) => {
         for (let order of orders) {
             newTotal += order.CuentaTotal;
         }
-        console.log("Calculando el total del día")
         setTotalDia(newTotal);
     },[orders]);
 
@@ -270,29 +258,35 @@ const OrdersInterface = ({ modeInterface }) => {
             <div className="row">
                 <div className="col">
                     <h1 style={{ color: "#ffffff" }}>Comandas ${TotalDia}</h1><ToastContainer />
-                    <Button variant="primary" onClick={() => setComandasPerScreen(6)}>6</Button>
-                    <Button variant="primary" onClick={() => setComandasPerScreen(4)}>4</Button>
-                    <Button variant="primary" onClick={() => setComandasPerScreen(3)}>3</Button>
+                    {modeInterface && (
+                        <div>
+                            <Button variant="primary" onClick={() => setComandasPerScreen(6)}>6</Button>
+                            <Button variant="primary" onClick={() => setComandasPerScreen(4)}>4</Button>
+                            <Button variant="primary" onClick={() => setComandasPerScreen(3)}>3</Button>
+                        </div>
+                    )}
                 </div>
             </div>
             <hr style={{backgroundColor:"white"}}/>
-            <div className="row">
-                {/* Botón para navegar entre comandas */}
-                <div className="col-2">
-                    <Button variant="success" size="lg" onClick={() => handleSlideChange(slide - 1)}>←</Button>
+            {modeInterface && (
+                <div>
+                    <div className="row">
+                        {/* Botón para navegar entre comandas */}
+                        <div className="col-2">
+                            <Button variant="success" size="lg" onClick={() => handleSlideChange(slide - 1)}>←</Button>
+                        </div>
+                        {/* Botón para agregar una nueva comanda */}
+                        <div className="col-8">
+                            <Button variant="success" size="lg" onClick={handleNewOrderClick}>Nueva Orden</Button>
+                        </div>
+                        {/* Botón para navegar entre comandas */}
+                        <div className="col-2">
+                            <Button variant="success" size="lg" onClick={() => handleSlideChange(slide + 1)}>→</Button>
+                        </div>
+                    </div>
                 </div>
-                {/* Botón para agregar una nueva comanda */}
-                <div className="col-8">
-                    <Button variant="success" size="lg" onClick={handleNewOrderClick}>Nueva Orden</Button>
-                </div>
-                {/* Botón para navegar entre comandas */}
-                <div className="col-2">
-                    <Button variant="success" size="lg" onClick={() => handleSlideChange(slide + 1)}>→</Button>
-                </div>
-            </div>
-            <div className="row">
-                {renderOrders()}
-            </div>
+            )}
+            {renderOrders()}
         </div>
     )
 }

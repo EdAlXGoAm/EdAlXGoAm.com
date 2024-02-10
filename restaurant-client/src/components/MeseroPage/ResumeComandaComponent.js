@@ -1,4 +1,4 @@
-import './DetailsComanda.css';
+import './ResumeComanda.css';
 import './../Global/checkbox.css'; //La ruta de este archivo es: src/css/checkbox.css
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -243,10 +243,10 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
     };
     
     //  CHECKBOX == RESPONSIVE ==
-    const [numCheckBoxPerRow, setNumCheckBoxPerRow] = useState (1);
+    const [numCheckBoxPerRow, setNumCheckBoxPerRow] = useState (6);
     const containerRef = useRef(null);
     const updateNumCheckBoxPerRow = (width) => {
-        const checkBoxWidth = 500;
+        const checkBoxWidth = 150;
         const newNumCheckBoxPerRow = Math.floor(width / checkBoxWidth)*2;
         setNumCheckBoxPerRow(prevNumCheckBoxPerRow => {
             return newNumCheckBoxPerRow > 0 ? newNumCheckBoxPerRow : 1;
@@ -269,155 +269,237 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
         };
     }, [componentsIsExpanded]);
 
+    const [allComponentsChecked, setAllComponentsChecked] = useState(false);
+    useEffect(() => {
+        let allChecked = true;
+        Comanda.Details.Variants[Comanda.Details.SelectedVariant].Componentes.map((componente, indexComponente) => (
+            componente.Checked === false && (allChecked = false)
+            ));
+        setAllComponentsChecked(allChecked);
+        console.log(`allComponentsChecked: ${allChecked}`);
+    }, [Comanda]);
+    
+    // const [allIngredientesChecked, setAllIngredientezChecked] = useState(false);
+    // useEffect(() => {
+    //     let allChecked = true;
+    //     Comanda.Details.Variants[Comanda.Details.SelectedVariant].Ingredientes.map((ingrediente, indexIngrediente) => (
+    //         ingrediente.Checked === false && (allChecked = false)
+    //         ));
+    //     setAllIngredientezChecked(allChecked);
+    //     console.log(`allComponentsChecked: ${allChecked}`);
+    // }, [Comanda]);
+
+
+    const [colorStatus, setColorStatus] = useState('#ffffff');
+
+    useEffect(() => {
+        if (Comanda.ComandaPrepStatus === "ReadyToServe" && Comanda.ComandaPaidStatus === "Pending") {
+            setColorStatus("#00ff5e");
+        }
+        else if (Comanda.ComandaPrepStatus === "Preparing" && Comanda.ComandaPaidStatus === "Editing")
+        {
+            setColorStatus("#fe8878");
+        }
+        else if (Comanda.ComandaPrepStatus === "Served")
+        {
+            setColorStatus("#2d2d2d");
+        }
+        else {
+            setColorStatus("#ffffff");
+        }
+    },[Comanda]);
+
     return (
         <div>
-            <div><span className="titleComponents" style={{fontSize:"60px", color:"red", justifyContent:"center"}}>
-                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].VariantName}
-            </span></div>
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Componentes.length > 0 && (
-                <h2 className="titleComponents">Componentes</h2>
-            )}
-            <div className="row">
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Componentes.map((componente, indexComponente) => (
-                <div key={indexComponente} className={`col-${12/numCheckBoxPerRow}`}>
-                    <label className="container">
-                        <div>
-                            {!componente.Checked ? (
-                                <div className="row">
-                                    <div className='col'>
-                                        <span className="titleComponents" style={{color:"red"}}>SIN</span>
-                                    </div>
-                                </div>
-                            ): (
-                                <div className="row">
-                                    <div className='col'>
-                                        <span className="titleComponents" style={{color:"green"}}>CON</span>
-                                    </div>
-                                </div>
-                            )}
-                            <div className='row mb-2'>
-                                <div className='col' style={{fontSize: "40px"}}>
-                                    {componente.Name}
-                                    {componente.Precio !== 0 && (
-                                        <span style={{color:"red"}}> ${componente.Precio}</span>
-                                    )}
-                                </div>
-                            </div>
-                            
-                            <div className='row mb-2'>
-                                <div className='col d-flex justify-content-center'>
-                                <img src={`iconscocina/${componente.Name}.png`} alt="icon"className="img-fluid" style={{ height: '100px'}}></img>
-                                </div>
+            <div className="card-body mb-1 divStyle" style={{backgroundColor: colorStatus}}>
+
+
+                <div className="row" style={{display: !Comanda.ComandaSwitchNota ? 'none' : 'flex'}}>
+                    <div className='col'>
+                    {/* Text box editable backgroudn red and text blanco BOLD */}
+                        <div className='row'>
+                            <div className='col'>
+                            <p className="textNotaCocina"><span style={{color: '#2d2d2d', fontSize: '25px'}}>Nota: </span>{Comanda.Notas}</p>
                             </div>
                         </div>
-                    </label>
+                    </div>
                 </div>
-            ))}
-            </div>
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Componentes.length > 0 && (<hr/>)}
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Opciones.map((opcion, indexOpcion) => (
-                <div key={indexOpcion}>
-                    {opcion.Items[opcion.SelectedItem].Name !== "No aplica" && (
-                        <div>
-                        {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Opciones.length > 0 && (
-                            <h2 className="titleComponents">{opcion.Name}</h2>
-                        )}
-                        {opcion.Items.map((item, indexItem) => (
-                            <div key={indexItem}>
-                                {item.Name === opcion.Items[opcion.SelectedItem].Name && (
-                                    <div>
-                                        <label className="container">
+
+
+                <div className="row mb-3">
+                    <div className='col'>
+                        <div className='row mb-2'>
+                            <div className='col-2'>
+                            <img src={Comanda.Imagen} alt="icon"className="img-fluid" style={{ width: '200px'}}></img>
+                            </div>
+                            <div className="col-8">
+                                <div className="row"><div className="col">
+                                    <h2 className="title comandaTextStyleCocina">{Comanda.Platillo}&nbsp;&nbsp;<span style={{textShadow: "0px 0px 10px red"}}>${Comanda.Precio}</span></h2>
+                                </div></div>
+                                <div className="row"><div className="col">
+                                    <div><span className="titleVariantCocina">
+                                        {Comanda.Details.Variants[Comanda.Details.SelectedVariant].VariantName.toUpperCase()}
+                                    </span></div>
+                                </div></div>
+                                
+                            </div>
+                            <div className='col-2'>
+                            <img src={Comanda.ComandaDeliverMode === "Delivery" ? "iconscocina/Llevar.png" : "iconscocina/Aqui.png" } alt="icon"className="img-fluid" style={{ width: '250px'}}></img>
+                            </div>
+                        </div>
+                        {Comanda.ComandaPaidStatus === "Editing" ? (
+                            <div>
+                                <div style={{padding: "50px 0px"}}>
+                                    <h1>Editando Comanda...</h1>
+                                </div>
+                            </div>
+                        )
+                        : (
+                            <div>
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Componentes.length > 0 && (
+                                    <h2 className="titleComponentsCocina">Componentes</h2>
+                                )}
+                                <div className="row">
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Componentes.map((componente, indexComponente) => (
+                                    <div key={indexComponente} style={{padding: '2px'}} className={`col-${12/numCheckBoxPerRow}`}>
+                                        <label className="container containerIng">
                                             <div>
-                                                <div className="row">
-                                                    <div className='col-8'>
-                                                        <span className="titleComponents" style={{fontSize:"60px", color:"black"}}>
-                                                            {item.Name}
-                                                        </span>
+                                                <div className='row mb-2'>
+                                                    <div className='col textoComponentsCocina' style={{fontSize: "15px"}}>
+                                                        {!componente.Checked ? (
+                                                            <span className="sinconComponentsCocina" style={{color:"red"}}>SIN </span>
+                                                        ): (
+                                                            <span className="sinconComponentsCocina" style={{color:"green"}}>CON </span>
+                                                        )}
+                                                        <span className="textoComponentsCocina">{componente.Name}</span>
+                                                        {componente.Precio !== 0 && (
+                                                            <span style={{color:"red"}}> ${componente.Precio}</span>
+                                                        )}
                                                     </div>
-                                                    <div className='col-4 d-flex justify-content-center'>
-                                                    <img src={`iconscocina/${item.Name}.png`} alt="icon"className="img-fluid" style={{ height: '250px'}}></img>
+                                                </div>
+                                                
+                                                <div className='row mb-2'>
+                                                    <div className='col d-flex justify-content-center'>
+                                                       <img src={`iconscocina/${componente.Name}.png`} alt="icon"className="img-fluid" style={{ width: 'auto', height: '55px', objectFit: 'cover'}}></img>
+                                                       
+                                                       {!componente.Checked && (
+                                                        <div class="linea-tachado-delgada"></div>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
                                         </label>
                                     </div>
-                                )}
-                            </div>
-                        ))}
-                        </div>
-                    )}
-                </div>
-            ))}
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Opciones.length > 0 && (<hr/>)}
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Ingredientes.map((ingrediente, indexIngrediente) => (
-                <div key={indexIngrediente}>
-                    <div className="row"><div className="col">
-                        <h2 className="titleOption">{ingrediente.Name}</h2>
-                    </div></div>
-                    <div className="row" ref={containerRef}>
-                    {ingrediente.Items.map((item, indexItem) => (
-                        item.Checked && (
-                            <div key={indexItem} className={`col-${12/numCheckBoxPerRow}`}>
-                                <label className="container">
-                                    <div>
-                                        <div className="row">
-                                            <div className="col">
-                                                <div style={{fontSize:"40px"}}> {item.Name ? item.Name : "Nombre Ingrediente"} </div>
+                                ))}
+                                </div>
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Componentes.length > 0 && (<hr/>)}
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Opciones.map((opcion, indexOpcion) => (
+                                    <div key={indexOpcion}>
+                                        {opcion.Items[opcion.SelectedItem].Name !== "No aplica" && (
+                                            <div>
+                                            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Opciones.length > 0 && (
+                                                <h2 className="titleOpcionesCocina">{opcion.Name}</h2>
+                                            )}
+                                            {opcion.Items.map((item, indexItem) => (
+                                                <div key={indexItem}>
+                                                    {item.Name === opcion.Items[opcion.SelectedItem].Name && (
+                                                        <div>
+                                                            <label className="container containerIng">
+                                                                <div style={{backgroundColor: '#7cd7ff'}}>
+                                                                    <div className="row">
+                                                                        <div className='col-10'>
+                                                                            <div className="textOpcionesCocina">{item.Name}</div>
+                                                                        </div>
+                                                                        <div className='col-2 d-flex justify-content-center'>
+                                                                            <img src={`iconscocina/${item.Name}.png`} alt="icon"className="img-fluid" style={{ width: 'auto', height: '55px', objectFit: 'cover'}}></img>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
                                             </div>
-                                        </div>
-                                        
-                                        <div className='row mb-2'>
-                                            <div className='col d-flex justify-content-center'>
-                                            <img src={`iconscocina/${item.Name}.png`} alt="icon"className="img-fluid" style={{ height: '200px'}}></img>
-                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Opciones.length > 0 && (<hr/>)}
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Ingredientes.map((ingrediente, indexIngrediente) => (
+                                    <div key={indexIngrediente}>
+                                        <div className="row"><div className="col">
+                                            <h2 className="titleIngredientesCocina">{ingrediente.Name}</h2>
+                                        </div></div>
+                                        <div className="row" ref={containerRef}>
+                                        {ingrediente.Items.map((item, indexItem) => (
+                                                <div key={indexItem} style={{padding: '2px'}} className={`col-${12/numCheckBoxPerRow}`}>
+                                                    <label className="container containerIng">
+                                                        <div>
+                                                            <div className="row">
+                                                                <div className="col">
+                                                                    <div className="textIngredientesCocina"> {item.Name ? item.Name : "Nombre Ingrediente"} </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div className='row mb-2'>
+                                                                <div className='col d-flex justify-content-center'>
+                                                                <img src={`iconscocina/${item.Name}.png`} alt="icon"className="img-fluid" style={{ width: 'auto', height: '55px', objectFit: 'cover'}}></img>
+                                                                {!item.Checked && (
+                                                                <div class="linea-tachado"></div>
+                                                                )}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </label>
+                                                </div>
+                                        ))}
                                         </div>
                                     </div>
-                                    
-                                </label>
+                                ))}
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Ingredientes.length > 0 && (<hr/>)}
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Extras.map((extra, indexExtra) => (
+                                    extra.Checked && (
+                                        <div key={indexExtra} className={`col-${12/numCheckBoxPerRow}`}>
+                                            <label className="container">
+                                                <div> 
+                                                    {extra.Extra ? extra.Extra : "Nombre Ing Extra"}
+                                                    <span style={{color: "red"}}>{extra.Precio !== 0 ? (<strong> ${extra.Precio}</strong>) : ''}</span>
+                                                </div>
+                                                <input type="checkbox" id="Checked" checked={extra.Checked} onChange={(e) => handleVariantExtra(indexExtra, e)}/>
+                                                <span className="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    )
+                                ))}
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Extras.length > 0 && (<hr/>)}
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Adicionales.map((adicional, indexAdicional) => (
+                                    adicional.Checked && (
+                                        <div key={indexAdicional} className={`col-${12/numCheckBoxPerRow}`}>
+                                            <label className="container">
+                                                <div>
+                                                    {adicional.Adicional ? adicional.Adicional : "Nombre Adicional"}
+                                                    <span style={{color: "red"}}>{adicional.Precio !== 0 ? (<strong> ${adicional.Precio}</strong>) : ''}</span>
+                                                </div>
+                                                <input type="checkbox" id="Checked" checked={adicional.Checked} onChange={(e) => handleVariantAdicional(indexAdicional, e)}/>
+                                                <span className="checkmark"></span>
+                                            </label>
+                                            {adicional.Checked && (
+                                                <DropDown
+                                                    opciones_in={adicional.Opciones.map((opcion, indexOpcion) => (opcion))}
+                                                    selectedValue={adicional.Opciones[adicional.SelectedOpcion]} 
+                                                    onDropdownChange={(e) => handleVariantAdicionalOpcionDropdownChange(adicional.Opciones.map((opcion, indexOpcion) => (opcion)), indexAdicional, e)}
+                                                    prefix={adicional.Opciones.map((opcion, indexOpcion) => (0))}/>
+                                            )}
+                                        </div>
+                                    )
+                                ))}
+                                {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Adicionales.length > 0 && (<hr/>)}
                             </div>
-                        )
-                    ))}
-                    </div>
-                </div>
-            ))}
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Ingredientes.length > 0 && (<hr/>)}
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Extras.map((extra, indexExtra) => (
-                extra.Checked && (
-                    <div key={indexExtra} className={`col-${12/numCheckBoxPerRow}`}>
-                        <label className="container">
-                            <div> 
-                                {extra.Extra ? extra.Extra : "Nombre Ing Extra"}
-                                <span style={{color: "red"}}>{extra.Precio !== 0 ? (<strong> ${extra.Precio}</strong>) : ''}</span>
-                            </div>
-                            <input type="checkbox" id="Checked" checked={extra.Checked} onChange={(e) => handleVariantExtra(indexExtra, e)}/>
-                            <span className="checkmark"></span>
-                        </label>
-                    </div>
-                )
-            ))}
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Extras.length > 0 && (<hr/>)}
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Adicionales.map((adicional, indexAdicional) => (
-                adicional.Checked && (
-                    <div key={indexAdicional} className={`col-${12/numCheckBoxPerRow}`}>
-                        <label className="container">
-                            <div>
-                                {adicional.Adicional ? adicional.Adicional : "Nombre Adicional"}
-                                <span style={{color: "red"}}>{adicional.Precio !== 0 ? (<strong> ${adicional.Precio}</strong>) : ''}</span>
-                            </div>
-                            <input type="checkbox" id="Checked" checked={adicional.Checked} onChange={(e) => handleVariantAdicional(indexAdicional, e)}/>
-                            <span className="checkmark"></span>
-                        </label>
-                        {adicional.Checked && (
-                            <DropDown
-                                opciones_in={adicional.Opciones.map((opcion, indexOpcion) => (opcion))}
-                                selectedValue={adicional.Opciones[adicional.SelectedOpcion]} 
-                                onDropdownChange={(e) => handleVariantAdicionalOpcionDropdownChange(adicional.Opciones.map((opcion, indexOpcion) => (opcion)), indexAdicional, e)}
-                                prefix={adicional.Opciones.map((opcion, indexOpcion) => (0))}/>
                         )}
                     </div>
-                )
-            ))}
-            {Comanda.Details.Variants[Comanda.Details.SelectedVariant].Adicionales.length > 0 && (<hr/>)}
+                </div>
+            </div>
         </div>
     )
 }
