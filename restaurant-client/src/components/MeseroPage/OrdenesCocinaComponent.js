@@ -25,7 +25,13 @@ const OrdenesCocina = ({modeInterface, Orders}) => {
         let comandasPromises = localOrders.map(order => {
             return comandasApi.getComandasByOrderId(order.OrderID)
                 .then(response => {
-                    return response; // Devuelve la respuesta para su uso posterior
+                    const res_comandas = response.map(comanda => {
+                        return {
+                            ...comanda, // Esto copia todas las propiedades existentes del postre
+                            Customer: order.Customer // Esto agrega el nuevo elemento Customer
+                        };
+                    });
+                    return res_comandas; // Devuelve la respuesta para su uso posterior
                 })
                 .catch(e => {
                     console.log(e);

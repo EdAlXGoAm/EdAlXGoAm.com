@@ -313,13 +313,23 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
         <div>
             <div className="card-body mb-1 divStyle" style={{backgroundColor: colorStatus}}>
 
+                <div className="row" style={{display: Comanda.Customer === undefined ? 'none' : 'flex'}}>
+                    <div className='col'>
+                    {/* Text box editable backgroudn red and text blanco BOLD */}
+                        <div className='row'>
+                            <div className='col'>
+                            <p className="textClienteCocina"><span style={{color: '#2d2d2d', fontSize: '25px'}}>Cliente: </span>{Comanda.Customer}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="row" style={{display: !Comanda.ComandaSwitchNota ? 'none' : 'flex'}}>
                     <div className='col'>
                     {/* Text box editable backgroudn red and text blanco BOLD */}
                         <div className='row'>
                             <div className='col'>
-                            <p className="textNotaCocina"><span style={{color: '#2d2d2d', fontSize: '25px'}}>Nota: </span>{Comanda.Notas}</p>
+                            <p className="textNotaCocina"><span style={{fontSize: '25px'}}>Nota: </span>{Comanda.Notas}</p>
                             </div>
                         </div>
                     </div>

@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const socket = io(`${process.env.REACT_APP_API_URL}`);
 
-const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCustStatus, platillos, numPlatillos }) => {
+const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCustStatus, platillos, numPlatillos, handleOrderClient }) => {
     const notify = (message) => toast(message);
     const [Order, setOrder] = useState({});
     const [comandas, setComandas] = useState([])
@@ -219,7 +219,7 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
             const confirm = window.confirm("La ORDEN ha sido COMPLETADA?");
                 if (confirm) {
                     setColorOrder("#5d5d5d");
-                    const newOrder = Order;
+                    const newOrder = { ...Order };
                     newOrder.OrderCustStatus = "Done";
                     setOrder(newOrder);
                     handleOrderCustStatus(Order.OrderID, "Done");
@@ -228,7 +228,7 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
             const confirm = window.confirm("Deseas regresar la orden a PREPARANDO?");
                 if (confirm) {
                     setColorOrder("#ffffff");
-                    const newOrder = Order;
+                    const newOrder = { ...Order };
                     newOrder.OrderCustStatus = "InPlace";
                     setOrder(newOrder);
                     handleOrderCustStatus(Order.OrderID, "InPlace");
@@ -236,8 +236,50 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
         }
     }
 
+    const [cliente, setCliente] = useState('');
+
+    const handleCliente = (e) => {
+        setCliente(e.target.value);
+    }
+
+    useEffect (() => {
+        console.log("CARGANDO CLIENTE", Order.Customer);
+        setCliente(Order.Customer);
+    }, [Order.Customer]);
+
+    const updateCliente = () => {
+        const newOrder = { ...Order };
+            newOrder.Customer = document.getElementById(`textAreaClient_${Order.OrderID}`).value;
+            console.log("Adding cliente: ", newOrder.Customer);
+            setOrder(newOrder);
+            ordersApi.updateOrder(newOrder)
+            .then((res) => {
+                console.log(res);
+                socket.emit('OrdenActualizadaDesdeCliente', {msg: Order.OrderID});
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     return (
         <div className="card" style={{backgroundColor: colorOrder}}>
+        {/* Text box editable backgroudn red and text blanco BOLD */}
+            <div className='row'>
+                <div className='col-11'>
+                    <textarea className="form-control" id={`textAreaClient_${Order.OrderID}`} rows="1" placeholder="Cliente" onChange={handleCliente} value={cliente}
+                    style={{backgroundColor: 'greenyellow', color: '#000', fontWeight: 'bold', fontSize: '20px'
+                    }}
+                    ></textarea>
+                </div>
+                <div className='col-1'>
+                    {/* Add Variant at Level 1 */}
+                    <div className="form-group">
+                        <button type="button" className="btn btn-primary" onClick={updateCliente}>+</button>
+                    </div>
+                </div>
+            </div>
+
             <div className="row">
                 <div className="col-2 d-flex align-items-center">
                     <div className="toggleArrowButtons">

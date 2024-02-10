@@ -1,21 +1,39 @@
+.textClienteCocina{
+    color: black;
+    font-weight: bold;
+    font-size: 35px;
+    background-color: rgb(127, 215, 255);
+    text-align: left;
+    padding: 0px 5px 0px 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-family: 'Salsa', cursive;
+}
 .textNotaCocina{
     color: white;
     font-weight: bold;
     font-size: 35px;
     animation: cambio-color 3s infinite linear;
     text-align: left;
+    padding: 0px 5px 0px 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-family: 'Salsa', cursive;
 }
+
 @keyframes cambio-color {
-    0% { background-color: red; }
-    4% { background-color: red; }
-    5% { background-color: rgb(255, 134, 154); }
-    9% { background-color: rgb(255, 134, 154); }
-    10% { background-color: red; }
-    14% { background-color: red; }
-    15% { background-color: rgb(255, 134, 154); }
-    19% { background-color: rgb(255, 134, 154); }
-    20% { background-color: red; }
-    100% { background-color: red; }
+    0% { background-color: red; 
+    color: #fff}
+    15% { background-color: red; 
+    color: #fff}
+    35% { background-color: greenyellow; 
+        color: #000}
+    65% { background-color: greenyellow; 
+        color: #000}
+    85% { background-color: red; 
+        color: #fff}
+    100% { background-color: red; 
+        color: #fff}
   }
 .comandaTextStyleCocina{
     background-color: #2d2d2d;
