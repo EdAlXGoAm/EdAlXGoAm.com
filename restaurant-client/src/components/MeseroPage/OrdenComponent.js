@@ -266,13 +266,13 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
         <div className="card" style={{backgroundColor: colorOrder}}>
         {/* Text box editable backgroudn red and text blanco BOLD */}
             <div className='row'>
-                <div className='col-11'>
+                <div className='col-10'>
                     <textarea className="form-control" id={`textAreaClient_${Order.OrderID}`} rows="1" placeholder="Cliente" onChange={handleCliente} value={cliente}
                     style={{backgroundColor: 'greenyellow', color: '#000', fontWeight: 'bold', fontSize: '20px'
                     }}
                     ></textarea>
                 </div>
-                <div className='col-1'>
+                <div className='col-2'>
                     {/* Add Variant at Level 1 */}
                     <div className="form-group">
                         <button type="button" className="btn btn-primary" onClick={updateCliente}>+</button>

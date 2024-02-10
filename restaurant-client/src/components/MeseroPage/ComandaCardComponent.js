@@ -7,7 +7,7 @@ import ResumeComanda from './ResumeComandaComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCashRegister } from '@fortawesome/free-solid-svg-icons';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { faPaperPlane, faFilePen } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faFilePen, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
 const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComanda}) => {
 
@@ -64,19 +64,18 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
     const handleChangeNota = (event) => {
         setNota(event.target.value);
       };
+    
+    const handleNoteNew = () => {
+        const updatedComanda = {
+            ...Comanda,
+            Notas: nota
+        }
+        updateComanda(updatedComanda);
+        setLiveStatusNota('#33d457')
+    }
 
     const handleUpdateNota = (event) => {
-        if (event.key === 'Enter') {
-            const updatedComanda = {
-                ...Comanda,
-                Notas: nota
-            }
-            updateComanda(updatedComanda);
-            setLiveStatusNota('#33d457')
-        }
-        else {
-            setLiveStatusNota('#ff69b4')
-        }
+        setLiveStatusNota('#ff69b4')
     };
     const fetchNota = () => {
         setNota(Comanda.Notas);
@@ -185,11 +184,17 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
                                 <div className='col'>
                                 {/* Text box editable backgroudn red and text blanco BOLD */}
                                     <div className='row'>
-                                        <div className='col'>
-                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
+                                        <div className='col-10'>
+                                        <textarea className="form-control" id={`NotaTextArea_${Comanda._id}`} rows="3" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
                                         value={nota} style={{backgroundColor: liveStatusNota, color: '#fff', fontWeight: 'bold', fontSize: '30px'
                                         }}
                                         ></textarea>
+                                        </div>
+                                        <div className='col-2'>
+                                            {/* Add Variant at Level 1 */}
+                                            <div className="form-group">
+                                                <button type="button" className="btn btn-light" onClick={handleNoteNew}><FontAwesomeIcon icon={faPaperPlane} style={{color: '#7ed65b'}} size="2x" /></button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -198,9 +203,9 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
                                 <div className='col-10'>
                                 </div>
                                 <div className='col-2'>
-                                    <div className="faButton" onClick={() => handleUpdateComandaPaidStatus("Pending")} style={{ cursor: 'pointer' }}>
-                                        <FontAwesomeIcon icon={faPaperPlane} style={{color: '#7ed65b'}} size="2x" />
-                                    </div>
+                                    <button type="button" className="btn btn-outline-success btn-lg" onClick={() => handleUpdateComandaPaidStatus("Pending")}>
+                                        <FontAwesomeIcon icon={faFloppyDisk} style={{color: '#7ed65b'}} size="2x" />
+                                    </button>
                                 </div>
                             </div>
 
@@ -217,11 +222,17 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
                                 <div className='col'>
                                 {/* Text box editable backgroudn red and text blanco BOLD */}
                                     <div className='row'>
-                                        <div className='col'>
-                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
+                                        <div className='col-10'>
+                                        <textarea className="form-control" id={`NotaTextArea_${Comanda._id}`} rows="3" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
                                         value={nota} style={{backgroundColor: liveStatusNota, color: '#fff', fontWeight: 'bold', fontSize: '30px'
                                         }}
                                         ></textarea>
+                                        </div>
+                                        <div className='col-2'>
+                                            {/* Add Variant at Level 1 */}
+                                            <div className="form-group">
+                                                <button type="button" className="btn btn-light" onClick={handleNoteNew}><FontAwesomeIcon icon={faPaperPlane} style={{color: '#7ed65b'}} size="2x" /></button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -230,9 +241,9 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
                                 <div className='col-10'>
                                 </div>
                                 <div className='col-2'>
-                                    <div className="faButton" onClick={() => handleUpdateComandaPaidStatus("Editing")} style={{ cursor: 'pointer' }}>
+                                    <button type="button" className="btn btn-outline-warning btn-lg" onClick={() => handleUpdateComandaPaidStatus("Editing")}>
                                         <FontAwesomeIcon icon={faFilePen} style={{color: '#7ed65b'}} size="2x" />
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -257,9 +268,9 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
                                 <div className='col-10'>
                                 </div>
                                 <div className='col-2'>
-                                    <div className="faButton" onClick={() => handleUpdateComandaPaidStatus("Editing")} style={{ cursor: 'pointer' }}>
-                                        <FontAwesomeIcon icon={faFilePen} style={{color: '#7ed65b'}} size="2x" />
-                                    </div>
+                                    <button type="button" className="btn btn-outline-success btn-lg" onClick={() => handleUpdateComandaPaidStatus("Editing")}>
+                                        <FontAwesomeIcon icon={faFloppyDisk} style={{color: '#7ed65b'}} size="2x" />
+                                    </button>
                                 </div>
                             </div>
                             <div className="row" style={{display: !Comanda.ComandaSwitchNota ? 'none' : 'flex'}}>
@@ -267,7 +278,7 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
                                 {/* Text box editable backgroudn red and text blanco BOLD */}
                                     <div className='row'>
                                         <div className='col'>
-                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
+                                        <textarea className="form-control" id={`NotaTextArea_${Comanda._id}`} rows="2" placeholder="Agregar notas" onChange={handleChangeNota} onKeyDown={handleUpdateNota}
                                         value={nota} style={{backgroundColor: liveStatusNota, color: '#fff', fontWeight: 'bold', fontSize: '50px'
                                         }}
                                         ></textarea>
