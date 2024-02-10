@@ -140,13 +140,13 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
                     ) : (
                         <div className='row mb-2'>
                             <div className='col-2'>
-                            <img src={Comanda.Imagen} alt="icon"className="img-fluid" style={{ height: '180px'}}></img>
+                            <img src={Comanda.Imagen} alt="icon"className="img-fluid" style={{ width: '200px'}}></img>
                             </div>
                             <div className="col-8 d-flex align-items-center personalizarTitle">
-                                <h2 className="title comandaTextStyle" style={{fontSize:"80px"}}>{Comanda.Platillo}&nbsp;&nbsp;<span style={{textShadow: "0px 0px 10px red"}}>${Comanda.Precio}</span></h2>
+                                <h2 className="title comandaTextStyle" style={{fontSize:"70px"}}>{Comanda.Platillo}&nbsp;&nbsp;<span style={{textShadow: "0px 0px 10px red"}}>${Comanda.Precio}</span></h2>
                             </div>
                             <div className='col-2'>
-                            <img src={Comanda.ComandaDeliverMode === "Delivery" ? "iconscocina/Llevar.png" : "iconscocina/Aqui.png" } alt="icon"className="img-fluid" style={{ height: '250px'}}></img>
+                            <img src={Comanda.ComandaDeliverMode === "Delivery" ? "iconscocina/Llevar.png" : "iconscocina/Aqui.png" } alt="icon"className="img-fluid" style={{ width: '250px'}}></img>
                             </div>
                         </div>
                     )}

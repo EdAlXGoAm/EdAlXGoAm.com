@@ -86,6 +86,22 @@ const OrdersInterface = ({ modeInterface }) => {
         fetchPlatillos();
     }, []);
 
+    useEffect(() => {
+        if (!modeInterface) {
+            // Define la función que quieres ejecutar
+            const hacerAlgo = () => {
+                fetchOrders();
+            };
+        
+            // Crea un intervalo que ejecuta hacerAlgo cada 10 segundos (10000 milisegundos)
+            const intervalo = setInterval(hacerAlgo, 10000);
+        
+            // Limpia el intervalo cuando el componente se desmonta
+            // para evitar efectos secundarios no deseados
+            return () => clearInterval(intervalo);
+        }
+      }, []); // El array vacío asegura que el efecto se ejecute solo una vez al montar el componente
+
     const [ComandasPerScreen, setComandasPerScreen] = useState(3);
     const [slide, setSlide] = useState(1);
     const handleSlideChange = (newSlide) => {

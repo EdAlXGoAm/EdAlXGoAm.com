@@ -31,6 +31,23 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
             console.log(err);
         });
     };
+
+    useEffect(() => {
+        if (!modeInterface) {
+            // Define la función que quieres ejecutar
+            const hacerAlgo = () => {
+                fetchOrder();
+            };
+        
+            // Crea un intervalo que ejecuta hacerAlgo cada 10 segundos (10000 milisegundos)
+            const intervalo = setInterval(hacerAlgo, 10000);
+        
+            // Limpia el intervalo cuando el componente se desmonta
+            // para evitar efectos secundarios no deseados
+            return () => clearInterval(intervalo);
+        }
+      }, []); // El array vacío asegura que el efecto se ejecute solo una vez al montar el componente
+
     const fetchColorOrder = () => {
         if (Order.OrderCustStatus === "Done") {
             setColorOrder("#5d5d5d");
