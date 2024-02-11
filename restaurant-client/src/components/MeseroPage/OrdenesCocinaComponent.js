@@ -298,25 +298,53 @@ const OrdenesCocina = ({modeInterface, Orders}) => {
         <div className="row contenedor-elementos">
             <div className="col-12 fila-elemento">
                 <div className="row">
-                    {renderSixFirstBebidas()}
+                    <div className="col-1" style={{color: '#fff', fontFamily: "'Salsa', cursive", fontSize: '30px'}}>
+                        {`BEBIDAS -> `}
+                    </div>
+                    <div className="col-11">
+                        <div className="row">
+                            {renderSixFirstBebidas()}
+                        </div>
+                    </div>
                 </div>
             </div>
         
             <div className="col-12 fila-elemento">
                 <div className="row">
-                    {renderSixFirstBotanas()}
+                    <div className="col-1" style={{color: '#fff', fontFamily: "'Salsa', cursive", fontSize: '30px'}}>
+                        {`ESQUITES -> `}
+                    </div>
+                    <div className="col-11">
+                        <div className="row">
+                            {renderSixFirstBotanas()}
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div className="col-12 fila-elemento">
                 <div className="row">
-                    {renderSixFirstComidas()}
+                    <div className="col-1" style={{color: '#fff', fontFamily: "'Salsa', cursive", fontSize: '30px'}}>
+                        {`COMIDA -> `}
+                    </div>
+                    <div className="col-11">
+                        <div className="row">
+                            {renderSixFirstComidas()}
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div className="col-12 fila-elemento">
                 <div className="row">
-                    {renderSixFirstWaffles()}
+                    <div className="col-1" style={{color: '#fff', fontFamily: "'Salsa', cursive", fontSize: '30px'}}>
+                        {`WAFFLES -> `}
+                    </div>
+                    <div className="col-11">
+                        <div className="row">
+                            {renderSixFirstWaffles()}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
