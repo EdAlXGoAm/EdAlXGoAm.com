@@ -270,7 +270,7 @@ const OrdersInterface = ({ modeInterface }) => {
     }, [contador]); // Dependencias del efecto, se vuelve a ejecutar el efecto si `contador` cambia
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid" style={{backgroundColor: (contador === 0 && modeInterface) && ('#ff6d6d')}}>
             <div className="row">
                 <div className="col-4">
                     <div style={{color: '#fff', textAlign:'left'}}>
