@@ -253,18 +253,40 @@ const OrdersInterface = ({ modeInterface }) => {
             socket.off('OrdenActualizadaDesdeServidor');
         };
     }, []);
+    const [contador, setContador] = useState(30);
+
+    useEffect(() => {
+        // Si el contador es 0, no hace nada más
+        if (contador === 0) return;
+
+        // Crea un temporizador que disminuye el contador cada segundo
+        const id = setInterval(() => {
+            setContador(contador - 1);
+        }, 1000);
+
+        // Limpia el intervalo cuando el componente se desmonta
+        // o el contador llega a 0 para evitar efectos no deseados
+        return () => clearInterval(id);
+    }, [contador]); // Dependencias del efecto, se vuelve a ejecutar el efecto si `contador` cambia
+
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col">
+                <div className="col-4">
+                    <div style={{color: '#fff', textAlign:'left'}}>
+                        <span>{contador}</span>
+                        {contador === 0 && <span> - Se recomienda recargar el sitio</span>}
+                    </div>
+                </div>
+                <div className="col-8">
                     <h1 style={{ color: "#ffffff" }}>Comandas ${TotalDia}</h1><ToastContainer />
-                    {modeInterface && (
+                    {/* {modeInterface && (
                         <div>
                             <Button variant="primary" onClick={() => setComandasPerScreen(6)}>6</Button>
                             <Button variant="primary" onClick={() => setComandasPerScreen(4)}>4</Button>
                             <Button variant="primary" onClick={() => setComandasPerScreen(3)}>3</Button>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
             <hr style={{backgroundColor:"white"}}/>
