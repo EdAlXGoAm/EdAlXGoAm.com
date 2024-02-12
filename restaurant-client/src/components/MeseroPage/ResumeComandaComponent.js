@@ -318,7 +318,7 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
                     {/* Text box editable backgroudn red and text blanco BOLD */}
                         <div className='row'>
                             <div className='col'>
-                            <p className="textClienteCocina"><span style={{color: '#2d2d2d', fontSize: '25px'}}>Cliente: </span>{Comanda.Customer}</p>
+                            <p className="textClienteCocina"><span>{`(${Comanda.OrderID})`} : </span>{Comanda.Customer}</p>
                             </div>
                         </div>
                     </div>
