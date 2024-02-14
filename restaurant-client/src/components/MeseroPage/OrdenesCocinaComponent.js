@@ -287,6 +287,18 @@ const OrdenesCocina = ({modeInterface, Orders}) => {
                     const audio = new Audio("ComandaAudios/Solicitan-Pastel.wav");
                     audio.play();
                 }
+                else if (audioMsg === "Add-AMOR Hamburguesa") {
+                    const audio = new Audio("ComandaAudios/Solicitan-SanValentinHamburguesa.wav");
+                    audio.play();
+                }
+                else if (audioMsg === "Add-AMOR Alitas") {
+                    const audio = new Audio("ComandaAudios/Solicitan-SanValentinAlitas.wav");
+                    audio.play();
+                }
+                else if (audioMsg === "Add-AMOR Hot Dog") {
+                    const audio = new Audio("ComandaAudios/Solicitan-SanValentinHotDogs.wav");
+                    audio.play();
+                }
             }
         });
         return () => {
