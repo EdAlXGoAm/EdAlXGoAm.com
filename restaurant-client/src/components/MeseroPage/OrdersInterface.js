@@ -9,6 +9,7 @@ import ordersApi from '../../api/ordersApi';
 import platillosApi from '../../api/platillosApi';
 
 import OrdenesCocina from './OrdenesCocinaComponent';
+import Counter30_to_0 from '../Global/CounterComponent'
 
 import io from 'socket.io-client';
 const socket = io(`${process.env.REACT_APP_API_URL}`);
@@ -253,29 +254,19 @@ const OrdersInterface = ({ modeInterface }) => {
             socket.off('OrdenActualizadaDesdeServidor');
         };
     }, []);
-    const [contador, setContador] = useState(30);
 
-    useEffect(() => {
-        // Si el contador es 0, no hace nada más
-        if (contador === 0) return;
+    const [reloadFlag, setReloadFlag] = useState(false);
 
-        // Crea un temporizador que disminuye el contador cada segundo
-        const id = setInterval(() => {
-            setContador(contador - 1);
-        }, 1000);
-
-        // Limpia el intervalo cuando el componente se desmonta
-        // o el contador llega a 0 para evitar efectos no deseados
-        return () => clearInterval(id);
-    }, [contador]); // Dependencias del efecto, se vuelve a ejecutar el efecto si `contador` cambia
+    const handleReloadFlag = () => {
+        setReloadFlag(true);
+    }
 
     return (
-        <div className="container-fluid" style={{backgroundColor: (contador === 0 && modeInterface) && ('#ff6d6d')}}>
+        <div className="container-fluid" style={{backgroundColor: (reloadFlag && modeInterface) && ('#ff6d6d')}}>
             <div className="row">
                 <div className="col-4">
                     <div style={{color: '#fff', textAlign:'left'}}>
-                        <span>{contador}</span>
-                        {contador === 0 && <span> - Se recomienda recargar el sitio</span>}
+                        <Counter30_to_0 handleReloadFlag={handleReloadFlag}/>
                     </div>
                 </div>
                 <div className="col-8">

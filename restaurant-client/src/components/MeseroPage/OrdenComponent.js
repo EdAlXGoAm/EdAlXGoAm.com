@@ -8,6 +8,7 @@ import ComandaCard from './ComandaCardComponent'
 import comandasApi from './../../api/comandasApi';
 import ordersApi from '../../api/ordersApi';
 import io from 'socket.io-client';
+import { faCheck, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -139,6 +140,17 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
         }
     };
 
+    useEffect(() => { // AddComanda
+        socket.on('NuevaComandaDesdeServidor', (data) => {
+            console.log("Mensaje: ", data.msg)
+            if (data.msg.split('-')[1] === OrderID.toString()) {
+                fetchOrder();
+            }
+        });
+        return () => {
+            socket.off('NuevaComandaDesdeServidor');
+        };
+    }, []);
     useEffect(() => { // UpdateComanda
         socket.on('UpdateComandaDesdeServidor', (data) => {
             console.log("Mensaje: ", data.msg)
@@ -237,9 +249,13 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
     }
 
     const [cliente, setCliente] = useState('');
+    const [colorCliente, setColorCliente] = useState('greenyellow');
+    const [clientIcon, setClientIcon] = useState(false);
 
     const handleCliente = (e) => {
         setCliente(e.target.value);
+        setColorCliente('#ff3667');
+        setClientIcon(false);
     }
 
     useEffect (() => {
@@ -255,6 +271,8 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
             ordersApi.updateOrder(newOrder)
             .then((res) => {
                 console.log(res);
+                setColorCliente('greenyellow')
+                setClientIcon(true);
                 socket.emit('OrdenActualizadaDesdeCliente', {msg: Order.OrderID});
             })
             .catch((err) => {
@@ -267,15 +285,17 @@ const Orden = ({modeInterface, iInterface, OrderID, DeleteOrder, handleOrderCust
         {/* Text box editable backgroudn red and text blanco BOLD */}
             <div className='row'>
                 <div className='col-10'>
-                    <textarea className="form-control" id={`textAreaClient_${Order.OrderID}`} rows="1" placeholder="Cliente" onChange={handleCliente} value={cliente}
-                    style={{backgroundColor: 'greenyellow', color: '#000', fontWeight: 'bold', fontSize: '20px'
+                    <textarea className="form-control" id={`textAreaClient_${Order.OrderID}`} rows="1" placeholder="Cliente"
+                    onChange={handleCliente}
+                    value={cliente}
+                    style={{backgroundColor: colorCliente, color: '#000', fontWeight: 'bold', fontSize: '20px'
                     }}
                     ></textarea>
                 </div>
                 <div className='col-2'>
                     {/* Add Variant at Level 1 */}
                     <div className="form-group">
-                        <button type="button" className="btn btn-primary" onClick={updateCliente}>+</button>
+                        <button type="button" className="btn btn-primary" onClick={updateCliente}>{clientIcon ? <FontAwesomeIcon icon={faCheck} size="2x" /> : <FontAwesomeIcon icon={faFloppyDisk} size="2x" /> }</button>
                     </div>
                 </div>
             </div>

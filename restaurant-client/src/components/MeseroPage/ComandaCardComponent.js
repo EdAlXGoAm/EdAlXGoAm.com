@@ -87,31 +87,38 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
     const [toggleArrowStatus, setToggleArrowStatus] = useState(true); // false: plegado, true: desplegado
 
     const [colorStatus, setColorStatus] = useState('#ffffff');
+    const [animOrBg, setAnimOrBg] = useState(false);
 
     useEffect(() => {
-        if (Comanda.ComandaPrepStatus === "ReadyToServe" && Comanda.ComandaPaidStatus === "Pending") {
-            setToggleArrowStatus(false);
-            setColorStatus("#00ff5e");
-        }
-        else if (Comanda.ComandaPrepStatus === "Preparing" && Comanda.ComandaPaidStatus === "Editing")
-        {
-            setToggleArrowStatus(true);
-            setColorStatus("#fe8878");
-        }
-        else if (Comanda.ComandaPrepStatus === "Served")
+        if (order.OrderCustStatus === "Done")
         {
             setToggleArrowStatus(false);
+            setAnimOrBg(false);
             setColorStatus("#2d2d2d");
         }
         else {
-            setToggleArrowStatus(true);
-            setColorStatus("#ffffff");
+            if (Comanda.ComandaPrepStatus === "ReadyToServe" && Comanda.ComandaPaidStatus === "Pending") {
+                setToggleArrowStatus(false);
+                setAnimOrBg(false);
+                setColorStatus("#00ff5e");
+            }
+            else if (Comanda.ComandaPrepStatus === "Preparing" && Comanda.ComandaPaidStatus === "Editing")
+            {
+                setToggleArrowStatus(true);
+                setAnimOrBg(true);
+                setColorStatus("#fe8878");
+            }
+            else {
+                setToggleArrowStatus(true);
+                setAnimOrBg(false);
+                setColorStatus("#ffffff");
+            }
         }
     },[Comanda]);
 
     return(
         <div className="row"><div className="col-12">
-            <div className="card-body mb-1 divStyle" style={{backgroundColor: colorStatus}}>
+            <div className={`card-body mb-1 divStyle ${animOrBg && 'comandaCardAnimation'}`} style={{backgroundColor: animOrBg ? '' : colorStatus}}>
             <div className="row mb-3">
                 <div className='col'>
                     <div className='row mb-2' style={{padding: "0px 20px"}}>
@@ -157,8 +164,10 @@ const ComandaCard = ({order, modeInterface, Comanda, updateComanda, removeComand
                                 onlabel='Aqui' offlabel='Llevar' width={100} onChange={handleUpdateComandaDeliverMode} />
                         </div>
                         <div className="col-3">
-                            <img src="icons/Mesa.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: (Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
-                            <img src="icons/Llevar.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: !(Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
+                            <div className="iconDelivery">
+                                <img src="icons/Mesa.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: (Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
+                                <img src="icons/Llevar.png" alt="icon"className="img-fluid" style={{ width: '40px',  display: !(Comanda.ComandaDeliverMode === "Delivery" ? false : true) ? 'flex' : 'none'}}></img>
+                            </div>
                         </div>
                         <div className="col-3">
                             <BootstrapSwitchButton checked={Comanda.ComandaPrepStatus === "Preparing" ? false : true}
