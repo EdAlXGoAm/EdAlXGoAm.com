@@ -156,6 +156,22 @@ const OrdenesCocina = ({modeInterface, Orders}) => {
         return localSixFirstComidas;
     };
 
+    const renderSixSecComidas = () => {
+        let localArrayComidas = arrayComidas;
+        let localNumComidas = localArrayComidas.length;
+        let localSixFirstComidas = [];
+        for (let i = 6; i < localNumComidas; i++) {
+            if (i < localNumComidas) {
+                localSixFirstComidas.push(
+                    <div key={localArrayComidas[i].ComandaId} className="col-2">
+                        <ResumeComanda Comanda={localArrayComidas[i]} />
+                    </div>
+                );
+            }
+        }
+        return localSixFirstComidas;
+    };
+
     const renderSixFirstWaffles = () => {
         
         let localArrayWaffles = arrayWaffles;
@@ -342,6 +358,19 @@ const OrdenesCocina = ({modeInterface, Orders}) => {
                     <div className="col-11">
                         <div className="row">
                             {renderSixFirstComidas()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div className="col-12 fila-elemento">
+                <div className="row">
+                    <div className="col-1" style={{color: '#fff', fontFamily: "'Salsa', cursive", fontSize: '30px'}}>
+                        {`COMIDA 2 -> `}
+                    </div>
+                    <div className="col-11">
+                        <div className="row">
+                            {renderSixSecComidas()}
                         </div>
                     </div>
                 </div>
