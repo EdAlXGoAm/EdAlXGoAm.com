@@ -45,3 +45,8 @@
 .faButton {
     padding: 0px !important;
 }
+.conTodoBtn{
+    background-color: #fff45a;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px #2d2d2d;
+}

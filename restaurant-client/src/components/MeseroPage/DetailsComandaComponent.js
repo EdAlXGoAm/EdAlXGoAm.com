@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare, faBan} from '@fortawesome/free-solid-svg-icons';
+import { faListCheck } from '@fortawesome/free-solid-svg-icons';
 
 import DropDown from './../x10DropDown';
 
@@ -84,6 +85,16 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
         const newComanda = Comanda;
         const indexVariant = Comanda.Details.SelectedVariant;
         newComanda.Details.Variants[indexVariant].Ingredientes[indexIngrediente].Items[indexItem].Checked = event.target.checked;
+        updateComanda(newComanda);
+    };
+
+    const handleVariantIngredientesItemAll = (indexIngrediente) => {
+        const newComanda = Comanda;
+        const indexVariant = Comanda.Details.SelectedVariant;
+        newComanda.Details.Variants[indexVariant].Ingredientes[indexIngrediente].Items.map((item, indexItem) => {
+            console.log(`item.Name: ${item.Name} - itemIndex: ${newComanda.Details.Variants[indexVariant].Ingredientes[indexIngrediente].Items[indexItem].Checked}`);
+            newComanda.Details.Variants[indexVariant].Ingredientes[indexIngrediente].Items[indexItem].Checked = true;
+        });
         updateComanda(newComanda);
     };
 
@@ -327,6 +338,11 @@ const DetailsComanda = ({Comanda, updateComanda}) => {
                                 <div className="row"><div className="col">
                                     <h2 className="titleOption">{ingrediente.Name}</h2>
                                 </div></div>
+                                <div className="conTodo">
+                                    <button className="conTodoBtn" onClick={() => handleVariantIngredientesItemAll(indexIngrediente)}>
+                                        <FontAwesomeIcon style={{color: "#000000"}} icon={faListCheck} size="xl" />{` Marcar Todo`}
+                                    </button>
+                                </div>
                                 <div className="row" ref={containerRef}>
                                 {ingrediente.Items.map((item, indexItem) => (
                                     <div key={indexItem} className={`col-${12/numCheckBoxPerRow}`}>
