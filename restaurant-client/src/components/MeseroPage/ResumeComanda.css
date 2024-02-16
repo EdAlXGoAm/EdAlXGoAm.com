@@ -2,12 +2,41 @@
     color: black;
     font-weight: bold;
     font-size: 35px;
-    background-color: greenyellow;
     text-align: left;
     padding: 0px 5px 0px 5px;
     border: 1px solid black;
     border-radius: 10px;
     font-family: 'Salsa', cursive;
+}
+.colorTextClienteCocina1{
+    background-color: greenyellow;
+}
+.colorTextClienteCocina2{
+    background-color: #00b7ff;
+}
+.colorTextClienteCocina3{
+    background-color: #ffac2f;
+}
+.colorTextClienteCocina4{
+    background-color: rgb(196, 47, 255);
+}
+.colorTextClienteCocina5{
+    background-color: rgb(47, 255, 255);
+}
+.colorTextClienteCocina6{
+    background-color: rgb(255, 252, 47);
+}
+.colorTextClienteCocina7{
+    background-color: rgb(255, 89, 47);
+}
+.colorTextClienteCocina8{
+    background-color: rgb(68, 211, 39);
+}
+.colorTextClienteCocina9{
+    background-color: rgb(250, 184, 247);
+}
+.colorTextClienteCocina0{
+    background-color: rgb(109, 47, 255);
 }
 .textNotaCocina{
     color: white;
