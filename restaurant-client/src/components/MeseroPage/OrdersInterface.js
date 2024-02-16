@@ -226,8 +226,10 @@ const OrdersInterface = ({ modeInterface }) => {
         socket.on('NuevaOrdenDesdeServidor', (data) => {
             console.log("Mensaje: ", data)
             fetchOrders();
-            const audio = new Audio("ComandaAudios/Pedido.wav");
-            audio.play();
+            if (!modeInterface) {
+                const audio = new Audio("ComandaAudios/Pedido.wav");
+                audio.play();
+            }
         });
 
         return () => {
